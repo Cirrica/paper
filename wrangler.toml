@@ -1,6 +1,0 @@
-name = "paper"
-compatibility_date = "2024-11-11"
-pages_build_output_dir = ".open-next/static"
-
-[[pages.functions]]
-directory = ".open-next/server-functions/"
