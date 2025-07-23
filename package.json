@@ -19,8 +19,6 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.11",
-    "autoprefixer": "^10.4.20",
-    "postcss": "^8.4.47",
     "tailwindcss": "^4.1.11",
     "wrangler": "^4.18.0"
   }
