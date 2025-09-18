@@ -3,15 +3,21 @@
 import StatCard from '@/app/components/statCard';
 
 function Panel({ title, children, icon }) {
+  const isPrimaryPanel =
+    title === "Active tournaments" || title === "Top Performing Stocks";
+  const titleClasses = isPrimaryPanel
+    ? "font-['Poppins'] font-semibold text-[20.45px] leading-[100%] tracking-[0.06em] text-white"
+    : "font-['Poppins'] font-medium text-[15px] leading-[100%] tracking-[0.06em] text-white";
+
   return (
     <div className="bg-[#0b0b0b] border border-white/6 rounded-2xl p-6 w-full">
-      <h3 className="flex items-center gap-3 font-['Poppins'] font-medium text-[15px] leading-[100%] tracking-[0.06em] text-white">
+      <h3 className="flex items-center gap-3">
         {icon && (
           <span className="w-8 h-8 flex items-center justify-center rounded-md bg-black/60">
             {icon}
           </span>
         )}
-        <span>{title}</span>
+        <span className={titleClasses}>{title}</span>
       </h3>
       <div className="mt-4 text-sm text-white/60">{children}</div>
     </div>
@@ -81,7 +87,9 @@ export default function OverviewPanels() {
           <ul className="space-y-4">
             <li className="flex items-center justify-between bg-black/60 rounded-lg p-3">
               <div>
-                <p className="font-medium">Tech Titans Weekly</p>
+                <p className="font-['Poppins'] font-medium text-[15px] leading-[100%] tracking-[0.06em] text-white">
+                  Tech Titans Weekly
+                </p>
                 <p className="text-xs text-white/50 mt-1">1245 participants</p>
               </div>
               <div className="flex flex-col items-end gap-2">
@@ -91,7 +99,9 @@ export default function OverviewPanels() {
             </li>
             <li className="flex items-center justify-between bg-black/60 rounded-lg p-3">
               <div>
-                <p className="font-medium">Crypto Crusher</p>
+                <p className="font-['Poppins'] font-medium text-[15px] leading-[100%] tracking-[0.06em] text-white">
+                  Crypto Crusher
+                </p>
                 <p className="text-xs text-white/50 mt-1">867 participants</p>
               </div>
               <div className="flex flex-col items-end gap-2">
@@ -101,7 +111,9 @@ export default function OverviewPanels() {
             </li>
             <li className="flex items-center justify-between bg-black/60 rounded-lg p-3">
               <div>
-                <p className="font-medium">Blue Chip Champions</p>
+                <p className="font-['Poppins'] font-medium text-[15px] leading-[100%] tracking-[0.06em] text-white">
+                  Blue Chip Champions
+                </p>
                 <p className="text-xs text-white/50 mt-1">2134 participants</p>
               </div>
               <div className="flex flex-col items-end gap-2">
@@ -111,7 +123,9 @@ export default function OverviewPanels() {
             </li>
             <li className="flex items-center justify-between bg-black/60 rounded-lg p-3">
               <div>
-                <p className="font-medium">Tech Titans Weekly</p>
+                <p className="font-['Poppins'] font-medium text-[15px] leading-[100%] tracking-[0.06em] text-white">
+                  Tech Titans Weekly
+                </p>
                 <p className="text-xs text-white/50 mt-1">1245 participants</p>
               </div>
               <div className="flex flex-col items-end gap-2">
@@ -137,7 +151,9 @@ export default function OverviewPanels() {
           <ul className="space-y-4">
             <li className="flex items-center justify-between bg-black/60 rounded-lg p-3">
               <div>
-                <p className="font-medium">AAPL</p>
+                <p className="font-['Poppins'] font-medium text-[15px] leading-[100%] tracking-[0.06em] text-white">
+                  AAPL
+                </p>
                 <p className="text-xs text-white/50 mt-1">Apple Inc.</p>
               </div>
               <div className="flex flex-col items-end gap-1">
@@ -147,7 +163,9 @@ export default function OverviewPanels() {
             </li>
             <li className="flex items-center justify-between bg-black/60 rounded-lg p-3">
               <div>
-                <p className="font-medium">TSLA</p>
+                <p className="font-['Poppins'] font-medium text-[15px] leading-[100%] tracking-[0.06em] text-white">
+                  TSLA
+                </p>
                 <p className="text-xs text-white/50 mt-1">Tesla Inc.</p>
               </div>
               <div className="flex flex-col items-end gap-1">
@@ -157,7 +175,9 @@ export default function OverviewPanels() {
             </li>
             <li className="flex items-center justify-between bg-black/60 rounded-lg p-3">
               <div>
-                <p className="font-medium">NVDA</p>
+                <p className="font-['Poppins'] font-medium text-[15px] leading-[100%] tracking-[0.06em] text-white">
+                  NVDA
+                </p>
                 <p className="text-xs text-white/50 mt-1">NVIDIA Corp.</p>
               </div>
               <div className="flex flex-col items-end gap-1">
@@ -167,7 +187,9 @@ export default function OverviewPanels() {
             </li>
             <li className="flex items-center justify-between bg-black/60 rounded-lg p-3">
               <div>
-                <p className="font-medium">MSFT</p>
+                <p className="font-['Poppins'] font-medium text-[15px] leading-[100%] tracking-[0.06em] text-white">
+                  MSFT
+                </p>
                 <p className="text-xs text-white/50 mt-1">Microsoft Corp.</p>
               </div>
               <div className="flex flex-col items-end gap-1">
