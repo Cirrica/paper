@@ -5,7 +5,7 @@ import StatCard from '@/app/components/statCard';
 function Panel({ title, children, icon }) {
   return (
     <div className="bg-[#0b0b0b] border border-white/6 rounded-2xl p-6 w-full">
-      <h3 className="flex items-center gap-3 text-sm text-white/80 font-medium">
+      <h3 className="flex items-center gap-3 font-['Poppins'] font-medium text-[15px] leading-[100%] tracking-[0.06em] text-white">
         {icon && (
           <span className="w-8 h-8 flex items-center justify-center rounded-md bg-black/60">
             {icon}

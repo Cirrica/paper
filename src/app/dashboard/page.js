@@ -59,16 +59,28 @@ export default function Dashboard() {
                 <p className="mt-2 font-poppins font-medium text-[14px] leading-[100%] tracking-[0.06em] text-white">Welcome back to Cirrica</p>
               </div>
               <div className="flex items-center gap-3">
-                <button className="px-5 py-2 rounded text-sm font-medium bg-gradient-to-br from-amber-400 to-amber-600 text-black shadow-md">
-                  Create Tournament
+                <button className="flex h-[36px] w-[156px] items-center justify-center gap-[7.16px] rounded-[3.58px] p-[7.16px] bg-gradient-to-r from-[#DAA56A] to-[#FADABD] text-[#050505] shadow-md">
+                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M12 5v14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M5 12h14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                  <span className="font-['Poppins'] font-medium text-[12.52px] leading-[16.1px] tracking-[0px] text-current align-middle">
+                    Create Tournament
+                  </span>
                 </button>
-                <button className="px-4 py-2 rounded text-sm font-medium bg-black/60 border border-white/10 text-white/90">
-                  Pick Stocks
+                <button className="flex h-[36px] w-[119px] items-center justify-center gap-[7.16px] rounded-[3.58px] border border-white p-[7.16px] bg-transparent text-white">
+                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M6 6l12 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M18 6L6 18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                  <span className="font-['Poppins'] font-medium text-[12.52px] leading-[16.1px] tracking-[0px] text-white align-middle">
+                    Pick Stocks
+                  </span>
                 </button>
               </div>
             </div>
 
-            <hr className="border-white/10 mt-4" />
+            <hr className="relative top-[107.5px] left-[247px] h-0 w-[1164.00390625px] border border-[#FFFFFF33]" />
 
             {/* Stats and overview panels */}
             <div>

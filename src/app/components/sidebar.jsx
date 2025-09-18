@@ -1,18 +1,20 @@
 "use client";
 
 import Image from "next/image";
-import { Users2, Trophy, Layers, Settings, LogOut } from "lucide-react";
+import { Users2, Trophy, Settings, LogOut } from "lucide-react";
 
 function NavItem({ icon, label, active = false }) {
   return (
     <a
-      className={`relative flex items-center gap-3 px-3 py-2 rounded-xl cursor-pointer
-      ${active ? "bg-white/6 text-amber-300" : "text-white/80 hover:text-white hover:bg-white/5"}
+      className={`relative flex items-center gap-3 px-3 py-2 rounded-xl cursor-pointer transition-colors
+      ${active ? "bg-white/6 text-[#D7A66C]" : "text-white/80 hover:text-white hover:bg-white/5"}
       focus:outline-none focus-visible:outline-none focus:ring-0 focus-visible:ring-0`}
     >
-      {active && <span className="absolute left-[-18px] w-2 h-8 bg-amber-400 rounded-r-full" aria-hidden />}
+      {/* {active && <span className="absolute left-[-18px] w-2 h-8 bg-amber-400 rounded-r-full" aria-hidden />} */}
       {icon}
-      <span className="tracking-wide">{label}</span>
+      <span className="font-['Poppins',_sans-serif] font-medium text-[15px] leading-[100%] tracking-[0.06em] text-current">
+        {label}
+      </span>
     </a>
   );
 }
@@ -23,7 +25,9 @@ export default function Sidebar({ onLogout }) {
       {/* Logo */}
       <div className="flex items-center gap-3 mb-8">
         <Image src="/clearCircleLogo.svg" alt="Cirrica logo" width={36} height={36} className="rounded-full" priority />
-        <span className="text-lg font-semibold tracking-tight">Cirrica</span>
+        <span className="font-['Poppins',_sans-serif] font-medium text-[20px] leading-[100%] tracking-[0.06em] text-white">
+          Cirrica
+        </span>
       </div>
 
       {/* Nav */}
@@ -108,12 +112,12 @@ export default function Sidebar({ onLogout }) {
 
         {/* Logout below Setting */}
         <button
-            onClick={onLogout}
-            className="mt-2 flex items-center gap-3 px-3 py-2 rounded-xl text-sm text-rose-400 hover:text-rose-300
+          onClick={onLogout}
+          className="mt-2 flex items-center gap-3 px-3 py-2 rounded-xl text-sm text-[#EC221F] hover:text-[#EC221F]
                         focus:outline-none focus-visible:outline-none focus:ring-0 focus-visible:ring-0"
         >
-            <LogOut className="w-5 h-5 md:w-6 md:h-6" />
-            Logout
+          <LogOut className="w-5 h-5 md:w-6 md:h-6" />
+          Logout
         </button>
       </nav>
     </div>
