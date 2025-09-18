@@ -3,15 +3,13 @@
 import Image from "next/image";
 
 function NavItem({ icon, label, active = false }) {
+  const baseClass = 'relative flex cursor-pointer items-center gap-3 rounded-xl px-3 py-2 transition-colors focus:outline-none focus-visible:outline-none focus:ring-0 focus-visible:ring-0';
+  const stateClass = active ? 'text-gold-muted' : 'text-white/80 hover:text-white';
+
   return (
-    <a
-      className={`relative flex items-center gap-3 px-3 py-2 rounded-xl cursor-pointer transition-colors
-      ${active ? "text-[#D7A66C]" : "text-white/80 hover:text-white"}
-      focus:outline-none focus-visible:outline-none focus:ring-0 focus-visible:ring-0`}
-    >
-      {/* {active && <span className="absolute left-[-18px] w-2 h-8 bg-amber-400 rounded-r-full" aria-hidden />} */}
+    <a className={`${baseClass} ${stateClass}`}>
       {icon}
-      <span className="font-['Poppins',_sans-serif] font-medium text-[15px] leading-[100%] tracking-[0.06em] text-current">
+      <span className="font-poppins text-base font-medium leading-none tracking-wide text-current">
         {label}
       </span>
     </a>
@@ -20,17 +18,17 @@ function NavItem({ icon, label, active = false }) {
 
 export default function Sidebar({ onLogout }) {
   return (
-    <div className="flex h-dvh flex-col">
+    <div className="flex h-full flex-col">
       {/* Logo */}
       <div className="flex items-center gap-3 mb-8">
         <Image src="/clearCircleLogo.svg" alt="Cirrica logo" width={36} height={36} className="rounded-full" priority />
-        <span className="font-['Poppins',_sans-serif] font-medium text-[20px] leading-[100%] tracking-[0.06em] text-white">
+        <span className="font-poppins text-xl font-medium leading-none tracking-wide text-white">
           Cirrica
         </span>
       </div>
 
       {/* Nav */}
-      <nav className="space-y-4 text-sm">
+      <nav className="space-y-4">
         {/* Dashboard (INLINE SVG FROM FIGMA) */}
         <NavItem
           label="Dashboard"
@@ -58,7 +56,7 @@ export default function Sidebar({ onLogout }) {
           icon={
             <svg
               viewBox="0 0 22 15"
-              className="w-[22px] h-[15px]"
+              className="h-4 w-5"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
               aria-hidden="true"
@@ -142,7 +140,7 @@ export default function Sidebar({ onLogout }) {
           icon={
             <svg
               viewBox="0 0 22 15"
-              className="w-[22px] h-[15px]"
+              className="h-4 w-5"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
               aria-hidden="true"
@@ -161,7 +159,7 @@ export default function Sidebar({ onLogout }) {
           icon={
             <svg
               viewBox="0 0 17 18"
-              className="w-[17px] h-[18px]"
+              className="h-5 w-4"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
               aria-hidden="true"
@@ -181,12 +179,11 @@ export default function Sidebar({ onLogout }) {
         {/* Logout below Setting */}
         <button
           onClick={onLogout}
-          className="mt-2 flex items-center gap-3 px-3 py-2 rounded-xl text-sm text-[#EC221F] hover:text-[#EC221F]
-                        focus:outline-none focus-visible:outline-none focus:ring-0 focus-visible:ring-0"
+          className="mt-2 inline-flex items-center gap-3 rounded-xl px-3 py-2 text-sm text-danger transition-colors hover:text-danger focus:outline-none focus-visible:outline-none focus:ring-0 focus-visible:ring-0"
         >
           <svg
             viewBox="0 0 17 17"
-            className="w-[17px] h-[18px]"
+            className="h-5 w-4"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             aria-hidden="true"

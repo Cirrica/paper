@@ -2,20 +2,20 @@
 
 export default function StatCard({ icon, title, value, change, children }) {
   return (
-    <div className="bg-[#1B1B1B] border border-[#323232] rounded-[10px] px-6 py-5 h-[180px] w-[270px] flex flex-col items-start">
-      <div className="w-full flex items-center justify-start">
-        <div className="w-9 h-9 flex items-center justify-center rounded-lg mr-3">
-          {icon ? icon : <div className="w-4 h-4 rounded-full bg-white/20" />}
+    <div className="flex h-44 w-full flex-col items-start rounded-xl border border-panel-border bg-panel px-6 py-5">
+      <div className="flex w-full items-center">
+        <div className="mr-3 flex h-9 w-9 items-center justify-center rounded-lg bg-panel/60">
+          {icon ? icon : <div className="h-4 w-4 rounded-full bg-white/20" />}
         </div>
       </div>
 
       <div className="mt-3 w-full">
-        <p className="font-['Poppins'] font-medium text-[15px] leading-[100%] tracking-[0.06em] text-white">{title}</p>
-        <p className="font-['Poppins'] font-medium text-[25px] leading-[100%] tracking-[0.06em] text-white mt-6">{value}</p>
-        <div className="mt-2 inline-flex items-center gap-1.5 font-['Poppins'] font-medium text-[13px] leading-[100%] tracking-[0.06em] text-[#0FEDBE]">
+        <p className="font-poppins text-base font-medium leading-none tracking-wide text-white">{title}</p>
+        <p className="mt-6 font-poppins text-2xl font-medium leading-none tracking-wide text-white">{value}</p>
+        <div className="mt-2 inline-flex items-center gap-1.5 font-poppins text-sm font-medium leading-none text-positive">
           <span className="flex h-4 w-4 items-center justify-center">
             <svg
-              className="w-[8px] h-[8px]"
+              className="h-2 w-2"
               viewBox="0 0 8 8"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -31,7 +31,7 @@ export default function StatCard({ icon, title, value, change, children }) {
         </div>
       </div>
 
-      {children && <div className="mt-3 text-sm text-white/60 w-full">{children}</div>}
+      {children && <div className="mt-3 w-full text-sm text-white/60">{children}</div>}
     </div>
   );
 }
