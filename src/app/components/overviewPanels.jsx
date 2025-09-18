@@ -123,7 +123,7 @@ export default function OverviewPanels() {
                 </p>
               </div>
               <div className="flex flex-col items-end gap-2">
-                <span className="inline-flex items-center px-3 py-1 rounded-full bg-rose-600 text-xs">💎350x</span>
+                <span className="inline-flex items-center px-3 py-1 rounded-full bg-[#FF5757] font-['Poppins'] font-medium text-[13px] leading-[100%] text-white">💎350x</span>
                 <span className="font-['Poppins'] font-medium text-[12px] leading-[100%] text-right text-white">1d 2h</span>
               </div>
             </li>
