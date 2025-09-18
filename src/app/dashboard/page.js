@@ -80,7 +80,7 @@ export default function Dashboard() {
               </div>
             </div>
 
-            <hr className="relative top-[107.5px] left-[247px] h-0 w-[1164.00390625px] border border-[#FFFFFF33]" />
+            <hr className="border border-[#FFFFFF33] mt-5" />
 
             {/* Stats and overview panels */}
             <div>

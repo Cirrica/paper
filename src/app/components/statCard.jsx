@@ -11,10 +11,32 @@ export default function StatCard({ icon, title, value, change, children }) {
 
       <div className="mt-3 w-full">
         <p className="font-['Poppins'] font-medium text-[15px] leading-[100%] tracking-[0.06em] text-white">{title}</p>
-        <p className="font-['Poppins'] font-medium text-[25px] leading-[100%] tracking-[0.06em] text-white mt-8">{value}</p>
-        <p className="font-['Poppins'] font-medium text-[13px] leading-[100%] tracking-[0.06em] text-[#0FEDBE] mt-2">
-          {change}
-        </p>
+        <p className="font-['Poppins'] font-medium text-[25px] leading-[100%] tracking-[0.06em] text-white mt-[36px]">{value}</p>
+        <div className="mt-[38px] inline-flex items-center gap-1.5 font-['Poppins'] font-medium text-[13px] leading-[100%] tracking-[0.06em] text-[#0FEDBE]">
+          <svg
+            className="h-3.5 w-3.5"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+          >
+            <path
+              d="M12 5v14"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M5 12h14"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+          <span>{change}</span>
+        </div>
       </div>
 
       {children && <div className="mt-3 text-sm text-white/60 w-full">{children}</div>}
