@@ -206,7 +206,31 @@ export default function OverviewPanels() {
               </div>
               <div className="flex flex-col items-end gap-1">
                 <span className="inline-flex items-center px-3 py-1 rounded-full bg-[#0f0f0f] text-sm font-medium">$242.11</span>
-                <span className="text-xs text-rose-400">-2.45%</span>
+                <span className="inline-flex items-center gap-1 font-['Poppins'] font-medium text-[13px] leading-[100%] text-[#FF5757]">
+                  <svg
+                    className="h-4 w-4"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M12 5v14"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M8 15l4 4 4-4"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                  -2.45%
+                </span>
               </div>
             </li>
             <li className="flex items-center justify-between rounded-lg bg-[#050505] p-3">
