@@ -95,7 +95,7 @@ export default function OverviewPanels() {
                 </p>
               </div>
               <div className="flex flex-col items-end gap-2">
-                <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-[#1B1B1B] font-['Poppins'] font-medium text-[13px] leading-[100%] text-white">
+                <span className="inline-flex h-[27px] w-[79px] items-center justify-center gap-1 rounded-full bg-[#1B1B1B] font-['Poppins'] font-medium text-[13px] leading-[100%] text-white">
                   <svg
                     className="h-3.5 w-3.5"
                     viewBox="0 0 24 24"
@@ -125,7 +125,7 @@ export default function OverviewPanels() {
                 </p>
               </div>
               <div className="flex flex-col items-end gap-2">
-                <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-[#1B1B1B] font-['Poppins'] font-medium text-[13px] leading-[100%] text-white">
+                <span className="inline-flex h-[27px] w-[79px] items-center justify-center gap-1 rounded-full bg-[#1B1B1B] font-['Poppins'] font-medium text-[13px] leading-[100%] text-white">
                   <svg
                     className="h-3.5 w-3.5"
                     viewBox="0 0 24 24"
@@ -155,7 +155,7 @@ export default function OverviewPanels() {
                 </p>
               </div>
               <div className="flex flex-col items-end gap-2">
-                <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-[#FF5757] font-['Poppins'] font-medium text-[13px] leading-[100%] text-white">
+                <span className="inline-flex h-[27px] w-[79px] items-center justify-center gap-1 rounded-full bg-[#FF5757] font-['Poppins'] font-medium text-[13px] leading-[100%] text-white">
                   <svg
                     className="h-3.5 w-3.5"
                     viewBox="0 0 24 24"
@@ -185,7 +185,7 @@ export default function OverviewPanels() {
                 </p>
               </div>
               <div className="flex flex-col items-end gap-2">
-                <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-[#1B1B1B] font-['Poppins'] font-medium text-[13px] leading-[100%] text-white">
+                <span className="inline-flex h-[27px] w-[79px] items-center justify-center gap-1 rounded-full bg-[#1B1B1B] font-['Poppins'] font-medium text-[13px] leading-[100%] text-white">
                   <svg
                     className="h-3.5 w-3.5"
                     viewBox="0 0 24 24"
