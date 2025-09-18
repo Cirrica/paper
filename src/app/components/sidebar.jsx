@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { Users2, Trophy, Settings, LogOut } from "lucide-react";
+import { Trophy, Settings, LogOut } from "lucide-react";
+import IconUsers from "@/app/components/icons/IconUsers.svg";
 
 function NavItem({ icon, label, active = false }) {
   return (
@@ -55,7 +56,10 @@ export default function Sidebar({ onLogout }) {
         />
 
         {/* Teams (lucide) */}
-        <NavItem icon={<Users2 className="size-4" />} label="Teams" />
+        <NavItem
+          icon={<Image src={IconUsers} alt="Teams" width={22} height={15} />}
+          label="Teams"
+        />
 
         {/* Tournaments (lucide) */}
         <NavItem icon={<Trophy className="size-4" />} label="Tournaments" />
@@ -105,7 +109,10 @@ export default function Sidebar({ onLogout }) {
         />
 
         {/* Friends (lucide) */}
-        <NavItem icon={<Users2 className="size-4" />} label="Friends" />
+        <NavItem
+          icon={<Image src={IconUsers} alt="Friends" width={22} height={15} />}
+          label="Friends"
+        />
 
         {/* Setting (lucide) */}
         <NavItem icon={<Settings className="size-4" />} label="Setting" />
