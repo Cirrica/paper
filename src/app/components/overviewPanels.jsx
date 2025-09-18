@@ -110,7 +110,7 @@ export default function OverviewPanels() {
                       strokeLinejoin="round"
                     />
                   </svg>
-                  1000x
+                  1000X
                 </span>
                 <span className="font-['Poppins'] font-medium text-[12px] leading-[100%] text-right text-white">2d 14h</span>
               </div>
@@ -140,7 +140,7 @@ export default function OverviewPanels() {
                       strokeLinejoin="round"
                     />
                   </svg>
-                  500x
+                  500X
                 </span>
                 <span className="font-['Poppins'] font-medium text-[12px] leading-[100%] text-right text-white">5d 8h</span>
               </div>
@@ -185,7 +185,23 @@ export default function OverviewPanels() {
                 </p>
               </div>
               <div className="flex flex-col items-end gap-2">
-                <span className="inline-flex items-center px-3 py-1 rounded-full bg-[#0f0f0f] text-xs">⚡1000x</span>
+                <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-[#1B1B1B] font-['Poppins'] font-medium text-[13px] leading-[100%] text-white">
+                  <svg
+                    className="h-3.5 w-3.5"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M13 2L4 14h6l-1 8 9-12h-6l1-8z"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                  1000X
+                </span>
                 <span className="font-['Poppins'] font-medium text-[12px] leading-[100%] text-right text-white">2d 14h</span>
               </div>
             </li>
