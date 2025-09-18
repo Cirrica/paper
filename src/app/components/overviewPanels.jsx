@@ -10,7 +10,7 @@ function Panel({ title, children, icon }) {
     : "font-['Poppins'] font-medium text-[15px] leading-[100%] tracking-[0.06em] text-white";
 
   return (
-    <div className="bg-[#0b0b0b] border border-white/6 rounded-2xl p-6 w-full">
+    <div className="w-full rounded-[10px] border border-[#323232] bg-[#1B1B1B] p-6">
       <h3 className="flex items-center gap-3">
         {icon && (
           <span className="w-8 h-8 flex items-center justify-center rounded-md bg-black/60">
@@ -85,52 +85,60 @@ export default function OverviewPanels() {
           }
         >
           <ul className="space-y-4">
-            <li className="flex items-center justify-between bg-black/60 rounded-lg p-3">
+            <li className="flex items-center justify-between rounded-lg bg-[#050505] p-3">
               <div>
                 <p className="font-['Poppins'] font-medium text-[15px] leading-[100%] tracking-[0.06em] text-white">
                   Tech Titans Weekly
                 </p>
-                <p className="text-xs text-white/50 mt-1">1245 participants</p>
+                <p className="font-['Poppins'] font-medium text-[13px] leading-[100%] tracking-[0.06em] text-white/60 mt-1">
+                  1245 participants
+                </p>
               </div>
               <div className="flex flex-col items-end gap-2">
                 <span className="inline-flex items-center px-3 py-1 rounded-full bg-[#0f0f0f] text-xs">⚡1000x</span>
-                <span className="text-xs text-white/60">2d 14h</span>
+                <span className="font-['Poppins'] font-medium text-[12px] leading-[100%] text-right text-white">2d 14h</span>
               </div>
             </li>
-            <li className="flex items-center justify-between bg-black/60 rounded-lg p-3">
+            <li className="flex items-center justify-between rounded-lg bg-[#050505] p-3">
               <div>
                 <p className="font-['Poppins'] font-medium text-[15px] leading-[100%] tracking-[0.06em] text-white">
                   Crypto Crusher
                 </p>
-                <p className="text-xs text-white/50 mt-1">867 participants</p>
+                <p className="font-['Poppins'] font-medium text-[13px] leading-[100%] tracking-[0.06em] text-white/60 mt-1">
+                  867 participants
+                </p>
               </div>
               <div className="flex flex-col items-end gap-2">
                 <span className="inline-flex items-center px-3 py-1 rounded-full bg-[#0f0f0f] text-xs">⚡500x</span>
-                <span className="text-xs text-white/60">5d 8h</span>
+                <span className="font-['Poppins'] font-medium text-[12px] leading-[100%] text-right text-white">5d 8h</span>
               </div>
             </li>
-            <li className="flex items-center justify-between bg-black/60 rounded-lg p-3">
+            <li className="flex items-center justify-between rounded-lg bg-[#050505] p-3">
               <div>
                 <p className="font-['Poppins'] font-medium text-[15px] leading-[100%] tracking-[0.06em] text-white">
                   Blue Chip Champions
                 </p>
-                <p className="text-xs text-white/50 mt-1">2134 participants</p>
+                <p className="font-['Poppins'] font-medium text-[13px] leading-[100%] tracking-[0.06em] text-white/60 mt-1">
+                  2134 participants
+                </p>
               </div>
               <div className="flex flex-col items-end gap-2">
                 <span className="inline-flex items-center px-3 py-1 rounded-full bg-rose-600 text-xs">💎350x</span>
-                <span className="text-xs text-white/60">1d 2h</span>
+                <span className="font-['Poppins'] font-medium text-[12px] leading-[100%] text-right text-white">1d 2h</span>
               </div>
             </li>
-            <li className="flex items-center justify-between bg-black/60 rounded-lg p-3">
+            <li className="flex items-center justify-between rounded-lg bg-[#050505] p-3">
               <div>
                 <p className="font-['Poppins'] font-medium text-[15px] leading-[100%] tracking-[0.06em] text-white">
                   Tech Titans Weekly
                 </p>
-                <p className="text-xs text-white/50 mt-1">1245 participants</p>
+                <p className="font-['Poppins'] font-medium text-[13px] leading-[100%] tracking-[0.06em] text-white/60 mt-1">
+                  1245 participants
+                </p>
               </div>
               <div className="flex flex-col items-end gap-2">
                 <span className="inline-flex items-center px-3 py-1 rounded-full bg-[#0f0f0f] text-xs">⚡1000x</span>
-                <span className="text-xs text-white/60">2d 14h</span>
+                <span className="font-['Poppins'] font-medium text-[12px] leading-[100%] text-right text-white">2d 14h</span>
               </div>
             </li>
           </ul>
@@ -149,52 +157,132 @@ export default function OverviewPanels() {
           }
         >
           <ul className="space-y-4">
-            <li className="flex items-center justify-between bg-black/60 rounded-lg p-3">
+            <li className="flex items-center justify-between rounded-lg bg-[#050505] p-3">
               <div>
                 <p className="font-['Poppins'] font-medium text-[15px] leading-[100%] tracking-[0.06em] text-white">
                   AAPL
                 </p>
-                <p className="text-xs text-white/50 mt-1">Apple Inc.</p>
+                <p className="font-['Poppins'] font-medium text-[13px] leading-[100%] tracking-[0.06em] text-white/60 mt-1">
+                  Apple Inc.
+                </p>
               </div>
               <div className="flex flex-col items-end gap-1">
                 <span className="inline-flex items-center px-3 py-1 rounded-full bg-[#0f0f0f] text-sm font-medium">$185.25</span>
-                <span className="text-xs text-emerald-400">+2.45%</span>
+                <span className="inline-flex items-center gap-1 font-['Poppins'] font-medium text-[13px] leading-[100%] text-[#0FEDBE]">
+                  <svg
+                    className="h-4 w-4"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M12 5v14"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M8 9l4-4 4 4"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                  +2.45%
+                </span>
               </div>
             </li>
-            <li className="flex items-center justify-between bg-black/60 rounded-lg p-3">
+            <li className="flex items-center justify-between rounded-lg bg-[#050505] p-3">
               <div>
                 <p className="font-['Poppins'] font-medium text-[15px] leading-[100%] tracking-[0.06em] text-white">
                   TSLA
                 </p>
-                <p className="text-xs text-white/50 mt-1">Tesla Inc.</p>
+                <p className="font-['Poppins'] font-medium text-[13px] leading-[100%] tracking-[0.06em] text-white/60 mt-1">
+                  Tesla Inc.
+                </p>
               </div>
               <div className="flex flex-col items-end gap-1">
                 <span className="inline-flex items-center px-3 py-1 rounded-full bg-[#0f0f0f] text-sm font-medium">$242.11</span>
                 <span className="text-xs text-rose-400">-2.45%</span>
               </div>
             </li>
-            <li className="flex items-center justify-between bg-black/60 rounded-lg p-3">
+            <li className="flex items-center justify-between rounded-lg bg-[#050505] p-3">
               <div>
                 <p className="font-['Poppins'] font-medium text-[15px] leading-[100%] tracking-[0.06em] text-white">
                   NVDA
                 </p>
-                <p className="text-xs text-white/50 mt-1">NVIDIA Corp.</p>
+                <p className="font-['Poppins'] font-medium text-[13px] leading-[100%] tracking-[0.06em] text-white/60 mt-1">
+                  NVIDIA Corp.
+                </p>
               </div>
               <div className="flex flex-col items-end gap-1">
                 <span className="inline-flex items-center px-3 py-1 rounded-full bg-[#0f0f0f] text-sm font-medium">$456.89</span>
-                <span className="text-xs text-emerald-400">+2.45%</span>
+                <span className="inline-flex items-center gap-1 font-['Poppins'] font-medium text-[13px] leading-[100%] text-[#0FEDBE]">
+                  <svg
+                    className="h-4 w-4"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M12 5v14"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M8 9l4-4 4 4"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                  +2.45%
+                </span>
               </div>
             </li>
-            <li className="flex items-center justify-between bg-black/60 rounded-lg p-3">
+            <li className="flex items-center justify-between rounded-lg bg-[#050505] p-3">
               <div>
                 <p className="font-['Poppins'] font-medium text-[15px] leading-[100%] tracking-[0.06em] text-white">
                   MSFT
                 </p>
-                <p className="text-xs text-white/50 mt-1">Microsoft Corp.</p>
+                <p className="font-['Poppins'] font-medium text-[13px] leading-[100%] tracking-[0.06em] text-white/60 mt-1">
+                  Microsoft Corp.
+                </p>
               </div>
               <div className="flex flex-col items-end gap-1">
                 <span className="inline-flex items-center px-3 py-1 rounded-full bg-[#0f0f0f] text-sm font-medium">$378.45</span>
-                <span className="text-xs text-emerald-400">+2.45%</span>
+                <span className="inline-flex items-center gap-1 font-['Poppins'] font-medium text-[13px] leading-[100%] text-[#0FEDBE]">
+                  <svg
+                    className="h-4 w-4"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M12 5v14"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M8 9l4-4 4 4"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                  +2.45%
+                </span>
               </div>
             </li>
           </ul>
