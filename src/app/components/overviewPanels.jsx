@@ -95,7 +95,23 @@ export default function OverviewPanels() {
                 </p>
               </div>
               <div className="flex flex-col items-end gap-2">
-                <span className="inline-flex items-center px-3 py-1 rounded-full bg-[#0f0f0f] text-xs">⚡1000x</span>
+                <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-[#1B1B1B] font-['Poppins'] font-medium text-[13px] leading-[100%] text-white">
+                  <svg
+                    className="h-3.5 w-3.5"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M13 2L4 14h6l-1 8 9-12h-6l1-8z"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                  1000x
+                </span>
                 <span className="font-['Poppins'] font-medium text-[12px] leading-[100%] text-right text-white">2d 14h</span>
               </div>
             </li>
@@ -109,7 +125,23 @@ export default function OverviewPanels() {
                 </p>
               </div>
               <div className="flex flex-col items-end gap-2">
-                <span className="inline-flex items-center px-3 py-1 rounded-full bg-[#0f0f0f] text-xs">⚡500x</span>
+                <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-[#1B1B1B] font-['Poppins'] font-medium text-[13px] leading-[100%] text-white">
+                  <svg
+                    className="h-3.5 w-3.5"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M13 2L4 14h6l-1 8 9-12h-6l1-8z"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                  500x
+                </span>
                 <span className="font-['Poppins'] font-medium text-[12px] leading-[100%] text-right text-white">5d 8h</span>
               </div>
             </li>
@@ -123,7 +155,23 @@ export default function OverviewPanels() {
                 </p>
               </div>
               <div className="flex flex-col items-end gap-2">
-                <span className="inline-flex items-center px-3 py-1 rounded-full bg-[#FF5757] font-['Poppins'] font-medium text-[13px] leading-[100%] text-white">💎350x</span>
+                <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-[#FF5757] font-['Poppins'] font-medium text-[13px] leading-[100%] text-white">
+                  <svg
+                    className="h-3.5 w-3.5"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M12 4l7 8-7 8-7-8 7-8z"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                  350X
+                </span>
                 <span className="font-['Poppins'] font-medium text-[12px] leading-[100%] text-right text-white">1d 2h</span>
               </div>
             </li>
@@ -167,7 +215,7 @@ export default function OverviewPanels() {
                 </p>
               </div>
               <div className="flex flex-col items-end gap-1">
-                <span className="inline-flex items-center px-3 py-1 rounded-full bg-[#0f0f0f] text-sm font-medium">$185.25</span>
+                <span className="inline-flex items-center px-3 py-1 rounded-full bg-[#1B1B1B] font-['Poppins'] font-medium text-[13px] leading-[100%] text-white">$185.25</span>
                 <span className="inline-flex items-center gap-1 font-['Poppins'] font-medium text-[13px] leading-[100%] text-[#0FEDBE]">
                   <svg
                     className="h-4 w-4"
@@ -205,7 +253,7 @@ export default function OverviewPanels() {
                 </p>
               </div>
               <div className="flex flex-col items-end gap-1">
-                <span className="inline-flex items-center px-3 py-1 rounded-full bg-[#0f0f0f] text-sm font-medium">$242.11</span>
+                <span className="inline-flex items-center px-3 py-1 rounded-full bg-[#1B1B1B] font-['Poppins'] font-medium text-[13px] leading-[100%] text-white">$242.11</span>
                 <span className="inline-flex items-center gap-1 font-['Poppins'] font-medium text-[13px] leading-[100%] text-[#FF5757]">
                   <svg
                     className="h-4 w-4"
@@ -243,7 +291,7 @@ export default function OverviewPanels() {
                 </p>
               </div>
               <div className="flex flex-col items-end gap-1">
-                <span className="inline-flex items-center px-3 py-1 rounded-full bg-[#0f0f0f] text-sm font-medium">$456.89</span>
+                <span className="inline-flex items-center px-3 py-1 rounded-full bg-[#1B1B1B] font-['Poppins'] font-medium text-[13px] leading-[100%] text-white">$456.89</span>
                 <span className="inline-flex items-center gap-1 font-['Poppins'] font-medium text-[13px] leading-[100%] text-[#0FEDBE]">
                   <svg
                     className="h-4 w-4"
@@ -281,7 +329,7 @@ export default function OverviewPanels() {
                 </p>
               </div>
               <div className="flex flex-col items-end gap-1">
-                <span className="inline-flex items-center px-3 py-1 rounded-full bg-[#0f0f0f] text-sm font-medium">$378.45</span>
+                <span className="inline-flex items-center px-3 py-1 rounded-full bg-[#1B1B1B] font-['Poppins'] font-medium text-[13px] leading-[100%] text-white">$378.45</span>
                 <span className="inline-flex items-center gap-1 font-['Poppins'] font-medium text-[13px] leading-[100%] text-[#0FEDBE]">
                   <svg
                     className="h-4 w-4"
