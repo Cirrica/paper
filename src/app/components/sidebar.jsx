@@ -3,7 +3,7 @@
 import Image from "next/image";
 
 function NavItem({ icon, label, active = false }) {
-  const baseClass = 'relative flex cursor-pointer items-center gap-3 rounded-xl px-3 py-2 transition-colors focus:outline-none focus-visible:outline-none focus:ring-0 focus-visible:ring-0';
+  const baseClass = 'relative flex w-full cursor-pointer items-center gap-3 rounded-xl border-none bg-transparent px-3 py-2 transition-colors focus:outline-none focus-visible:outline-none focus:ring-0 focus-visible:ring-0';
   const stateClass = active ? 'text-gold-muted' : 'text-white/80 hover:text-white';
 
   return (
@@ -16,11 +16,11 @@ function NavItem({ icon, label, active = false }) {
   );
 }
 
-export default function Sidebar({ onLogout }) {
+export default function Sidebar({ onLogout, activeItem = 'dashboard' }) {
   return (
-    <div className="flex h-full flex-col">
+    <div className="flex h-full w-full max-w-[209px] flex-col overflow-hidden bg-[#050505]">
       {/* Logo */}
-      <div className="flex items-center gap-3 mb-8">
+      <div className="mb-8 flex w-full items-center gap-3 bg-transparent">
         <Image src="/clearCircleLogo.svg" alt="Cirrica logo" width={36} height={36} className="rounded-full" priority />
         <span className="font-poppins text-xl font-medium leading-none tracking-wide text-white">
           Cirrica
@@ -28,11 +28,11 @@ export default function Sidebar({ onLogout }) {
       </div>
 
       {/* Nav */}
-      <nav className="space-y-4">
+      <nav className="flex w-full flex-col space-y-4 bg-transparent">
         {/* Dashboard (INLINE SVG FROM FIGMA) */}
         <NavItem
           label="Dashboard"
-          active
+          active={activeItem === 'dashboard'}
           icon={
             <svg
               viewBox="0 0 18 18"
@@ -68,6 +68,7 @@ export default function Sidebar({ onLogout }) {
             </svg>
           }
           label="Teams"
+          active={activeItem === 'teams'}
         />
 
         {/* Tournaments (IconTrophy) */}
@@ -89,11 +90,13 @@ export default function Sidebar({ onLogout }) {
             </svg>
           }
           label="Tournaments"
+          active={activeItem === 'tournaments'}
         />
 
         {/* Select Stock (INLINE SVG FROM FIGMA) */}
         <NavItem
           label="Select Stock"
+          active={activeItem === 'select-stock'}
           icon={
             <svg
               viewBox="0 0 17 21"
@@ -117,6 +120,7 @@ export default function Sidebar({ onLogout }) {
         {/* Promotions (INLINE SVG FROM FIGMA) */}
         <NavItem
           label="Promotions"
+          active={activeItem === 'promotions'}
           icon={
             <svg
               viewBox="0 0 18 19"
@@ -152,6 +156,7 @@ export default function Sidebar({ onLogout }) {
             </svg>
           }
           label="Friends"
+          active={activeItem === 'friends'}
         />
 
         {/* Setting (IconGear) */}
@@ -174,12 +179,13 @@ export default function Sidebar({ onLogout }) {
             </svg>
           }
           label="Setting"
+          active={activeItem === 'settings'}
         />
 
         {/* Logout below Setting */}
         <button
           onClick={onLogout}
-          className="mt-2 inline-flex items-center gap-3 rounded-xl px-3 py-2 text-sm text-danger transition-colors hover:text-danger focus:outline-none focus-visible:outline-none focus:ring-0 focus-visible:ring-0"
+          className="mt-2 inline-flex w-full items-center gap-3 rounded-xl border-none bg-transparent px-3 py-2 text-sm text-danger transition-colors hover:text-danger focus:outline-none focus-visible:outline-none focus:ring-0 focus-visible:ring-0"
         >
           <svg
             viewBox="0 0 17 17"
