@@ -532,7 +532,7 @@ export default function CreateTournament() {
                                   : 'border-[#FFFFFF33] text-white/70 hover:border-white hover:text-white'
                               }`}
                             >
-                              <span className="flex items-center gap-2 font-poppins text-lg font-semibold">
+                              <span className="flex h-[28px] w-[68px] items-center justify-center gap-2 font-poppins text-[18.45px] font-semibold leading-[100%] tracking-[0.06em] text-[#D7A66C]">
                                 <svg
                                   width="10"
                                   height="16"
