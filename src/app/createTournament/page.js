@@ -13,7 +13,7 @@ const initialFormState = {
   winCondition: 'percentage-gain',
   entryFee: '10',
   maxParticipants: '1000',
-  prizeMultiplier: '1000x',
+  prizeMultiplier: '1000X',
   allowShortSelling: false,
   optionsTrading: false,
   realTimeLeaderboard: true,
@@ -46,11 +46,11 @@ const winConditionOptions = [
 ];
 
 const prizeMultiplierOptions = [
-  { value: '50x', title: '50x', description: 'Low risk, steady return' },
-  { value: '100x', title: '100x', description: 'Moderate risk, good return' },
-  { value: '250x', title: '250x', description: 'High risk, great return' },
-  { value: '500x', title: '500x', description: 'Very high risk, excellent returns' },
-  { value: '1000x', title: '1000x', description: 'Maximum risk, maxima reward' },
+  { value: '50X', title: '50X', description: 'Low risk, steady return' },
+  { value: '100X', title: '100X', description: 'Moderate risk, good return' },
+  { value: '250X', title: '250X', description: 'High risk, great return' },
+  { value: '500X', title: '500X', description: 'Very high risk, excellent returns' },
+  { value: '1000X', title: '1000X', description: 'Maximum risk, maxima reward' },
 ];
 
 const advancedSettingFields = [
@@ -412,7 +412,7 @@ export default function CreateTournament() {
 
                 <section className="w-[707px] h-[584px] rounded-[10px] border border-[#323232] bg-[#1B1B1B] p-6 shadow-lg shadow-black/30">
                   <div className="flex flex-col gap-1">
-                    <h2 className="font-poppins text-[18.45px] font-semibold leading-[100%] tracking-[0.06em] text-white">Tournament Settings</h2>
+                    <h2 className="font-poppins text-[18.45px] font-semibold leading-[100%] tracking-[0.06em] text-white">Tournament Setting</h2>
                   </div>
 
                   <div className="mt-6 space-y-8">
@@ -526,9 +526,9 @@ export default function CreateTournament() {
                               key={option.value}
                               type="button"
                               onClick={() => handlePrizeSelect(option.value)}
-                              className={`flex h-[118px] w-[207px] flex-col rounded-[6px] border px-5 py-4 text-left transition ${
+                              className={`flex h-[118px] w-[207px] flex-col items-center justify-center gap-1 rounded-[6px] border px-5 py-4 text-center transition ${
                                 isActive
-                                  ? 'border-gold text-gold'
+                                  ? 'border-gold bg-gradient-to-b from-[#2A1E0F] to-[#1B1307]'
                                   : 'border-[#FFFFFF33] text-white/70 hover:border-white hover:text-white'
                               }`}
                             >
@@ -539,7 +539,7 @@ export default function CreateTournament() {
                                   viewBox="0 0 10 16"
                                   fill="none"
                                   xmlns="http://www.w3.org/2000/svg"
-                                  className="text-current"
+                                  className="text-current shrink-0"
                                   aria-hidden="true"
                                 >
                                   <path
@@ -549,7 +549,9 @@ export default function CreateTournament() {
                                 </svg>
                                 {option.title}
                               </span>
-                              <span className="mt-2 font-poppins text-sm">{option.description}</span>
+                              <span className="flex h-[42px] w-[108px] items-center justify-center font-poppins text-sm text-center">
+                                {option.description}
+                              </span>
                             </button>
                           );
                         })}
@@ -623,7 +625,7 @@ export default function CreateTournament() {
                           viewBox="0 0 10 16"
                           fill="none"
                           xmlns="http://www.w3.org/2000/svg"
-                          className="h-4 w-[10px]"
+                          className="h-4 w-[10px] shrink-0"
                           aria-hidden="true"
                         >
                           <path
