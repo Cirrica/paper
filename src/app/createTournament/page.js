@@ -263,7 +263,7 @@ export default function CreateTournament() {
               <div>
                 <h1 className="font-poppins text-[22px] font-semibold leading-[100%] tracking-[0.06em] text-white">Create Tournament</h1>
                 <p className="font-poppins mt-2 text-[14px] font-medium leading-[100%] tracking-[0.06em] text-white">
-                  Set up a new stock trading competition.
+                  Set up a new stock trading competition
                 </p>
               </div>
               <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:gap-6">
@@ -322,7 +322,7 @@ export default function CreateTournament() {
                         value={formData.name}
                         onChange={handleFieldChange('name')}
                         placeholder="eg. Tech Giants Weekly Challenge"
-                        className={`mt-1 w-[649px] h-[42px] rounded-[6px] border px-4 font-poppins text-[14.45px] font-thin leading-[100%] text-white placeholder:text-[#FFFFFF99] focus:border-gold focus:outline-none focus:ring-0 ${
+                        className={`mt-1 w-[649px] h-[42px] rounded-[6px] border px-4 font-poppins text-[14.45px] font-thin leading-[100%] text-white/60 placeholder:text-[#FFFFFF99] focus:border-gold focus:outline-none focus:ring-0 ${
                           errors.name ? 'border-danger/60' : 'border-[#FFFFFF33]'
                         }`}
                       />
@@ -342,7 +342,7 @@ export default function CreateTournament() {
                         onChange={handleFieldChange('description')}
                         placeholder="Describe your tournament rules and objectives ..."
                         rows={4}
-                        className="mt-1 h-[113px] w-[649px] resize-none rounded-[6px] border border-[#FFFFFF33] px-4 py-3 font-poppins text-[14.45px] font-thin leading-[100%] text-white placeholder:text-[#FFFFFF99] focus:border-gold focus:outline-none focus:ring-0"
+                        className="mt-1 h-[113px] w-[649px] resize-none rounded-[6px] border border-[#FFFFFF33] px-4 py-3 font-poppins text-[14.45px] font-thin leading-[100%] text-white/60 placeholder:text-[#FFFFFF99] focus:border-gold focus:outline-none focus:ring-0"
                       />
                     </div>
 
@@ -357,7 +357,7 @@ export default function CreateTournament() {
                             name="tournamentType"
                             value={formData.tournamentType}
                             onChange={handleFieldChange('tournamentType')}
-                            className="h-full w-full appearance-none rounded-[6px] border border-[#FFFFFF33] bg-transparent pl-3 pr-8 font-poppins text-[14.45px] leading-[100%] text-white/70 font-thin focus:border-gold focus:outline-none focus:ring-0"
+                            className="h-full w-full appearance-none rounded-[6px] border border-[#FFFFFF33] bg-transparent pl-3 pr-8 font-poppins text-[14.45px] leading-[100%] text-white/60 font-thin focus:border-gold focus:outline-none focus:ring-0"
                           >
                             {tournamentTypeOptions.map((option) => (
                               <option
@@ -387,7 +387,7 @@ export default function CreateTournament() {
                             name="tradeMode"
                             value={formData.tradeMode}
                             onChange={handleFieldChange('tradeMode')}
-                            className="h-full w-full appearance-none rounded-[6px] border border-[#FFFFFF33] bg-transparent pl-3 pr-8 font-poppins text-[14.45px] leading-[100%] text-white/70 font-thin focus:border-gold focus:outline-none focus:ring-0"
+                            className="h-full w-full appearance-none rounded-[6px] border border-[#FFFFFF33] bg-transparent pl-3 pr-8 font-poppins text-[14.45px] leading-[100%] text-white/60 font-thin focus:border-gold focus:outline-none focus:ring-0"
                           >
                             {tradeModeOptions.map((option) => (
                               <option
@@ -410,134 +410,151 @@ export default function CreateTournament() {
                   </div>
                 </section>
 
-                <section className="w-full max-w-[707px] h-[422px] rounded-[10px] border border-[#323232] bg-[#1B1B1B] p-6 shadow-lg shadow-black/30">
+                <section className="w-[707px] h-[584px] rounded-[10px] border border-[#323232] bg-[#1B1B1B] p-6 shadow-lg shadow-black/30">
                   <div className="flex flex-col gap-1">
-                    <h2 className="font-poppins text-lg font-semibold text-white">Tournament Setting</h2>
+                    <h2 className="font-poppins text-[18.45px] font-semibold leading-[100%] tracking-[0.06em] text-white">Tournament Settings</h2>
                   </div>
 
-                  <div className="mt-6 grid gap-5 md:grid-cols-2">
-                    <div>
-                      <label className="font-poppins text-xs font-semibold uppercase tracking-widest text-white/60" htmlFor="duration">
-                        Duration
-                      </label>
-                      <div className="relative mt-2 h-[42px] w-[315px]">
-                        <select
-                          id="duration"
-                          name="duration"
-                          value={formData.duration}
-                          onChange={handleFieldChange('duration')}
-                            className="h-full w-full appearance-none rounded-[6px] border border-[#FFFFFF33] bg-transparent pl-3 pr-8 font-poppins text-[14.45px] font-thin leading-[100%] text-white focus:border-gold focus:outline-none focus:ring-0"
-                        >
-                          {durationOptions.map((option) => (
-                            <option key={option.value} value={option.value} className="bg-[#1B1B1B] font-thin text-white">
-                              {option.label}
-                            </option>
-                          ))}
-                        </select>
-                        <span className="pointer-events-none absolute inset-y-0 right-3 flex items-center text-white">
-                          <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-                          </svg>
-                        </span>
+                  <div className="mt-6 space-y-8">
+                    <div className="grid gap-5 md:grid-cols-2">
+                      <div>
+                        <label className="font-poppins text-[14px] font-normal leading-[100%] tracking-[0%] text-white" htmlFor="duration">
+                          Duration
+                        </label>
+                        <div className="relative mt-1 h-[42px] w-[315px]">
+                          <select
+                            id="duration"
+                            name="duration"
+                            value={formData.duration}
+                            onChange={handleFieldChange('duration')}
+                          className="h-full w-full appearance-none rounded-[6px] border border-[#FFFFFF33] bg-transparent pl-3 pr-8 font-poppins text-[14px] font-normal leading-[100%] tracking-[0%] text-[#FFFFFF99] focus:border-gold focus:outline-none focus:ring-0"
+                          >
+                            {durationOptions.map((option) => (
+                              <option key={option.value} value={option.value} className="bg-[#1B1B1B] font-thin text-white">
+                                {option.label}
+                              </option>
+                            ))}
+                          </select>
+                          <span className="pointer-events-none absolute inset-y-0 right-3 flex items-center text-white">
+                            <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+                            </svg>
+                          </span>
+                        </div>
                       </div>
-                    </div>
 
-                    <div>
-                      <label className="font-poppins text-xs font-semibold uppercase tracking-widest text-white/60" htmlFor="win-condition">
-                        Win Condition
-                      </label>
-                      <div className="relative mt-2 h-[42px] w-[315px]">
-                        <select
-                          id="win-condition"
-                          name="winCondition"
-                          value={formData.winCondition}
-                          onChange={handleFieldChange('winCondition')}
-                            className="h-full w-full appearance-none rounded-[6px] border border-[#FFFFFF33] bg-transparent pl-3 pr-8 font-poppins text-[14.45px] font-thin leading-[100%] text-white focus:border-gold focus:outline-none focus:ring-0"
-                        >
-                          {winConditionOptions.map((option) => (
-                            <option key={option.value} value={option.value} className="bg-[#1B1B1B] font-thin text-white">
-                              {option.label}
-                            </option>
-                          ))}
-                        </select>
-                        <span className="pointer-events-none absolute inset-y-0 right-3 flex items-center text-white">
-                          <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-                          </svg>
-                        </span>
+                      <div>
+                        <label className="font-poppins text-[14px] font-normal leading-[100%] tracking-[0%] text-white" htmlFor="win-condition">
+                          Win Condition
+                        </label>
+                        <div className="relative mt-1 h-[42px] w-[315px]">
+                          <select
+                            id="win-condition"
+                            name="winCondition"
+                            value={formData.winCondition}
+                            onChange={handleFieldChange('winCondition')}
+                            className="h-full w-full appearance-none rounded-[6px] border border-[#FFFFFF33] bg-transparent pl-3 pr-8 font-poppins text-[14px] font-normal leading-[100%] tracking-[0%] text-[#FFFFFF99] focus:border-gold focus:outline-none focus:ring-0"
+                          >
+                            {winConditionOptions.map((option) => (
+                              <option key={option.value} value={option.value} className="bg-[#1B1B1B] font-thin text-white">
+                                {option.label}
+                              </option>
+                            ))}
+                          </select>
+                          <span className="pointer-events-none absolute inset-y-0 right-3 flex items-center text-white">
+                            <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+                            </svg>
+                          </span>
+                        </div>
                       </div>
-                    </div>
 
-                    <div>
-                      <label className="font-poppins text-xs font-semibold uppercase tracking-widest text-white/60" htmlFor="entry-fee">
-                        Entry Fee ($)
-                      </label>
-                      <input
-                        id="entry-fee"
-                        name="entryFee"
-                        type="number"
-                        min="0"
-                        step="5"
-                        value={formData.entryFee}
-                        onChange={handleFieldChange('entryFee')}
-                        className={`mt-2 w-full rounded-lg border bg-black/60 px-4 py-3 font-poppins text-sm text-white focus:border-gold focus:outline-none focus:ring-0 ${
-                          errors.entryFee ? 'border-danger/60' : 'border-white/15'
-                        }`}
-                      />
-                      {errors.entryFee && (
-                        <p className="mt-2 font-poppins text-xs text-danger">{errors.entryFee}</p>
-                      )}
-                    </div>
-
-                    <div>
-                      <label className="font-poppins text-xs font-semibold uppercase tracking-widest text-white/60" htmlFor="max-participants">
-                        Max Participants
-                      </label>
-                      <input
-                        id="max-participants"
-                        name="maxParticipants"
-                        type="number"
-                        min="2"
-                        step="50"
-                        value={formData.maxParticipants}
-                        onChange={handleFieldChange('maxParticipants')}
-                        className={`mt-2 w-full rounded-lg border bg-black/60 px-4 py-3 font-poppins text-sm text-white focus:border-gold focus:outline-none focus:ring-0 ${
-                          errors.maxParticipants ? 'border-danger/60' : 'border-white/15'
-                        }`}
-                      />
-                      {errors.maxParticipants && (
-                        <p className="mt-2 font-poppins text-xs text-danger">{errors.maxParticipants}</p>
-                      )}
-                    </div>
-                  </div>
-                </section>
-
-                <section className="w-full max-w-[707px] h-[422px] rounded-[10px] border border-[#323232] bg-[#1B1B1B] p-6 shadow-lg shadow-black/30">
-                  <div className="flex flex-col gap-1">
-                    <h2 className="font-poppins text-lg font-semibold text-white">Prize Multiplier</h2>
-                    <p className="font-poppins text-sm text-white/60">Scale rewards based on difficulty and risk tolerance.</p>
-                  </div>
-
-                  <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-                    {prizeMultiplierOptions.map((option) => {
-                      const isActive = formData.prizeMultiplier === option.value;
-
-                      return (
-                        <button
-                          key={option.value}
-                          type="button"
-                          onClick={() => handlePrizeSelect(option.value)}
-                          className={`flex h-full flex-col rounded-2xl border px-5 py-4 text-left transition ${
-                            isActive
-                              ? 'border-gold bg-gold/10 text-gold'
-                              : 'border-white/10 bg-black/50 text-white/70 hover:border-white/30 hover:text-white'
+                      <div>
+                        <label className="font-poppins text-[14px] font-normal leading-[100%] tracking-[0%] text-white" htmlFor="entry-fee">
+                          Entry Fee ($)
+                        </label>
+                        <input
+                          id="entry-fee"
+                          name="entryFee"
+                          type="number"
+                          min="0"
+                          step="5"
+                          value={formData.entryFee}
+                          onChange={handleFieldChange('entryFee')}
+                          className={`mt-1 h-[42px] w-[315px] rounded-[6px] border bg-transparent px-4 font-poppins text-[14px] font-normal leading-[100%] tracking-[0%] text-[#FFFFFF99] placeholder:text-[#FFFFFF99] focus:border-gold focus:outline-none focus:ring-0 ${
+                            errors.entryFee ? 'border-danger/60' : 'border-[#FFFFFF33]'
                           }`}
-                        >
-                          <span className="font-poppins text-lg font-semibold">{option.title}</span>
-                          <span className="mt-2 font-poppins text-sm">{option.description}</span>
-                        </button>
-                      );
-                    })}
+                        />
+                        {errors.entryFee && (
+                          <p className="mt-2 font-poppins text-xs text-danger">{errors.entryFee}</p>
+                        )}
+                      </div>
+
+                      <div>
+                        <label className="font-poppins text-[14px] font-normal leading-[100%] tracking-[0%] text-white" htmlFor="max-participants">
+                          Max Participants
+                        </label>
+                        <input
+                          id="max-participants"
+                          name="maxParticipants"
+                          type="number"
+                          min="2"
+                          step="50"
+                          value={formData.maxParticipants}
+                          onChange={handleFieldChange('maxParticipants')}
+                          className={`mt-1 h-[42px] w-[315px] rounded-[6px] border bg-transparent px-4 font-poppins text-[14px] font-normal leading-[100%] tracking-[0%] text-[#FFFFFF99] placeholder:text-[#FFFFFF99] focus:border-gold focus:outline-none focus:ring-0 ${
+                            errors.maxParticipants ? 'border-danger/60' : 'border-[#FFFFFF33]'
+                          }`}
+                        />
+                        {errors.maxParticipants && (
+                          <p className="mt-2 font-poppins text-xs text-danger">{errors.maxParticipants}</p>
+                        )}
+                      </div>
+                    </div>
+
+                    <div>
+                      <div className="flex flex-col gap-1">
+                        <h3 className="font-poppins text-[18.45px] font-semibold leading-[100%] tracking-[0.06em] text-white">Prize Multiplier</h3>
+                      </div>
+
+                      <div className="mt-4 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+                        {prizeMultiplierOptions.map((option) => {
+                          const isActive = formData.prizeMultiplier === option.value;
+
+                          return (
+                            <button
+                              key={option.value}
+                              type="button"
+                              onClick={() => handlePrizeSelect(option.value)}
+                              className={`flex h-[118px] w-[207px] flex-col rounded-[6px] border px-5 py-4 text-left transition ${
+                                isActive
+                                  ? 'border-gold text-gold'
+                                  : 'border-[#FFFFFF33] text-white/70 hover:border-white hover:text-white'
+                              }`}
+                            >
+                              <span className="flex items-center gap-2 font-poppins text-lg font-semibold">
+                                <svg
+                                  width="10"
+                                  height="16"
+                                  viewBox="0 0 10 16"
+                                  fill="none"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  className="text-current"
+                                  aria-hidden="true"
+                                >
+                                  <path
+                                    d="M9.967 7.707C9.89457 7.48596 9.71138 7.32074 9.48596 7.27299L6.38332 6.61619L7.31932 0.758518C7.36567 0.468169 7.21479 0.182163 6.95035 0.0596611C6.68568 -0.0630601 6.37319 0.00778505 6.1861 0.233164L0.151564 7.49206C0.0142876 7.65728 -0.033572 7.88072 0.0237732 8.08869C0.0810876 8.29667 0.2365 8.46276 0.438661 8.53208L3.44796 9.5651L2.23438 15.2072C2.17187 15.4982 2.31153 15.7951 2.57425 15.9296C2.66712 15.9771 2.76714 16 2.86607 16C3.0471 16 3.22513 15.9231 3.351 15.7787L9.83816 8.34588C9.99048 8.17129 10.0396 7.92803 9.967 7.707ZM4.02642 13.0282L4.83441 9.27234C4.90445 8.94711 4.72191 8.6208 4.41047 8.51398L1.75031 7.60084L5.66953 2.8869L5.00852 7.02361C4.95333 7.36846 5.1762 7.69631 5.51433 7.76803L8.13356 8.32235L4.02642 13.0282Z"
+                                    fill="currentColor"
+                                  />
+                                </svg>
+                                {option.title}
+                              </span>
+                              <span className="mt-2 font-poppins text-sm">{option.description}</span>
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
                   </div>
                 </section>
 
@@ -599,7 +616,7 @@ export default function CreateTournament() {
                           Tournament Preview
                         </p>
                       </div>
-                      <div className="flex items-center gap-2 text-[#D7A66C]">
+                      <div className="flex h-[28px] w-[68px] items-center gap-2 text-[#D7A66C]">
                         <svg
                           width="10"
                           height="16"

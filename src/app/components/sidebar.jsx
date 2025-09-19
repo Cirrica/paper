@@ -9,7 +9,7 @@ function NavItem({ icon, label, active = false }) {
   return (
     <a className={`${baseClass} ${stateClass}`}>
       {icon}
-      <span className="font-poppins text-base font-medium leading-none tracking-wide text-current">
+      <span className="font-poppins text-base font-semibold leading-none tracking-wide text-current">
         {label}
       </span>
     </a>
@@ -20,15 +20,15 @@ export default function Sidebar({ onLogout, activeItem = 'dashboard' }) {
   return (
     <div className="flex h-full w-full max-w-[209px] flex-col overflow-hidden bg-[#050505]">
       {/* Logo */}
-      <div className="mb-8 flex w-full items-center gap-3 bg-transparent">
-        <Image src="/clearCircleLogo.svg" alt="Cirrica logo" width={36} height={36} className="rounded-full" priority />
-        <span className="font-poppins text-xl font-medium leading-none tracking-wide text-white">
+      <div className="mb-8 flex w-full items-center gap-1 bg-transparent">
+        <Image src="/clearCircleLogo.svg" alt="Cirrica logo" width={44} height={44} className="rounded-full" priority />
+        <span className="font-poppins text-xl font-semibold leading-none tracking-wider text-white mt-0.5">
           Cirrica
         </span>
       </div>
 
       {/* Nav */}
-      <nav className="flex w-full flex-col space-y-4 bg-transparent">
+      <nav className="flex w-full flex-col space-y-4 mt-4 bg-transparent">
         {/* Dashboard (INLINE SVG FROM FIGMA) */}
         <NavItem
           label="Dashboard"
@@ -185,7 +185,7 @@ export default function Sidebar({ onLogout, activeItem = 'dashboard' }) {
         {/* Logout below Setting */}
         <button
           onClick={onLogout}
-          className="mt-2 inline-flex w-full items-center gap-3 rounded-xl border-none bg-transparent px-3 py-2 text-sm text-danger transition-colors hover:text-danger focus:outline-none focus-visible:outline-none focus:ring-0 focus-visible:ring-0"
+          className="mt-2 font-semibold inline-flex w-full items-center gap-3 rounded-xl border-none bg-transparent px-3 py-2 text-sm text-danger transition-colors hover:text-danger focus:outline-none focus-visible:outline-none focus:ring-0 focus-visible:ring-0"
         >
           <svg
             viewBox="0 0 17 17"
