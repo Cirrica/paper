@@ -565,24 +565,28 @@ export default function CreateTournament() {
                     <h2 className="font-poppins text-[18.45px] font-semibold leading-[100%] tracking-[0.06em] text-white">Advanced Settings</h2>
                   </div>
 
-                  <div className="mt-6 space-y-4">
+                  <div className="mt-6 space-y-3">
                     {advancedSettingFields.map((setting) => (
-                      <div key={setting.key} className="flex items-center justify-between gap-4 rounded-xl border border-white/10 bg-black/50 px-5 py-4">
+                      <div key={setting.key} className="flex items-center justify-between py-1">
                         <div>
                           <p className="font-poppins text-[16px] font-medium leading-[100%] tracking-[0%] text-white">{setting.label}</p>
-                          <p className="font-poppins text-[14px] font-normal leading-[100%] tracking-[0%] text-[#FFFFFF99]">{setting.description}</p>
+                          <p className="font-poppins text-[14px] font-normal leading-[100%] tracking-[0%] text-[#FFFFFF99] py-2">{setting.description}</p>
                         </div>
                         <button
                           type="button"
                           onClick={handleToggle(setting.key)}
-                          className={`relative h-6 w-12 rounded-full transition ${
-                            formData[setting.key] ? 'bg-gold' : 'bg-white/15'
+                          className={`relative h-[37px] w-[70px] rounded-[100px] transition ${
+                            formData[setting.key]
+                              ? 'bg-[var(--Main-colour,#D7A66C)]'
+                              : 'bg-[#3C3C3C]'
                           }`}
                           aria-pressed={formData[setting.key]}
                         >
                           <span
-                            className={`absolute top-0.5 h-5 w-5 rounded-full bg-black transition-transform ${
-                              formData[setting.key] ? 'translate-x-6' : 'translate-x-1'
+                            className={`absolute top-[4px] left-[4px] h-[29px] w-[29px] rounded-full transition-transform ${
+                              formData[setting.key]
+                                ? 'translate-x-[33px] bg-black'
+                                : 'translate-x-0 bg-white'
                             }`}
                           />
                         </button>
