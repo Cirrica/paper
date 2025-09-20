@@ -569,8 +569,8 @@ export default function CreateTournament() {
                     {advancedSettingFields.map((setting) => (
                       <div key={setting.key} className="flex items-center justify-between gap-4 rounded-xl border border-white/10 bg-black/50 px-5 py-4">
                         <div>
-                          <p className="font-poppins text-sm font-medium text-white">{setting.label}</p>
-                          <p className="font-poppins text-xs text-white/50">{setting.description}</p>
+                          <p className="font-poppins text-[16px] font-medium leading-[100%] tracking-[0%] text-white">{setting.label}</p>
+                          <p className="font-poppins text-[14px] font-normal leading-[100%] tracking-[0%] text-[#FFFFFF99]">{setting.description}</p>
                         </div>
                         <button
                           type="button"
