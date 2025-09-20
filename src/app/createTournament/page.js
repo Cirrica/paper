@@ -585,7 +585,7 @@ export default function CreateTournament() {
                           <span
                             className={`absolute top-[4px] left-[4px] h-[29px] w-[29px] rounded-full transition-transform ${
                               formData[setting.key]
-                                ? 'translate-x-[33px] bg-black'
+                                ? 'translate-x-[33px] bg-[#2A2525]'
                                 : 'translate-x-0 bg-white'
                             }`}
                           />
