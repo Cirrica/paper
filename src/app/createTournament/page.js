@@ -273,7 +273,7 @@ export default function CreateTournament() {
                 <div className="flex items-center gap-3">
                   <button
                     type="button"
-                    className="inline-flex h-[36px] w-[133px] items-center justify-center gap-[7.16px] rounded-[3.58px] bg-gradient-to-r from-[#DAA56A] to-[#FADABD] px-[7.16px] font-poppins text-[12.52px] font-medium leading-[16.1px] text-[#050505] transition"
+                    className="inline-flex h-[36px] w-[133px] items-center justify-center gap-[7.16px] rounded-[3.58px] bg-gradient-to-r from-[#DAA56A] to-[#FADABD] px-[7.16px] font-poppins text-[13px] font-medium leading-[16.1px] text-[#050505] transition"
                   >
                     Create Team ({selectedTeams})
                   </button>
@@ -560,17 +560,17 @@ export default function CreateTournament() {
                   </div>
                 </section>
 
-                <section className="w-[707px] h-[388px] rounded-[10px] border border-[#323232] bg-[#1B1B1B] p-6 shadow-lg shadow-black/30">
+                <section className="w-[707px] h-[388px] rounded-[10px] border border-[#323232] bg-[#1B1B1B] px-6 py-10 shadow-lg shadow-black/30">
                   <div className="flex flex-col gap-1">
                     <h2 className="font-poppins text-[18.45px] font-semibold leading-[100%] tracking-[0.06em] text-white">Advanced Settings</h2>
                   </div>
 
-                  <div className="mt-6 space-y-3">
+                  <div className="mt-6 space-y-6">
                     {advancedSettingFields.map((setting) => (
                       <div key={setting.key} className="flex items-center justify-between py-1">
-                        <div>
+                        <div className="space-y-2">
                           <p className="font-poppins text-[16px] font-medium leading-[100%] tracking-[0%] text-white">{setting.label}</p>
-                          <p className="font-poppins text-[14px] font-normal leading-[100%] tracking-[0%] text-[#FFFFFF99] py-2">{setting.description}</p>
+                          <p className="font-poppins text-[14px] font-normal leading-[100%] tracking-[0%] text-[#FFFFFF99]">{setting.description}</p>
                         </div>
                         <button
                           type="button"
@@ -782,13 +782,35 @@ export default function CreateTournament() {
                     form="create-tournament-form"
                     data-action="create"
                     disabled={isSubmitting}
-                    className="w-full rounded-md bg-gradient-to-r from-gold to-gold-soft px-5 py-3 font-poppins text-sm font-semibold text-surface shadow-md transition-opacity disabled:cursor-not-allowed disabled:opacity-60"
+                    className="inline-flex h-[43px] w-[440px] items-center justify-center rounded-[3.58px] bg-gradient-to-r from-[#DAA56A] to-[#FADABD] px-[7.16px] py-[7.16px] font-poppins text-[13px] font-medium leading-[16.1px] tracking-[0%] text-[#050505] shadow-md transition-opacity disabled:cursor-not-allowed disabled:opacity-60"
                   >
-                    {isSubmitting ? 'Saving...' : 'Create Tournament'}
+                    <span className="flex items-center gap-[7.16px] align-middle">
+                      <svg
+                        width="15"
+                        height="12"
+                        viewBox="0 0 16 12"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="text-current"
+                        aria-hidden="true"
+                      >
+                        <path
+                          d="M15.5514 2.92291C15.2701 2.6829 14.8884 2.62209 14.5534 2.76357L11.0447 4.25116L9.31437 0.585112C9.14534 0.226767 8.79977 0 8.42178 0C8.0438 0 7.69823 0.226107 7.52919 0.584452L5.79951 4.25118L2.29082 2.76359C1.95523 2.62144 1.57349 2.68226 1.29218 2.92292C1.01149 3.16359 0.874881 3.54705 0.936008 3.92457L2.13425 11.3399C2.20473 11.7697 2.58835 12.0593 2.99441 11.9892L3.54831 11.892C6.77501 11.3247 10.0685 11.3247 13.2952 11.892L13.8491 11.9892C14.2551 12.0606 14.6394 11.771 14.7086 11.3406L15.9075 3.92455C15.968 3.54703 15.8321 3.16423 15.5514 2.92291ZM13.7674 10.9029L13.4587 10.8487H13.458C10.1234 10.2623 6.72026 10.2623 3.38561 10.8487L3.07685 10.9029L1.91978 3.74599L5.42911 5.23358C5.91065 5.43391 6.45707 5.21375 6.69223 4.7245L8.42191 1.05777L10.1516 4.7245C10.3868 5.21375 10.9332 5.43391 11.4147 5.23358L14.924 3.74533L13.7674 10.9029Z"
+                          fill="currentColor"
+                          stroke="currentColor"
+                          strokeWidth="0.3"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                      <span className="align-middle">
+                        {isSubmitting ? 'Saving...' : 'Create Tournament'}
+                      </span>
+                    </span>
                   </button>
                   <button
                     type="button"
-                    className="w-full rounded-md border border-white/20 px-5 py-3 font-poppins text-sm font-semibold text-white transition hover:border-white/40 hover:bg-white/5"
+                    className="inline-flex h-[43px] w-[440px] items-center justify-center gap-[7.16px] rounded-[3.58px] border border-[#1B1B1B] bg-[#1B1B1B] px-[7.16px] font-poppins text-[13px] font-medium leading-[16.1px] tracking-[0%] text-white transition hover:border-[#1B1B1B] hover:bg-[#1B1B1B]"
                   >
                     Schedule for later
                   </button>
@@ -797,7 +819,7 @@ export default function CreateTournament() {
                     form="create-tournament-form"
                     data-action="draft"
                     disabled={isSubmitting}
-                    className="w-full rounded-md border border-white/20 px-5 py-3 font-poppins text-sm font-semibold text-white transition hover:border-white/40 hover:bg-white/5 disabled:cursor-not-allowed disabled:opacity-60"
+                    className="inline-flex h-[43px] w-[440px] items-center justify-center gap-[7.16px] rounded-[3.58px] border border-white bg-transparent px-[7.16px] font-poppins text-[13px] font-medium leading-[16.1px] tracking-[0%] text-white transition hover:border-white hover:bg-white/5 disabled:cursor-not-allowed disabled:opacity-60"
                   >
                     Save as Draft
                   </button>
