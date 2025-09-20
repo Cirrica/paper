@@ -560,10 +560,9 @@ export default function CreateTournament() {
                   </div>
                 </section>
 
-                <section className="w-full max-w-[707px] h-[422px] rounded-[10px] border border-[#323232] bg-[#1B1B1B] p-6 shadow-lg shadow-black/30">
+                <section className="w-[707px] h-[388px] rounded-[10px] border border-[#323232] bg-[#1B1B1B] p-6 shadow-lg shadow-black/30">
                   <div className="flex flex-col gap-1">
-                    <h2 className="font-poppins text-lg font-semibold text-white">Advanced Settings</h2>
-                    <p className="font-poppins text-sm text-white/60">Tailor competitive levers for experienced players.</p>
+                    <h2 className="font-poppins text-[18.45px] font-semibold leading-[100%] tracking-[0.06em] text-white">Advanced Settings</h2>
                   </div>
 
                   <div className="mt-6 space-y-4">
