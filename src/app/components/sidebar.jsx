@@ -18,7 +18,7 @@ function NavItem({ icon, label, active = false }) {
 
 export default function Sidebar({ onLogout, activeItem = 'dashboard' }) {
   return (
-    <div className="flex h-full w-full max-w-[209px] flex-col overflow-hidden bg-[#050505]">
+    <div className="flex h-full w-full max-w-[209px] flex-col overflow-hidden bg-surface">
       {/* Logo */}
       <div className="mb-8 flex w-full items-center gap-1 bg-transparent">
         <Image src="/clearCircleLogo.svg" alt="Cirrica logo" width={44} height={44} className="rounded-full" priority />

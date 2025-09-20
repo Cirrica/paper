@@ -44,7 +44,7 @@ export default function Dashboard() {
     <div className="h-screen overflow-hidden bg-black text-white">
       <div className="flex h-full flex-col lg:flex-row">
         {/* Sidebar (flush left, full height) */}
-        <aside className="sticky top-0 hidden h-screen border-r border-white/10 bg-[#050505] px-5 py-6 lg:flex lg:w-[209px] lg:flex-col lg:shrink-0">
+        <aside className="sticky top-0 hidden h-screen border-r border-white/10 bg-surface px-5 py-6 lg:flex lg:w-[209px] lg:flex-col lg:shrink-0">
           {/* use your Sidebar and pass logout */}
           <Sidebar onLogout={handleLogout} activeItem="dashboard" />
         </aside>

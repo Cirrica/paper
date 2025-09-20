@@ -253,7 +253,7 @@ export default function CreateTournament() {
   return (
     <div className="h-screen overflow-hidden bg-black text-white">
       <div className="flex h-full flex-col lg:flex-row">
-        <aside className="sticky top-0 hidden h-screen border-r border-white/10 bg-[#050505] px-5 py-6 lg:flex lg:w-[209px] lg:flex-col lg:shrink-0">
+        <aside className="sticky top-0 hidden h-screen border-r border-white/10 bg-surface px-5 py-6 lg:flex lg:w-[209px] lg:flex-col lg:shrink-0">
           <Sidebar onLogout={handleLogout} activeItem="tournaments" />
         </aside>
 
@@ -273,7 +273,7 @@ export default function CreateTournament() {
                 <div className="flex items-center gap-3">
                   <button
                     type="button"
-                    className="inline-flex h-[36px] w-[133px] items-center justify-center gap-[7.16px] rounded-[3.58px] bg-gradient-to-r from-[#DAA56A] to-[#FADABD] px-[7.16px] font-poppins text-[13px] font-medium leading-[16.1px] text-[#050505] transition"
+                    className="inline-flex h-[36px] w-[133px] items-center justify-center gap-[7.16px] rounded-[3.58px] bg-gradient-to-r from-gold to-gold-soft px-[7.16px] font-poppins text-[13px] font-medium leading-[16.1px] text-surface transition"
                   >
                     Create Team ({selectedTeams})
                   </button>
@@ -303,7 +303,7 @@ export default function CreateTournament() {
                 onSubmit={handleSubmit}
                 className="space-y-8 w-full max-w-[707px] mx-auto lg:mx-0"
               >
-                <section className="w-full max-w-[707px] h-[422px] rounded-[10px] border border-[#323232] bg-[#1B1B1B] p-6 shadow-lg shadow-black/30">
+                <section className="w-full max-w-[707px] h-[422px] rounded-[10px] border border-panel-border bg-panel p-6 shadow-lg shadow-black/30">
                   <div className="flex flex-col gap-1">
                     <h2 className="font-poppins text-[18.45px] font-semibold leading-[100%] tracking-[0.06em] text-white">
                       Basic Information
@@ -322,8 +322,8 @@ export default function CreateTournament() {
                         value={formData.name}
                         onChange={handleFieldChange('name')}
                         placeholder="eg. Tech Giants Weekly Challenge"
-                        className={`mt-1 w-[649px] h-[42px] rounded-[6px] border px-4 font-poppins text-[14.45px] font-thin leading-[100%] text-white/60 placeholder:text-[#FFFFFF99] focus:border-gold focus:outline-none focus:ring-0 ${
-                          errors.name ? 'border-danger/60' : 'border-[#FFFFFF33]'
+                        className={`mt-1 w-[649px] h-[42px] rounded-[6px] border px-4 font-poppins text-[14.45px] font-thin leading-[100%] text-white/60 placeholder:text-white/60 focus:border-gold focus:outline-none focus:ring-0 ${
+                          errors.name ? 'border-danger/60' : 'border-white/20'
                         }`}
                       />
                       {errors.name && (
@@ -342,7 +342,7 @@ export default function CreateTournament() {
                         onChange={handleFieldChange('description')}
                         placeholder="Describe your tournament rules and objectives ..."
                         rows={4}
-                        className="mt-1 h-[113px] w-[649px] resize-none rounded-[6px] border border-[#FFFFFF33] px-4 py-3 font-poppins text-[14.45px] font-thin leading-[100%] text-white/60 placeholder:text-[#FFFFFF99] focus:border-gold focus:outline-none focus:ring-0"
+                        className="mt-1 h-[113px] w-[649px] resize-none rounded-[6px] border border-white/20 px-4 py-3 font-poppins text-[14.45px] font-thin leading-[100%] text-white/60 placeholder:text-white/60 focus:border-gold focus:outline-none focus:ring-0"
                       />
                     </div>
 
@@ -357,13 +357,13 @@ export default function CreateTournament() {
                             name="tournamentType"
                             value={formData.tournamentType}
                             onChange={handleFieldChange('tournamentType')}
-                            className="h-full w-full appearance-none rounded-[6px] border border-[#FFFFFF33] bg-transparent pl-3 pr-8 font-poppins text-[14.45px] leading-[100%] text-white/60 font-thin focus:border-gold focus:outline-none focus:ring-0"
+                            className="h-full w-full appearance-none rounded-[6px] border border-white/20 bg-transparent pl-3 pr-8 font-poppins text-[14.45px] leading-[100%] text-white/60 font-thin focus:border-gold focus:outline-none focus:ring-0"
                           >
                             {tournamentTypeOptions.map((option) => (
                               <option
                                 key={option.value}
                                 value={option.value}
-                                className="bg-[#1B1B1B] text-white font-thin"
+                                className="bg-panel text-white font-thin"
                               >
                                 {option.label}
                               </option>
@@ -387,13 +387,13 @@ export default function CreateTournament() {
                             name="tradeMode"
                             value={formData.tradeMode}
                             onChange={handleFieldChange('tradeMode')}
-                            className="h-full w-full appearance-none rounded-[6px] border border-[#FFFFFF33] bg-transparent pl-3 pr-8 font-poppins text-[14.45px] leading-[100%] text-white/60 font-thin focus:border-gold focus:outline-none focus:ring-0"
+                            className="h-full w-full appearance-none rounded-[6px] border border-white/20 bg-transparent pl-3 pr-8 font-poppins text-[14.45px] leading-[100%] text-white/60 font-thin focus:border-gold focus:outline-none focus:ring-0"
                           >
                             {tradeModeOptions.map((option) => (
                               <option
                                 key={option.value}
                                 value={option.value}
-                                className="bg-[#1B1B1B] text-white font-thin"
+                                className="bg-panel text-white font-thin"
                               >
                                 {option.label}
                               </option>
@@ -410,7 +410,7 @@ export default function CreateTournament() {
                   </div>
                 </section>
 
-                <section className="w-[707px] h-[584px] rounded-[10px] border border-[#323232] bg-[#1B1B1B] p-6 shadow-lg shadow-black/30">
+                <section className="w-[707px] h-[584px] rounded-[10px] border border-panel-border bg-panel p-6 shadow-lg shadow-black/30">
                   <div className="flex flex-col gap-1">
                     <h2 className="font-poppins text-[18.45px] font-semibold leading-[100%] tracking-[0.06em] text-white">Tournament Setting</h2>
                   </div>
@@ -427,10 +427,10 @@ export default function CreateTournament() {
                             name="duration"
                             value={formData.duration}
                             onChange={handleFieldChange('duration')}
-                          className="h-full w-full appearance-none rounded-[6px] border border-[#FFFFFF33] bg-transparent pl-3 pr-8 font-poppins text-[14px] font-normal leading-[100%] tracking-[0%] text-[#FFFFFF99] focus:border-gold focus:outline-none focus:ring-0"
+                          className="h-full w-full appearance-none rounded-[6px] border border-white/20 bg-transparent pl-3 pr-8 font-poppins text-[14px] font-normal leading-[100%] tracking-[0%] text-white/60 focus:border-gold focus:outline-none focus:ring-0"
                           >
                             {durationOptions.map((option) => (
-                              <option key={option.value} value={option.value} className="bg-[#1B1B1B] font-thin text-white">
+                              <option key={option.value} value={option.value} className="bg-panel font-thin text-white">
                                 {option.label}
                               </option>
                             ))}
@@ -453,10 +453,10 @@ export default function CreateTournament() {
                             name="winCondition"
                             value={formData.winCondition}
                             onChange={handleFieldChange('winCondition')}
-                            className="h-full w-full appearance-none rounded-[6px] border border-[#FFFFFF33] bg-transparent pl-3 pr-8 font-poppins text-[14px] font-normal leading-[100%] tracking-[0%] text-[#FFFFFF99] focus:border-gold focus:outline-none focus:ring-0"
+                            className="h-full w-full appearance-none rounded-[6px] border border-white/20 bg-transparent pl-3 pr-8 font-poppins text-[14px] font-normal leading-[100%] tracking-[0%] text-white/60 focus:border-gold focus:outline-none focus:ring-0"
                           >
                             {winConditionOptions.map((option) => (
-                              <option key={option.value} value={option.value} className="bg-[#1B1B1B] font-thin text-white">
+                              <option key={option.value} value={option.value} className="bg-panel font-thin text-white">
                                 {option.label}
                               </option>
                             ))}
@@ -481,8 +481,8 @@ export default function CreateTournament() {
                           step="5"
                           value={formData.entryFee}
                           onChange={handleFieldChange('entryFee')}
-                          className={`mt-1 h-[42px] w-[315px] rounded-[6px] border bg-transparent px-4 font-poppins text-[14px] font-normal leading-[100%] tracking-[0%] text-[#FFFFFF99] placeholder:text-[#FFFFFF99] focus:border-gold focus:outline-none focus:ring-0 ${
-                            errors.entryFee ? 'border-danger/60' : 'border-[#FFFFFF33]'
+                          className={`mt-1 h-[42px] w-[315px] rounded-[6px] border bg-transparent px-4 font-poppins text-[14px] font-normal leading-[100%] tracking-[0%] text-white/60 placeholder:text-white/60 focus:border-gold focus:outline-none focus:ring-0 ${
+                            errors.entryFee ? 'border-danger/60' : 'border-white/20'
                           }`}
                         />
                         {errors.entryFee && (
@@ -502,8 +502,8 @@ export default function CreateTournament() {
                           step="50"
                           value={formData.maxParticipants}
                           onChange={handleFieldChange('maxParticipants')}
-                          className={`mt-1 h-[42px] w-[315px] rounded-[6px] border bg-transparent px-4 font-poppins text-[14px] font-normal leading-[100%] tracking-[0%] text-[#FFFFFF99] placeholder:text-[#FFFFFF99] focus:border-gold focus:outline-none focus:ring-0 ${
-                            errors.maxParticipants ? 'border-danger/60' : 'border-[#FFFFFF33]'
+                          className={`mt-1 h-[42px] w-[315px] rounded-[6px] border bg-transparent px-4 font-poppins text-[14px] font-normal leading-[100%] tracking-[0%] text-white/60 placeholder:text-white/60 focus:border-gold focus:outline-none focus:ring-0 ${
+                            errors.maxParticipants ? 'border-danger/60' : 'border-white/20'
                           }`}
                         />
                         {errors.maxParticipants && (
@@ -528,11 +528,11 @@ export default function CreateTournament() {
                               onClick={() => handlePrizeSelect(option.value)}
                               className={`flex h-[118px] w-[207px] flex-col items-center justify-center gap-1 rounded-[6px] border px-5 py-4 text-center transition ${
                                 isActive
-                                  ? 'border-gold bg-gradient-to-b from-[#2A1E0F] to-[#1B1307]'
-                                  : 'border-[#FFFFFF33] text-white/70 hover:border-white hover:text-white'
+                                  ? 'border-gold bg-gradient-to-b from-gold-deep to-gold-dark'
+                                  : 'border-white/20 text-white/70 hover:border-white hover:text-white'
                               }`}
                             >
-                              <span className="flex h-[28px] w-[68px] items-center justify-center gap-2 font-poppins text-[18.45px] font-semibold leading-[100%] tracking-[0.06em] text-[#D7A66C]">
+                              <span className="flex h-[28px] w-[68px] items-center justify-center gap-2 font-poppins text-[18.45px] font-semibold leading-[100%] tracking-[0.06em] text-gold-muted">
                                 <svg
                                   width="10"
                                   height="16"
@@ -560,7 +560,7 @@ export default function CreateTournament() {
                   </div>
                 </section>
 
-                <section className="w-[707px] h-[388px] rounded-[10px] border border-[#323232] bg-[#1B1B1B] px-6 py-10 shadow-lg shadow-black/30">
+                <section className="w-[707px] h-[388px] rounded-[10px] border border-panel-border bg-panel px-6 py-10 shadow-lg shadow-black/30">
                   <div className="flex flex-col gap-1">
                     <h2 className="font-poppins text-[18.45px] font-semibold leading-[100%] tracking-[0.06em] text-white">Advanced Settings</h2>
                   </div>
@@ -570,22 +570,22 @@ export default function CreateTournament() {
                       <div key={setting.key} className="flex items-center justify-between py-1">
                         <div className="space-y-2">
                           <p className="font-poppins text-[16px] font-medium leading-[100%] tracking-[0%] text-white">{setting.label}</p>
-                          <p className="font-poppins text-[14px] font-normal leading-[100%] tracking-[0%] text-[#FFFFFF99]">{setting.description}</p>
+                          <p className="font-poppins text-[14px] font-normal leading-[100%] tracking-[0%] text-white/60">{setting.description}</p>
                         </div>
                         <button
                           type="button"
                           onClick={handleToggle(setting.key)}
                           className={`relative h-[37px] w-[70px] rounded-[100px] transition ${
                             formData[setting.key]
-                              ? 'bg-[var(--Main-colour,#D7A66C)]'
-                              : 'bg-[#3C3C3C]'
+                              ? 'bg-gold-muted'
+                              : 'bg-toggle-off'
                           }`}
                           aria-pressed={formData[setting.key]}
                         >
                           <span
                             className={`absolute top-[4px] left-[4px] h-[29px] w-[29px] rounded-full transition-transform ${
                               formData[setting.key]
-                                ? 'translate-x-[33px] bg-[#2A2525]'
+                                ? 'translate-x-[33px] bg-toggle-knob'
                                 : 'translate-x-0 bg-white'
                             }`}
                           />
@@ -597,7 +597,7 @@ export default function CreateTournament() {
               </form>
 
               <aside className="space-y-6 w-full max-w-[440px] mx-auto lg:mx-0">
-                <section className="w-full max-w-[440px] h-[369px] rounded-[10px] border border-[#323232] bg-[#1B1B1B] p-6 shadow-xl shadow-black/40">
+                <section className="w-full max-w-[440px] h-[369px] rounded-[10px] border border-panel-border bg-panel p-6 shadow-xl shadow-black/40">
                   <header className="flex flex-col gap-3">
                     <div className="flex items-center justify-between gap-3">
                       <div className="flex items-center gap-2">
@@ -621,7 +621,7 @@ export default function CreateTournament() {
                           Tournament Preview
                         </p>
                       </div>
-                      <div className="flex h-[28px] w-[68px] items-center gap-2 text-[#D7A66C]">
+                      <div className="flex h-[28px] w-[68px] items-center gap-2 text-gold-muted">
                         <svg
                           width="10"
                           height="16"
@@ -636,7 +636,7 @@ export default function CreateTournament() {
                             fill="currentColor"
                           />
                         </svg>
-                        <span className="font-poppins text-[18.45px] font-semibold leading-[100%] tracking-[6%] text-right text-[#D7A66C]">
+                        <span className="font-poppins text-[18.45px] font-semibold leading-[100%] tracking-[6%] text-right text-gold-muted">
                           {formData.prizeMultiplier.toUpperCase()}
                         </span>
                       </div>
@@ -645,7 +645,7 @@ export default function CreateTournament() {
                       <h3 className="pl-2 font-poppins text-[14.45px] font-normal leading-[100%] tracking-[0%] text-white">
                         {formData.name || 'Tech Giant weekly Challenge'}
                       </h3>
-                      <span className="flex h-[24px] w-[111px] items-center justify-center rounded-[100px] bg-[#D7A66C] font-poppins text-[12px] font-normal leading-[100%] tracking-[0%] text-black">
+                      <span className="flex h-[24px] w-[111px] items-center justify-center rounded-[100px] bg-gold-muted font-poppins text-[12px] font-normal leading-[100%] tracking-[0%] text-black">
                         {`${getOptionLabel(tournamentTypeOptions, formData.tournamentType).split(' ')[0].toLowerCase()} + ${getOptionLabel(tradeModeOptions, formData.tradeMode).split(' ')[0].toLowerCase()}`}
                       </span>
                     </div>
@@ -654,7 +654,7 @@ export default function CreateTournament() {
                   <div className="mt-5 space-y-5 text-sm text-white/70 px-2">
                     <dl className="space-y-3">
                       <div className="flex items-center justify-between py-1">
-                        <dt className="flex items-center gap-2 font-poppins text-[14.45px] font-normal leading-[100%] tracking-[0%] text-[#FFFFFF99]">
+                        <dt className="flex items-center gap-2 font-poppins text-[14.45px] font-normal leading-[100%] tracking-[0%] text-white/60">
                           <svg
                             width="19"
                             height="19"
@@ -684,7 +684,7 @@ export default function CreateTournament() {
                         </dd>
                       </div>
                       <div className="flex items-center justify-between py-1">
-                        <dt className="flex items-center gap-2 font-poppins text-[14.45px] font-normal leading-[100%] tracking-[0%] text-[#FFFFFF99]">
+                        <dt className="flex items-center gap-2 font-poppins text-[14.45px] font-normal leading-[100%] tracking-[0%] text-white/60">
                           <svg
                             width="20"
                             height="14"
@@ -706,7 +706,7 @@ export default function CreateTournament() {
                         </dd>
                       </div>
                       <div className="flex items-center justify-between py-1">
-                        <dt className="flex items-center gap-2 font-poppins text-[14.45px] font-normal leading-[100%] tracking-[0%] text-[#FFFFFF99]">
+                        <dt className="flex items-center gap-2 font-poppins text-[14.45px] font-normal leading-[100%] tracking-[0%] text-white/60">
                           <svg
                             width="17"
                             height="17"
@@ -730,7 +730,7 @@ export default function CreateTournament() {
                         </dd>
                       </div>
                       <div className="flex items-center justify-between py-1">
-                        <dt className="flex items-center gap-2 font-poppins text-[14.45px] font-normal leading-[100%] tracking-[0%] text-[#FFFFFF99]">
+                        <dt className="flex items-center gap-2 font-poppins text-[14.45px] font-normal leading-[100%] tracking-[0%] text-white/60">
                           <svg
                             width="16"
                             height="16"
@@ -762,13 +762,13 @@ export default function CreateTournament() {
                     </dl>
 
                     <div className="rounded-xl px-4 py-4 text-center">
-                      <p className="font-poppins text-[14.45px] font-normal leading-[100%] tracking-[0%] text-[#FFFFFF99]">
+                      <p className="font-poppins text-[14.45px] font-normal leading-[100%] tracking-[0%] text-white/60">
                         Estimated Prize Pool
                       </p>
-                      <p className="font-poppins mt-3 text-[20.45px] font-bold leading-[100%] tracking-[0%] text-[#D7A66C]">
+                      <p className="font-poppins mt-3 text-[20.45px] font-bold leading-[100%] tracking-[0%] text-gold-muted">
                         {formatCurrency(estimatedPrizePool)}
                       </p>
-                      <p className="font-poppins mt-2 text-[14.45px] font-normal leading-[100%] tracking-[0%] text-[#FFFFFF99]">
+                      <p className="font-poppins mt-2 text-[14.45px] font-normal leading-[100%] tracking-[0%] text-white/60">
                         (90% of entry fees, 10% platform fee)
                       </p>
                     </div>
@@ -782,7 +782,7 @@ export default function CreateTournament() {
                     form="create-tournament-form"
                     data-action="create"
                     disabled={isSubmitting}
-                    className="inline-flex h-[43px] w-[440px] items-center justify-center rounded-[3.58px] bg-gradient-to-r from-[#DAA56A] to-[#FADABD] px-[7.16px] py-[7.16px] font-poppins text-[13px] font-medium leading-[16.1px] tracking-[0%] text-[#050505] shadow-md transition-opacity disabled:cursor-not-allowed disabled:opacity-60"
+                    className="inline-flex h-[43px] w-[440px] items-center justify-center rounded-[3.58px] bg-gradient-to-r from-gold to-gold-soft px-[7.16px] py-[7.16px] font-poppins text-[13px] font-medium leading-[16.1px] tracking-[0%] text-surface shadow-md transition-opacity disabled:cursor-not-allowed disabled:opacity-60"
                   >
                     <span className="flex items-center gap-[7.16px] align-middle">
                       <svg
@@ -810,7 +810,7 @@ export default function CreateTournament() {
                   </button>
                   <button
                     type="button"
-                    className="inline-flex h-[43px] w-[440px] items-center justify-center gap-[7.16px] rounded-[3.58px] border border-[#1B1B1B] bg-[#1B1B1B] px-[7.16px] font-poppins text-[13px] font-medium leading-[16.1px] tracking-[0%] text-white transition hover:border-[#1B1B1B] hover:bg-[#1B1B1B]"
+                    className="inline-flex h-[43px] w-[440px] items-center justify-center gap-[7.16px] rounded-[3.58px] border border-panel bg-panel px-[7.16px] font-poppins text-[13px] font-medium leading-[16.1px] tracking-[0%] text-white transition hover:border-panel hover:bg-panel"
                   >
                     Schedule for later
                   </button>
