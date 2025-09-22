@@ -9,7 +9,12 @@ function NavItem({ icon, label, active = false, href, onClick }) {
 
   if (href) {
     return (
-      <Link href={href} className={`${baseClass} ${stateClass}`} prefetch={false}>
+      <Link
+        href={href}
+        className={`${baseClass} ${stateClass}`}
+        prefetch={false}
+        onClick={onClick}
+      >
         {icon}
         <span className="font-poppins text-base font-semibold leading-none tracking-wide text-current">
           {label}
@@ -28,9 +33,21 @@ function NavItem({ icon, label, active = false, href, onClick }) {
   );
 }
 
-export default function Sidebar({ onLogout, activeItem = 'dashboard' }) {
+export default function Sidebar({ onLogout, activeItem = 'dashboard', onNavigate, onClose }) {
   return (
-    <div className="flex h-full w-full max-w-[209px] flex-col overflow-hidden bg-surface">
+    <div className="relative flex h-full w-full max-w-xs flex-col overflow-hidden bg-surface lg:w-52">
+      {onClose ? (
+        <button
+          type="button"
+          onClick={onClose}
+          className="absolute right-3 top-3 inline-flex h-8 w-8 items-center justify-center rounded-full text-white/70 transition hover:text-white focus:outline-none focus-visible:outline-none lg:hidden"
+          aria-label="Close navigation"
+        >
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M4.05029 4.05029C4.34029 3.76029 4.82029 3.76029 5.11029 4.05029L9.00029 7.94029L12.8903 4.05029C13.1803 3.76029 13.6603 3.76029 13.9503 4.05029C14.2403 4.34029 14.2403 4.82029 13.9503 5.11029L10.0603 9.00029L13.9503 12.8903C14.2403 13.1803 14.2403 13.6603 13.9503 13.9503C13.6603 14.2403 13.1803 14.2403 12.8903 13.9503L9.00029 10.0603L5.11029 13.9503C4.82029 14.2403 4.34029 14.2403 4.05029 13.9503C3.76029 13.6603 3.76029 13.1803 4.05029 12.8903L7.94029 9.00029L4.05029 5.11029C3.76029 4.82029 3.76029 4.34029 4.05029 4.05029Z" fill="currentColor" />
+          </svg>
+        </button>
+      ) : null}
       {/* Logo */}
       <div className="mb-8 flex w-full items-center gap-1 bg-transparent">
         <Image src="/clearCircleLogo.svg" alt="Cirrica logo" width={44} height={44} className="rounded-full" priority />
@@ -46,6 +63,7 @@ export default function Sidebar({ onLogout, activeItem = 'dashboard' }) {
           label="Dashboard"
           active={activeItem === 'dashboard'}
           href="/dashboard"
+          onClick={onNavigate}
           icon={
             <svg
               viewBox="0 0 18 18"
