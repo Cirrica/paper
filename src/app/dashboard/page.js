@@ -30,6 +30,10 @@ export default function Dashboard() {
     router.push('/');
   };
 
+  const handleCreateTournament = () => {
+    router.push('/createTournament');
+  };
+
   if (!isAuthenticated) {
     return (
       <div className='min-h-screen flex items-center justify-center'>
@@ -59,7 +63,10 @@ export default function Dashboard() {
                 <p className="mt-2 font-poppins text-sm font-medium leading-none tracking-wide text-white">Welcome back to Cirrica</p>
               </div>
               <div className="flex items-center gap-3">
-                <button className="inline-flex items-center gap-2 rounded-md bg-gradient-to-r from-gold to-gold-soft px-4 py-2 font-poppins text-sm font-medium text-surface shadow-md">
+                <button
+                  className="inline-flex items-center gap-2 rounded-md bg-gradient-to-r from-gold to-gold-soft px-4 py-2 font-poppins text-sm font-medium text-surface shadow-md cursor-pointer"
+                  onClick={handleCreateTournament}
+                >
                   <svg className="h-4 w-4" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                     <path d="M15.5514 2.92291C15.2701 2.6829 14.8884 2.62209 14.5534 2.76357L11.0447 4.25116L9.31437 0.585112C9.14534 0.226767 8.79977 0 8.42178 0C8.0438 0 7.69823 0.226107 7.52919 0.584452L5.79951 4.25118L2.29082 2.76359C1.95523 2.62144 1.57349 2.68226 1.29218 2.92292C1.01149 3.16359 0.874881 3.54705 0.936008 3.92457L2.13425 11.3399C2.20473 11.7697 2.58835 12.0593 2.99441 11.9892L3.54831 11.892C6.77501 11.3247 10.0685 11.3247 13.2952 11.892L13.8491 11.9892C14.2551 12.0606 14.6394 11.771 14.7086 11.3406L15.9075 3.92455C15.968 3.54703 15.8321 3.16423 15.5514 2.92291ZM13.7674 10.9029L13.4587 10.8487H13.458C10.1234 10.2623 6.72026 10.2623 3.38561 10.8487L3.07685 10.9029L1.91978 3.74599L5.42911 5.23358C5.91065 5.43391 6.45707 5.21375 6.69223 4.7245L8.42191 1.05777L10.1516 4.7245C10.3868 5.21375 10.9332 5.43391 11.4147 5.23358L14.924 3.74533L13.7674 10.9029Z" fill="currentColor" />
                   </svg>

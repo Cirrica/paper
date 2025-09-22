@@ -1,18 +1,30 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 
-function NavItem({ icon, label, active = false }) {
+function NavItem({ icon, label, active = false, href, onClick }) {
   const baseClass = 'relative flex w-full cursor-pointer items-center gap-3 rounded-xl border-none bg-transparent px-3 py-2 transition-colors focus:outline-none focus-visible:outline-none focus:ring-0 focus-visible:ring-0';
   const stateClass = active ? 'text-gold-muted' : 'text-white/80 hover:text-white';
 
+  if (href) {
+    return (
+      <Link href={href} className={`${baseClass} ${stateClass}`} prefetch={false}>
+        {icon}
+        <span className="font-poppins text-base font-semibold leading-none tracking-wide text-current">
+          {label}
+        </span>
+      </Link>
+    );
+  }
+
   return (
-    <a className={`${baseClass} ${stateClass}`}>
+    <button type="button" className={`${baseClass} ${stateClass}`} onClick={onClick}>
       {icon}
       <span className="font-poppins text-base font-semibold leading-none tracking-wide text-current">
         {label}
       </span>
-    </a>
+    </button>
   );
 }
 
@@ -33,6 +45,7 @@ export default function Sidebar({ onLogout, activeItem = 'dashboard' }) {
         <NavItem
           label="Dashboard"
           active={activeItem === 'dashboard'}
+          href="/dashboard"
           icon={
             <svg
               viewBox="0 0 18 18"
