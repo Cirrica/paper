@@ -73,9 +73,8 @@ function initRuntime() {
     };
     Object.assign(globalThis, {
         Request: CustomRequest,
-        __BUILD_TIMESTAMP_MS__,
-        __NEXT_BASE_PATH__,
-        __ASSETS_RUN_WORKER_FIRST__,
+        __BUILD_TIMESTAMP_MS__: __BUILD_TIMESTAMP_MS__,
+        __NEXT_BASE_PATH__: __NEXT_BASE_PATH__,
         // The external middleware will use the convertTo function of the `edge` converter
         // by default it will try to fetch the request, but since we are running everything in the same worker
         // we need to use the request as is.
@@ -114,9 +113,81 @@ function populateProcessEnv(url, env) {
      * https://github.com/vercel/next.js/blob/6b1e48080e896e0d44a05fe009cb79d2d3f91774/packages/next/src/server/app-render/action-handler.ts#L307-L316
      */
     process.env.__NEXT_PRIVATE_ORIGIN = url.origin;
-    // `__DEPLOYMENT_ID__` is a string (passed via ESBuild).
-    if (__DEPLOYMENT_ID__) {
-        process.env.DEPLOYMENT_ID = __DEPLOYMENT_ID__;
+}
+const imgRemotePatterns = __IMAGES_REMOTE_PATTERNS__;
+/**
+ * Fetches an images.
+ *
+ * Local images (starting with a '/' as fetched using the passed fetcher).
+ * Remote images should match the configured remote patterns or a 404 response is returned.
+ */
+export function fetchImage(fetcher, url) {
+    // https://github.com/vercel/next.js/blob/d76f0b1/packages/next/src/server/image-optimizer.ts#L208
+    if (!url || url.length > 3072 || url.startsWith("//")) {
+        return new Response("Not Found", { status: 404 });
     }
+    // Local
+    if (url.startsWith("/")) {
+        if (/\/_next\/image($|\/)/.test(decodeURIComponent(parseUrl(url)?.pathname ?? ""))) {
+            return new Response("Not Found", { status: 404 });
+        }
+        return fetcher?.fetch(`http://assets.local${url}`);
+    }
+    // Remote
+    let hrefParsed;
+    try {
+        hrefParsed = new URL(url);
+    }
+    catch {
+        return new Response("Not Found", { status: 404 });
+    }
+    if (!["http:", "https:"].includes(hrefParsed.protocol)) {
+        return new Response("Not Found", { status: 404 });
+    }
+    if (!imgRemotePatterns.some((p) => matchRemotePattern(p, hrefParsed))) {
+        return new Response("Not Found", { status: 404 });
+    }
+    return fetch(url, { cf: { cacheEverything: true } });
+}
+export function matchRemotePattern(pattern, url) {
+    // https://github.com/vercel/next.js/blob/d76f0b1/packages/next/src/shared/lib/match-remote-pattern.ts
+    if (pattern.protocol !== undefined) {
+        if (pattern.protocol.replace(/:$/, "") !== url.protocol.replace(/:$/, "")) {
+            return false;
+        }
+    }
+    if (pattern.port !== undefined) {
+        if (pattern.port !== url.port) {
+            return false;
+        }
+    }
+    if (pattern.hostname === undefined) {
+        throw new Error(`Pattern should define hostname but found\n${JSON.stringify(pattern)}`);
+    }
+    else {
+        if (!new RegExp(pattern.hostname).test(url.hostname)) {
+            return false;
+        }
+    }
+    if (pattern.search !== undefined) {
+        if (pattern.search !== url.search) {
+            return false;
+        }
+    }
+    // Should be the same as writeImagesManifest()
+    if (!new RegExp(pattern.pathname).test(url.pathname)) {
+        return false;
+    }
+    return true;
+}
+function parseUrl(url) {
+    let parsed = undefined;
+    try {
+        parsed = new URL(url, "http://n");
+    }
+    catch {
+        // empty
+    }
+    return parsed;
 }
 /* eslint-enable no-var */

@@ -1,4 +1,4 @@
-globalThis.openNextDebug = false;globalThis.openNextVersion = "3.7.0";
+globalThis.openNextDebug = false;globalThis.openNextVersion = "3.6.5";
 
 // node_modules/@opennextjs/aws/dist/utils/error.js
 var IgnorableError = class extends Error {
@@ -146,16 +146,15 @@ var DOQueueHandler = class extends DurableObject {
     this.ctx.waitUntil(revalidationPromise);
   }
   async executeRevalidation(msg) {
-    let response;
     try {
       debug(`Revalidating ${msg.MessageBody.host}${msg.MessageBody.url}`);
       const { MessageBody: { host, url } } = msg;
       const protocol = host.includes("localhost") ? "http" : "https";
-      response = await this.service.fetch(`${protocol}://${host}${url}`, {
+      const response = await this.service.fetch(`${protocol}://${host}${url}`, {
         method: "HEAD",
         headers: {
           // This is defined during build
-          "x-prerender-revalidate": "e9bfe319c90580da5962b16fd67c5aeb",
+          "x-prerender-revalidate": "bedf1420b12d01b814acd38a96a60c1c",
           "x-isr": "1"
         },
         // This one is kind of problematic, it will always show the wall time of the revalidation to `this.revalidationTimeout`
@@ -179,7 +178,7 @@ var DOQueueHandler = class extends DurableObject {
           "INSERT OR REPLACE INTO sync (id, lastSuccess, buildId) VALUES (?, unixepoch(), ?)",
           // We cannot use the deduplication id because it's not unique per route - every time a route is revalidated, the deduplication id is different.
           `${host}${url}`,
-          "VgLFy-aHhfX75opymGoxj"
+          "f90_drwn2VJElh7tiVij-"
         );
       }
       this.routeInFailedState.delete(msg.MessageDeduplicationId);
@@ -190,10 +189,6 @@ var DOQueueHandler = class extends DurableObject {
       error(e);
     } finally {
       this.ongoingRevalidations.delete(msg.MessageDeduplicationId);
-      try {
-        await response?.body?.cancel();
-      } catch {
-      }
     }
   }
   async alarm() {
@@ -231,7 +226,7 @@ var DOQueueHandler = class extends DurableObject {
     }
     this.routeInFailedState.set(msg.MessageDeduplicationId, updatedFailedState);
     if (!this.disableSQLite) {
-      this.sql.exec("INSERT OR REPLACE INTO failed_state (id, data, buildId) VALUES (?, ?, ?)", msg.MessageDeduplicationId, JSON.stringify(updatedFailedState), "VgLFy-aHhfX75opymGoxj");
+      this.sql.exec("INSERT OR REPLACE INTO failed_state (id, data, buildId) VALUES (?, ?, ?)", msg.MessageDeduplicationId, JSON.stringify(updatedFailedState), "f90_drwn2VJElh7tiVij-");
     }
     await this.addAlarm();
   }
@@ -255,8 +250,8 @@ var DOQueueHandler = class extends DurableObject {
       return;
     this.sql.exec("CREATE TABLE IF NOT EXISTS failed_state (id TEXT PRIMARY KEY, data TEXT, buildId TEXT)");
     this.sql.exec("CREATE TABLE IF NOT EXISTS sync (id TEXT PRIMARY KEY, lastSuccess INTEGER, buildId TEXT)");
-    this.sql.exec("DELETE FROM failed_state WHERE buildId != ?", "VgLFy-aHhfX75opymGoxj");
-    this.sql.exec("DELETE FROM sync WHERE buildId != ?", "VgLFy-aHhfX75opymGoxj");
+    this.sql.exec("DELETE FROM failed_state WHERE buildId != ?", "f90_drwn2VJElh7tiVij-");
+    this.sql.exec("DELETE FROM sync WHERE buildId != ?", "f90_drwn2VJElh7tiVij-");
     const failedStateCursor = this.sql.exec("SELECT * FROM failed_state");
     for (const row of failedStateCursor) {
       this.routeInFailedState.set(row.id, JSON.parse(row.data));

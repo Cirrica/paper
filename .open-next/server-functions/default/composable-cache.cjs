@@ -1,4 +1,4 @@
-globalThis.disableIncrementalCache = false;globalThis.disableDynamoDBCache = false;globalThis.isNextAfter15 = true;globalThis.openNextDebug = false;globalThis.openNextVersion = "3.7.0";
+globalThis.disableIncrementalCache = false;globalThis.disableDynamoDBCache = false;globalThis.isNextAfter15 = true;globalThis.openNextDebug = false;globalThis.openNextVersion = "3.6.5";
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __getOwnPropNames = Object.getOwnPropertyNames;
@@ -24,43 +24,6 @@ __export(composable_cache_exports, {
 });
 module.exports = __toCommonJS(composable_cache_exports);
 
-// node_modules/@opennextjs/aws/dist/adapters/logger.js
-function debug(...args) {
-  if (globalThis.openNextDebug) {
-    console.log(...args);
-  }
-}
-
-// node_modules/@opennextjs/aws/dist/utils/cache.js
-function getTagKey(tag) {
-  if (typeof tag === "string") {
-    return tag;
-  }
-  return JSON.stringify({
-    tag: tag.tag,
-    path: tag.path
-  });
-}
-async function writeTags(tags) {
-  const store = globalThis.__openNextAls.getStore();
-  debug("Writing tags", tags, store);
-  if (!store || globalThis.openNextConfig.dangerous?.disableTagCache) {
-    return;
-  }
-  const tagsToWrite = tags.filter((t) => {
-    const tagKey = getTagKey(t);
-    const shouldWrite = !store.writtenTags.has(tagKey);
-    if (shouldWrite) {
-      store.writtenTags.add(tagKey);
-    }
-    return shouldWrite;
-  });
-  if (tagsToWrite.length === 0) {
-    return;
-  }
-  await globalThis.tagCache.writeTags(tagsToWrite);
-}
-
 // node_modules/@opennextjs/aws/dist/utils/stream.js
 var import_node_stream = require("node:stream");
 function fromReadableStream(stream, base64) {
@@ -84,14 +47,17 @@ function toReadableStream(value, isBase64) {
   return import_node_stream.Readable.toWeb(import_node_stream.Readable.from(Buffer.from(value, isBase64 ? "base64" : "utf8")));
 }
 
+// node_modules/@opennextjs/aws/dist/adapters/logger.js
+function debug(...args) {
+  if (globalThis.openNextDebug) {
+    console.log(...args);
+  }
+}
+
 // node_modules/@opennextjs/aws/dist/adapters/composable-cache.js
-var pendingWritePromiseMap = /* @__PURE__ */ new Map();
 var composable_cache_default = {
   async get(cacheKey) {
     try {
-      if (pendingWritePromiseMap.has(cacheKey)) {
-        return pendingWritePromiseMap.get(cacheKey);
-      }
       const result = await globalThis.incrementalCache.get(cacheKey, "composable");
       if (!result?.value?.value) {
         return void 0;
@@ -116,10 +82,7 @@ var composable_cache_default = {
     }
   },
   async set(cacheKey, pendingEntry) {
-    pendingWritePromiseMap.set(cacheKey, pendingEntry);
-    const entry = await pendingEntry.finally(() => {
-      pendingWritePromiseMap.delete(cacheKey);
-    });
+    const entry = await pendingEntry;
     const valueToStore = await fromReadableStream(entry.value);
     await globalThis.incrementalCache.set(cacheKey, {
       ...entry,
@@ -129,7 +92,7 @@ var composable_cache_default = {
       const storedTags = await globalThis.tagCache.getByPath(cacheKey);
       const tagsToWrite = entry.tags.filter((tag) => !storedTags.includes(tag));
       if (tagsToWrite.length > 0) {
-        await writeTags(tagsToWrite.map((tag) => ({ tag, path: cacheKey })));
+        await globalThis.tagCache.writeTags(tagsToWrite.map((tag) => ({ tag, path: cacheKey })));
       }
     }
   },
@@ -144,7 +107,7 @@ var composable_cache_default = {
   },
   async expireTags(...tags) {
     if (globalThis.tagCache.mode === "nextMode") {
-      return writeTags(tags);
+      return globalThis.tagCache.writeTags(tags);
     }
     const tagCache = globalThis.tagCache;
     const revalidatedAt = Date.now();
@@ -160,7 +123,7 @@ var composable_cache_default = {
     for (const entry of pathsToUpdate.flat()) {
       setToWrite.add(entry);
     }
-    await writeTags(Array.from(setToWrite));
+    await globalThis.tagCache.writeTags(Array.from(setToWrite));
   },
   // This one is necessary for older versions of next
   async receiveExpiredTags(...tags) {

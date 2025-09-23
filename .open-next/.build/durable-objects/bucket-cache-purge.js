@@ -1,4 +1,4 @@
-globalThis.openNextDebug = false;globalThis.openNextVersion = "3.7.0";
+globalThis.openNextDebug = false;globalThis.openNextVersion = "3.6.5";
 
 // node_modules/@opennextjs/cloudflare/dist/api/durable-objects/bucket-cache-purge.js
 import { DurableObject } from "cloudflare:workers";
@@ -17,9 +17,8 @@ async function internalPurgeCacheByTags(env, tags) {
     debugCache("purgeCacheByTags", "No cache zone ID or API token provided. Skipping cache purge.");
     return "missing-credentials";
   }
-  let response;
   try {
-    response = await fetch(`https://api.cloudflare.com/client/v4/zones/${env.CACHE_PURGE_ZONE_ID}/purge_cache`, {
+    const response = await fetch(`https://api.cloudflare.com/client/v4/zones/${env.CACHE_PURGE_ZONE_ID}/purge_cache`, {
       headers: {
         Authorization: `Bearer ${env.CACHE_PURGE_API_TOKEN}`,
         "Content-Type": "application/json"
@@ -43,11 +42,6 @@ async function internalPurgeCacheByTags(env, tags) {
   } catch (error) {
     console.error("Error purging cache by tags:", error);
     return "purge-failed";
-  } finally {
-    try {
-      await response?.body?.cancel();
-    } catch {
-    }
   }
 }
 

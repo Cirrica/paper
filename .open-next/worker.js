@@ -1,9 +1,5 @@
 //@ts-expect-error: Will be resolved by wrangler build
-import { fetchImage } from "./cloudflare/images.js";
-//@ts-expect-error: Will be resolved by wrangler build
-import { runWithCloudflareRequestContext } from "./cloudflare/init.js";
-//@ts-expect-error: Will be resolved by wrangler build
-import { maybeGetSkewProtectionResponse } from "./cloudflare/skew-protection.js";
+import { fetchImage, runWithCloudflareRequestContext } from "./cloudflare/init.js";
 // @ts-expect-error: Will be resolved by wrangler build
 import { handler as middlewareHandler } from "./middleware/handler.mjs";
 //@ts-expect-error: Will be resolved by wrangler build
@@ -15,10 +11,6 @@ export { BucketCachePurge } from "./.build/durable-objects/bucket-cache-purge.js
 export default {
     async fetch(request, env, ctx) {
         return runWithCloudflareRequestContext(request, env, ctx, async () => {
-            const response = maybeGetSkewProtectionResponse(request);
-            if (response) {
-                return response;
-            }
             const url = new URL(request.url);
             // Serve images in development.
             // Note: "/cdn-cgi/image/..." requests do not reach production workers.
@@ -35,7 +27,7 @@ export default {
             // Fallback for the Next default image loader.
             if (url.pathname === `${globalThis.__NEXT_BASE_PATH__}/_next/image`) {
                 const imageUrl = url.searchParams.get("url") ?? "";
-                return await fetchImage(env.ASSETS, imageUrl, ctx);
+                return fetchImage(env.ASSETS, imageUrl);
             }
             // - `Request`s are handled by the Next server
             const reqOrResp = await middlewareHandler(request, env, ctx);

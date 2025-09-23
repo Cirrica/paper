@@ -1,7 +1,8 @@
 {
   "/_not-found/page": "/_not-found",
   "/favicon.ico/route": "/favicon.ico",
+  "/loginFromToken/page": "/loginFromToken",
+  "/createTournament/page": "/createTournament",
   "/dashboard/page": "/dashboard",
-  "/page": "/",
-  "/loginFromToken/page": "/loginFromToken"
+  "/page": "/"
 }
