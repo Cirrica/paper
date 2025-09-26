@@ -6,27 +6,28 @@ export default function TradesTable() {
 
   return (
     <div className="mb-8">
-      <h4 className="font-semibold mb-2">Recent Trades</h4>
-      <table className="w-full text-left border-collapse">
-        <thead className="text-gray-400 border-b border-gray-700">
+      <h4 className="font-semibold mb-8 text-[20px]">Recent trades</h4>
+     
+      <table className="w-full text-center rounded-t-xl text-[14px] overflow-hidden">
+        <thead className="bg-dark-gray text-[14px] h-[70px] border-t border-gray-500 ">
           <tr>
-            <th className="p-2">Date</th>
-            <th className="p-2">Action</th>
-            <th className="p-2">Ticker</th>
-            <th className="p-2">Qty</th>
-            <th className="p-2">Price</th>
-            <th className="p-2">Status</th>
+            <th className="p-2 rounded-tl-xl rounded-bl-xl border-l border-gray-500 font-normal">Date</th>
+            <th className="p-2 font-normal">Action</th>
+            <th className="p-2 font-normal">Ticker</th>
+            <th className="p-2 font-normal">Qty</th>
+            <th className="p-2 font-normal">Price</th>
+            <th className="p-2 rounded-br-xl rounded-tr-xl border-r border-gray-500 font-normal">Status</th>
           </tr>
         </thead>
         <tbody>
-          {trades.map((trade, i) => (
-            <tr key={i} className="border-b border-gray-800">
-              <td className="p-2">{trade.date}</td>
-              <td className="p-2">{trade.action}</td>
-              <td className="p-2">{trade.ticker}</td>
-              <td className="p-2">{trade.qty}</td>
-              <td className="p-2">{trade.price}</td>
-              <td className="p-2">{trade.status}</td>
+          {trades.map((row, i) => (
+            <tr key={i} >
+              <td className="p-6">{row.date}</td>
+              <td className="p-6">{row.action}</td>
+              <td className="p-6">{row.ticker}</td>
+              <td className="p-6">{row.qty}</td>
+              <td className="p-6">{row.price}</td>
+              <td className="p-6">{row.status}</td>
             </tr>
           ))}
         </tbody>

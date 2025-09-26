@@ -3,8 +3,8 @@ export default function Notifications() {
 
   return (
     <div>
-      <h4 className="font-semibold mb-2">Notifications</h4>
-      <ul className="list-disc list-inside text-gray-300">
+      <h4 className="font-semibold mb-2 text-[20px]">Notifications</h4>
+      <ul className="list-decimal list-inside text-[17px] space-y-4 py-4">
         {notes.map((note, i) => (
           <li key={i}>{note}</li>
         ))}
