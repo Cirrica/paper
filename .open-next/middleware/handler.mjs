@@ -16,7 +16,7 @@ Object.defineProperty = function(o, p, a) {
 
   
   
-  globalThis.openNextDebug = false;globalThis.openNextVersion = "3.7.0";
+  globalThis.openNextDebug = false;globalThis.openNextVersion = "3.6.5";
 var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -324,13 +324,12 @@ __export(edge_exports, {
   default: () => edge_default
 });
 import { Buffer as Buffer2 } from "node:buffer";
-var import_cookie, NULL_BODY_STATUSES, converter, edge_default;
+var import_cookie, converter, edge_default;
 var init_edge = __esm({
   "node_modules/@opennextjs/aws/dist/overrides/converters/edge.js"() {
     import_cookie = __toESM(require_dist(), 1);
     init_util();
     init_utils();
-    NULL_BODY_STATUSES = /* @__PURE__ */ new Set([101, 103, 204, 205, 304]);
     converter = {
       convertFrom: async (event) => {
         const url = new URL(event.url);
@@ -396,8 +395,7 @@ var init_edge = __esm({
             headers.set(key, value);
           }
         }
-        const body = NULL_BODY_STATUSES.has(result.statusCode) ? null : result.body;
-        return new Response(body, {
+        return new Response(result.body, {
           status: result.statusCode,
           headers
         });
@@ -497,21 +495,6 @@ var init_pattern_env = __esm({
       }
     };
     pattern_env_default = envLoader;
-  }
-});
-
-// node_modules/@opennextjs/aws/dist/overrides/assetResolver/dummy.js
-var dummy_exports = {};
-__export(dummy_exports, {
-  default: () => dummy_default
-});
-var resolver, dummy_default;
-var init_dummy = __esm({
-  "node_modules/@opennextjs/aws/dist/overrides/assetResolver/dummy.js"() {
-    resolver = {
-      name: "dummy"
-    };
-    dummy_default = resolver;
   }
 });
 
@@ -664,13 +647,12 @@ function provideNextAfterProvider() {
     globalThis[VERCEL_REQUEST_CONTEXT_SYMBOL] = nextAfterContext;
   }
 }
-function runWithOpenNextRequestContext({ isISRRevalidation, waitUntil, requestId = Math.random().toString(36) }, fn) {
+function runWithOpenNextRequestContext({ isISRRevalidation, waitUntil }, fn) {
   return globalThis.__openNextAls.run({
-    requestId,
+    requestId: Math.random().toString(36),
     pendingPromiseRunner: new DetachedPromiseRunner(),
     isISRRevalidation,
-    waitUntil,
-    writtenTags: /* @__PURE__ */ new Set()
+    waitUntil
   }, async () => {
     provideNextAfterProvider();
     let result;
@@ -711,13 +693,6 @@ async function resolveOriginResolver(originResolver) {
   const m_1 = await Promise.resolve().then(() => (init_pattern_env(), pattern_env_exports));
   return m_1.default;
 }
-async function resolveAssetResolver(assetResolver) {
-  if (typeof assetResolver === "function") {
-    return assetResolver();
-  }
-  const m_1 = await Promise.resolve().then(() => (init_dummy(), dummy_exports));
-  return m_1.default;
-}
 async function resolveProxyRequest(proxyRequest) {
   if (typeof proxyRequest === "function") {
     return proxyRequest();
@@ -749,12 +724,12 @@ var NEXT_DIR = path.join(__dirname, ".next");
 var OPEN_NEXT_DIR = path.join(__dirname, ".open-next");
 debug({ NEXT_DIR, OPEN_NEXT_DIR });
 var NextConfig = { "env": {}, "webpack": null, "eslint": { "ignoreDuringBuilds": false }, "typescript": { "ignoreBuildErrors": false, "tsconfigPath": "tsconfig.json" }, "distDir": ".next", "cleanDistDir": true, "assetPrefix": "", "cacheMaxMemorySize": 52428800, "configOrigin": "next.config.mjs", "useFileSystemPublicRoutes": true, "generateEtags": true, "pageExtensions": ["tsx", "ts", "jsx", "js"], "poweredByHeader": true, "compress": true, "images": { "deviceSizes": [640, 750, 828, 1080, 1200, 1920, 2048, 3840], "imageSizes": [16, 32, 48, 64, 96, 128, 256, 384], "path": "/_next/image", "loader": "default", "loaderFile": "", "domains": [], "disableStaticImages": false, "minimumCacheTTL": 60, "formats": ["image/webp"], "dangerouslyAllowSVG": false, "contentSecurityPolicy": "script-src 'none'; frame-src 'none'; sandbox;", "contentDispositionType": "attachment", "remotePatterns": [], "unoptimized": false }, "devIndicators": { "position": "bottom-left" }, "onDemandEntries": { "maxInactiveAge": 6e4, "pagesBufferLength": 5 }, "amp": { "canonicalBase": "" }, "basePath": "", "sassOptions": {}, "trailingSlash": false, "i18n": null, "productionBrowserSourceMaps": false, "excludeDefaultMomentLocales": true, "serverRuntimeConfig": {}, "publicRuntimeConfig": {}, "reactProductionProfiling": false, "reactStrictMode": null, "reactMaxHeadersLength": 6e3, "httpAgentOptions": { "keepAlive": true }, "logging": {}, "expireTime": 31536e3, "staticPageGenerationTimeout": 60, "output": "standalone", "modularizeImports": { "@mui/icons-material": { "transform": "@mui/icons-material/{{member}}" }, "lodash": { "transform": "lodash/{{member}}" } }, "outputFileTracingRoot": "/Users/anthony/Programming/Projects/cirrica/paper", "experimental": { "nodeMiddleware": false, "cacheLife": { "default": { "stale": 300, "revalidate": 900, "expire": 4294967294 }, "seconds": { "stale": 0, "revalidate": 1, "expire": 60 }, "minutes": { "stale": 300, "revalidate": 60, "expire": 3600 }, "hours": { "stale": 300, "revalidate": 3600, "expire": 86400 }, "days": { "stale": 300, "revalidate": 86400, "expire": 604800 }, "weeks": { "stale": 300, "revalidate": 604800, "expire": 2592e3 }, "max": { "stale": 300, "revalidate": 2592e3, "expire": 4294967294 } }, "cacheHandlers": {}, "cssChunking": true, "multiZoneDraftMode": false, "appNavFailHandling": false, "prerenderEarlyExit": true, "serverMinification": true, "serverSourceMaps": false, "linkNoTouchStart": false, "caseSensitiveRoutes": false, "clientSegmentCache": false, "dynamicOnHover": false, "preloadEntriesOnStart": true, "clientRouterFilter": true, "clientRouterFilterRedirects": false, "fetchCacheKeyPrefix": "", "middlewarePrefetch": "flexible", "optimisticClientCache": true, "manualClientBasePath": false, "cpus": 7, "memoryBasedWorkersCount": false, "imgOptConcurrency": null, "imgOptTimeoutInSeconds": 7, "imgOptMaxInputPixels": 268402689, "imgOptSequentialRead": null, "isrFlushToDisk": true, "workerThreads": false, "optimizeCss": false, "nextScriptWorkers": false, "scrollRestoration": false, "externalDir": false, "disableOptimizedLoading": false, "gzipSize": true, "craCompat": false, "esmExternals": true, "fullySpecified": false, "swcTraceProfiling": false, "forceSwcTransforms": false, "largePageDataBytes": 128e3, "typedRoutes": false, "typedEnv": false, "parallelServerCompiles": false, "parallelServerBuildTraces": false, "ppr": false, "authInterrupts": false, "webpackMemoryOptimizations": false, "optimizeServerReact": true, "useEarlyImport": false, "viewTransition": false, "routerBFCache": false, "staleTimes": { "dynamic": 0, "static": 300 }, "serverComponentsHmrCache": true, "staticGenerationMaxConcurrency": 8, "staticGenerationMinPagesPerWorker": 25, "dynamicIO": false, "inlineCss": false, "useCache": false, "optimizePackageImports": ["lucide-react", "date-fns", "lodash-es", "ramda", "antd", "react-bootstrap", "ahooks", "@ant-design/icons", "@headlessui/react", "@headlessui-float/react", "@heroicons/react/20/solid", "@heroicons/react/24/solid", "@heroicons/react/24/outline", "@visx/visx", "@tremor/react", "rxjs", "@mui/material", "@mui/icons-material", "recharts", "react-use", "effect", "@effect/schema", "@effect/platform", "@effect/platform-node", "@effect/platform-browser", "@effect/platform-bun", "@effect/sql", "@effect/sql-mssql", "@effect/sql-mysql2", "@effect/sql-pg", "@effect/sql-squlite-node", "@effect/sql-squlite-bun", "@effect/sql-squlite-wasm", "@effect/sql-squlite-react-native", "@effect/rpc", "@effect/rpc-http", "@effect/typeclass", "@effect/experimental", "@effect/opentelemetry", "@material-ui/core", "@material-ui/icons", "@tabler/icons-react", "mui-core", "react-icons/ai", "react-icons/bi", "react-icons/bs", "react-icons/cg", "react-icons/ci", "react-icons/di", "react-icons/fa", "react-icons/fa6", "react-icons/fc", "react-icons/fi", "react-icons/gi", "react-icons/go", "react-icons/gr", "react-icons/hi", "react-icons/hi2", "react-icons/im", "react-icons/io", "react-icons/io5", "react-icons/lia", "react-icons/lib", "react-icons/lu", "react-icons/md", "react-icons/pi", "react-icons/ri", "react-icons/rx", "react-icons/si", "react-icons/sl", "react-icons/tb", "react-icons/tfi", "react-icons/ti", "react-icons/vsc", "react-icons/wi"], "trustHostHeader": false, "isExperimentalCompile": false }, "htmlLimitedBots": "Mediapartners-Google|Slurp|DuckDuckBot|baiduspider|yandex|sogou|bitlybot|tumblr|vkShare|quora link preview|redditbot|ia_archiver|Bingbot|BingPreview|applebot|facebookexternalhit|facebookcatalog|Twitterbot|LinkedInBot|Slackbot|Discordbot|WhatsApp|SkypeUriPreview|Yeti", "bundlePagesRouterDependencies": false, "configFileName": "next.config.mjs", "turbopack": { "root": "/Users/anthony/Programming/Projects/cirrica/paper" } };
-var BuildId = "VgLFy-aHhfX75opymGoxj";
-var RoutesManifest = { "basePath": "", "rewrites": { "beforeFiles": [], "afterFiles": [], "fallback": [] }, "redirects": [{ "source": "/:path+/", "destination": "/:path+", "internal": true, "statusCode": 308, "regex": "^(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))/$" }], "routes": { "static": [{ "page": "/", "regex": "^/(?:/)?$", "routeKeys": {}, "namedRegex": "^/(?:/)?$" }, { "page": "/_not-found", "regex": "^/_not\\-found(?:/)?$", "routeKeys": {}, "namedRegex": "^/_not\\-found(?:/)?$" }, { "page": "/dashboard", "regex": "^/dashboard(?:/)?$", "routeKeys": {}, "namedRegex": "^/dashboard(?:/)?$" }, { "page": "/favicon.ico", "regex": "^/favicon\\.ico(?:/)?$", "routeKeys": {}, "namedRegex": "^/favicon\\.ico(?:/)?$" }, { "page": "/loginFromToken", "regex": "^/loginFromToken(?:/)?$", "routeKeys": {}, "namedRegex": "^/loginFromToken(?:/)?$" }], "dynamic": [], "data": { "static": [], "dynamic": [] } }, "locales": [] };
+var BuildId = "f90_drwn2VJElh7tiVij-";
+var RoutesManifest = { "basePath": "", "rewrites": { "beforeFiles": [], "afterFiles": [], "fallback": [] }, "redirects": [{ "source": "/:path+/", "destination": "/:path+", "internal": true, "statusCode": 308, "regex": "^(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))/$" }], "routes": { "static": [{ "page": "/", "regex": "^/(?:/)?$", "routeKeys": {}, "namedRegex": "^/(?:/)?$" }, { "page": "/_not-found", "regex": "^/_not\\-found(?:/)?$", "routeKeys": {}, "namedRegex": "^/_not\\-found(?:/)?$" }, { "page": "/createTournament", "regex": "^/createTournament(?:/)?$", "routeKeys": {}, "namedRegex": "^/createTournament(?:/)?$" }, { "page": "/dashboard", "regex": "^/dashboard(?:/)?$", "routeKeys": {}, "namedRegex": "^/dashboard(?:/)?$" }, { "page": "/favicon.ico", "regex": "^/favicon\\.ico(?:/)?$", "routeKeys": {}, "namedRegex": "^/favicon\\.ico(?:/)?$" }, { "page": "/loginFromToken", "regex": "^/loginFromToken(?:/)?$", "routeKeys": {}, "namedRegex": "^/loginFromToken(?:/)?$" }], "dynamic": [], "data": { "static": [], "dynamic": [] } }, "locales": [] };
 var ConfigHeaders = [];
-var PrerenderManifest = { "version": 4, "routes": { "/favicon.ico": { "initialHeaders": { "cache-control": "public, max-age=0, must-revalidate", "content-type": "image/x-icon", "x-next-cache-tags": "_N_T_/layout,_N_T_/favicon.ico/layout,_N_T_/favicon.ico/route,_N_T_/favicon.ico" }, "experimentalBypassFor": [{ "type": "header", "key": "Next-Action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/favicon.ico", "dataRoute": null, "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/": { "experimentalBypassFor": [{ "type": "header", "key": "Next-Action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/", "dataRoute": "/index.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/loginFromToken": { "experimentalBypassFor": [{ "type": "header", "key": "Next-Action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/loginFromToken", "dataRoute": "/loginFromToken.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/dashboard": { "experimentalBypassFor": [{ "type": "header", "key": "Next-Action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/dashboard", "dataRoute": "/dashboard.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] } }, "dynamicRoutes": {}, "notFoundRoutes": [], "preview": { "previewModeId": "e9bfe319c90580da5962b16fd67c5aeb", "previewModeSigningKey": "d6a07e738f83a6ecf566b5f7429f8e8d4f72a4c465bdac57fe44185107791ec6", "previewModeEncryptionKey": "217354a7a199c3c9f6335bfb1c65ecdf4eab4a640d8b81c641ef6bd17cd86d44" } };
+var PrerenderManifest = { "version": 4, "routes": { "/favicon.ico": { "initialHeaders": { "cache-control": "public, max-age=0, must-revalidate", "content-type": "image/x-icon", "x-next-cache-tags": "_N_T_/layout,_N_T_/favicon.ico/layout,_N_T_/favicon.ico/route,_N_T_/favicon.ico" }, "experimentalBypassFor": [{ "type": "header", "key": "Next-Action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/favicon.ico", "dataRoute": null, "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/dashboard": { "experimentalBypassFor": [{ "type": "header", "key": "Next-Action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/dashboard", "dataRoute": "/dashboard.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/createTournament": { "experimentalBypassFor": [{ "type": "header", "key": "Next-Action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/createTournament", "dataRoute": "/createTournament.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/loginFromToken": { "experimentalBypassFor": [{ "type": "header", "key": "Next-Action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/loginFromToken", "dataRoute": "/loginFromToken.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/": { "experimentalBypassFor": [{ "type": "header", "key": "Next-Action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/", "dataRoute": "/index.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] } }, "dynamicRoutes": {}, "notFoundRoutes": [], "preview": { "previewModeId": "bedf1420b12d01b814acd38a96a60c1c", "previewModeSigningKey": "1de17bb473c6e2119e62e7906f99b60a8d27f2361e12ddf6950ae9275c2b4bf7", "previewModeEncryptionKey": "d0c672be971b6e2aff9a11b3fbd9eca2f5fdfa081fedd0351130afadce23aeec" } };
 var MiddlewareManifest = { "version": 3, "middleware": {}, "functions": {}, "sortedMiddleware": [] };
-var AppPathRoutesManifest = { "/_not-found/page": "/_not-found", "/favicon.ico/route": "/favicon.ico", "/dashboard/page": "/dashboard", "/page": "/", "/loginFromToken/page": "/loginFromToken" };
+var AppPathRoutesManifest = { "/_not-found/page": "/_not-found", "/favicon.ico/route": "/favicon.ico", "/loginFromToken/page": "/loginFromToken", "/createTournament/page": "/createTournament", "/dashboard/page": "/dashboard", "/page": "/" };
 var FunctionsConfigManifest = { "version": 1, "functions": {} };
 var PagesManifest = { "/_app": "pages/_app.js", "/_error": "pages/_error.js", "/_document": "pages/_document.js", "/404": "pages/404.html" };
 process.env.NEXT_BUILD_ID = BuildId;
@@ -1103,7 +1078,6 @@ import { createHash } from "node:crypto";
 init_stream();
 
 // node_modules/@opennextjs/aws/dist/utils/cache.js
-init_logger();
 async function hasBeenRevalidated(key, tags, cacheEntry) {
   if (globalThis.openNextConfig.dangerous?.disableTagCache) {
     return false;
@@ -1137,7 +1111,6 @@ function getTagsFromValue(value) {
 init_logger();
 var CACHE_ONE_YEAR = 60 * 60 * 24 * 365;
 var CACHE_ONE_MONTH = 60 * 60 * 24 * 30;
-var VARY_HEADER = "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Router-Segment-Prefetch, Next-Url";
 async function computeCacheControl(path3, body, host, revalidate, lastModified) {
   let finalRevalidate = CACHE_ONE_YEAR;
   const existingRoute = Object.entries(PrerenderManifest.routes).find((p) => p[0] === path3)?.[1];
@@ -1213,15 +1186,13 @@ async function generateResult(event, localizedPath, cachedValue, lastModified) {
   const cacheControl = await computeCacheControl(localizedPath, body, event.headers.host, cachedValue.revalidate, lastModified);
   return {
     type: "core",
-    // sometimes other status codes can be cached, like 404. For these cases, we should return the correct status code
-    statusCode: cachedValue.meta?.status ?? 200,
+    statusCode: 200,
     body: toReadableStream(body, false),
     isBase64Encoded: false,
     headers: {
       ...cacheControl,
       "content-type": type,
-      ...cachedValue.meta?.headers,
-      vary: VARY_HEADER
+      ...cachedValue.meta?.headers
     }
   };
 }
@@ -1950,8 +1921,7 @@ function handleRedirects(event, redirects) {
 }
 function fixDataPage(internalEvent, buildId) {
   const { rawPath, query } = internalEvent;
-  const basePath = NextConfig.basePath ?? "";
-  const dataPattern = `${basePath}/_next/data/${buildId}`;
+  const dataPattern = `${NextConfig.basePath ?? ""}/_next/data/${buildId}`;
   if (rawPath.startsWith("/_next/data") && !rawPath.startsWith(dataPattern)) {
     return {
       type: internalEvent.type,
@@ -1964,7 +1934,7 @@ function fixDataPage(internalEvent, buildId) {
     };
   }
   if (rawPath.startsWith(dataPattern) && rawPath.endsWith(".json")) {
-    const newPath = `${basePath}${rawPath.slice(dataPattern.length, -".json".length).replace(/^\/index$/, "/")}`;
+    const newPath = rawPath.slice(dataPattern.length, -".json".length).replace(/^\/index$/, "/");
     query.__nextDataReq = "1";
     return {
       ...internalEvent,
@@ -2133,7 +2103,6 @@ var INTERNAL_HEADER_PREFIX = "x-opennext-";
 var INTERNAL_HEADER_INITIAL_URL = `${INTERNAL_HEADER_PREFIX}initial-url`;
 var INTERNAL_HEADER_LOCALE = `${INTERNAL_HEADER_PREFIX}locale`;
 var INTERNAL_HEADER_RESOLVED_ROUTES = `${INTERNAL_HEADER_PREFIX}resolved-routes`;
-var INTERNAL_EVENT_REQUEST_ID = `${INTERNAL_HEADER_PREFIX}request-id`;
 var geoHeaderToNextHeader = {
   "x-open-next-city": "x-vercel-ip-city",
   "x-open-next-country": "x-vercel-ip-country",
@@ -2141,17 +2110,15 @@ var geoHeaderToNextHeader = {
   "x-open-next-latitude": "x-vercel-ip-latitude",
   "x-open-next-longitude": "x-vercel-ip-longitude"
 };
-function applyMiddlewareHeaders(eventOrResult, middlewareHeaders) {
-  const isResult = isInternalResult(eventOrResult);
-  const headers = eventOrResult.headers;
-  const keyPrefix = isResult ? "" : MIDDLEWARE_HEADER_PREFIX;
+function applyMiddlewareHeaders(eventHeaders, middlewareHeaders, setPrefix = true) {
+  const keyPrefix = setPrefix ? MIDDLEWARE_HEADER_PREFIX : "";
   Object.entries(middlewareHeaders).forEach(([key, value]) => {
     if (value) {
-      headers[keyPrefix + key] = Array.isArray(value) ? value.join(",") : value;
+      eventHeaders[keyPrefix + key] = Array.isArray(value) ? value.join(",") : value;
     }
   });
 }
-async function routingHandler(event, { assetResolver }) {
+async function routingHandler(event) {
   try {
     for (const [openNextGeoName, nextGeoName] of Object.entries(geoHeaderToNextHeader)) {
       const value = event.headers[openNextGeoName];
@@ -2164,101 +2131,98 @@ async function routingHandler(event, { assetResolver }) {
         delete event.headers[key];
       }
     }
-    let headers = getNextConfigHeaders(event, ConfigHeaders);
-    let eventOrResult = fixDataPage(event, BuildId);
-    if (isInternalResult(eventOrResult)) {
-      return eventOrResult;
+    const nextHeaders = getNextConfigHeaders(event, ConfigHeaders);
+    let internalEvent = fixDataPage(event, BuildId);
+    if ("statusCode" in internalEvent) {
+      return internalEvent;
     }
-    const redirect = handleRedirects(eventOrResult, RoutesManifest.redirects);
+    const redirect = handleRedirects(internalEvent, RoutesManifest.redirects);
     if (redirect) {
       redirect.headers.Location = new URL(redirect.headers.Location).href;
       debug("redirect", redirect);
       return redirect;
     }
-    const middlewareEventOrResult = await handleMiddleware(
-      eventOrResult,
+    const eventOrResult = await handleMiddleware(
+      internalEvent,
       // We need to pass the initial search without any decoding
       // TODO: we'd need to refactor InternalEvent to include the initial querystring directly
       // Should be done in another PR because it is a breaking change
       new URL(event.url).search
     );
-    if (isInternalResult(middlewareEventOrResult)) {
-      return middlewareEventOrResult;
+    const isResult = "statusCode" in eventOrResult;
+    if (isResult) {
+      return eventOrResult;
     }
-    headers = {
-      ...middlewareEventOrResult.responseHeaders,
-      ...headers
-    };
-    let isExternalRewrite = middlewareEventOrResult.isExternalRewrite ?? false;
-    eventOrResult = middlewareEventOrResult;
+    const middlewareResponseHeaders = eventOrResult.responseHeaders;
+    let isExternalRewrite = eventOrResult.isExternalRewrite ?? false;
+    internalEvent = eventOrResult;
     if (!isExternalRewrite) {
-      const beforeRewrite = handleRewrites(eventOrResult, RoutesManifest.rewrites.beforeFiles);
-      eventOrResult = beforeRewrite.internalEvent;
-      isExternalRewrite = beforeRewrite.isExternalRewrite;
-      if (!isExternalRewrite) {
-        const assetResult = await assetResolver?.maybeGetAssetResult?.(eventOrResult);
-        if (assetResult) {
-          applyMiddlewareHeaders(assetResult, headers);
-          return assetResult;
-        }
-      }
+      const beforeRewrites = handleRewrites(internalEvent, RoutesManifest.rewrites.beforeFiles);
+      internalEvent = beforeRewrites.internalEvent;
+      isExternalRewrite = beforeRewrites.isExternalRewrite;
     }
-    const foundStaticRoute = staticRouteMatcher(eventOrResult.rawPath);
+    const foundStaticRoute = staticRouteMatcher(internalEvent.rawPath);
     const isStaticRoute = !isExternalRewrite && foundStaticRoute.length > 0;
     if (!(isStaticRoute || isExternalRewrite)) {
-      const afterRewrite = handleRewrites(eventOrResult, RoutesManifest.rewrites.afterFiles);
-      eventOrResult = afterRewrite.internalEvent;
-      isExternalRewrite = afterRewrite.isExternalRewrite;
+      const afterRewrites = handleRewrites(internalEvent, RoutesManifest.rewrites.afterFiles);
+      internalEvent = afterRewrites.internalEvent;
+      isExternalRewrite = afterRewrites.isExternalRewrite;
     }
     let isISR = false;
     if (!isExternalRewrite) {
-      const fallbackResult = handleFallbackFalse(eventOrResult, PrerenderManifest);
-      eventOrResult = fallbackResult.event;
+      const fallbackResult = handleFallbackFalse(internalEvent, PrerenderManifest);
+      internalEvent = fallbackResult.event;
       isISR = fallbackResult.isISR;
     }
-    const foundDynamicRoute = dynamicRouteMatcher(eventOrResult.rawPath);
+    const foundDynamicRoute = dynamicRouteMatcher(internalEvent.rawPath);
     const isDynamicRoute = !isExternalRewrite && foundDynamicRoute.length > 0;
     if (!(isDynamicRoute || isStaticRoute || isExternalRewrite)) {
-      const fallbackRewrites = handleRewrites(eventOrResult, RoutesManifest.rewrites.fallback);
-      eventOrResult = fallbackRewrites.internalEvent;
+      const fallbackRewrites = handleRewrites(internalEvent, RoutesManifest.rewrites.fallback);
+      internalEvent = fallbackRewrites.internalEvent;
       isExternalRewrite = fallbackRewrites.isExternalRewrite;
     }
-    const isNextImageRoute = eventOrResult.rawPath.startsWith("/_next/image");
+    const isNextImageRoute = internalEvent.rawPath.startsWith("/_next/image");
     const isRouteFoundBeforeAllRewrites = isStaticRoute || isDynamicRoute || isExternalRewrite;
     if (!(isRouteFoundBeforeAllRewrites || isNextImageRoute || // We need to check again once all rewrites have been applied
-    staticRouteMatcher(eventOrResult.rawPath).length > 0 || dynamicRouteMatcher(eventOrResult.rawPath).length > 0)) {
-      eventOrResult = {
-        ...eventOrResult,
+    staticRouteMatcher(internalEvent.rawPath).length > 0 || dynamicRouteMatcher(internalEvent.rawPath).length > 0)) {
+      internalEvent = {
+        ...internalEvent,
         rawPath: "/404",
-        url: constructNextUrl(eventOrResult.url, "/404"),
+        url: constructNextUrl(internalEvent.url, "/404"),
         headers: {
-          ...eventOrResult.headers,
+          ...internalEvent.headers,
           "x-middleware-response-cache-control": "private, no-cache, no-store, max-age=0, must-revalidate"
         }
       };
     }
-    if (globalThis.openNextConfig.dangerous?.enableCacheInterception && !isInternalResult(eventOrResult)) {
+    if (globalThis.openNextConfig.dangerous?.enableCacheInterception && !("statusCode" in internalEvent)) {
       debug("Cache interception enabled");
-      eventOrResult = await cacheInterceptor(eventOrResult);
-      if (isInternalResult(eventOrResult)) {
-        applyMiddlewareHeaders(eventOrResult, headers);
-        return eventOrResult;
+      internalEvent = await cacheInterceptor(internalEvent);
+      if ("statusCode" in internalEvent) {
+        applyMiddlewareHeaders(internalEvent.headers, {
+          ...middlewareResponseHeaders,
+          ...nextHeaders
+        }, false);
+        return internalEvent;
       }
     }
-    applyMiddlewareHeaders(eventOrResult, headers);
+    applyMiddlewareHeaders(internalEvent.headers, {
+      ...middlewareResponseHeaders,
+      ...nextHeaders
+    });
     const resolvedRoutes = [
       ...foundStaticRoute,
       ...foundDynamicRoute
     ];
     debug("resolvedRoutes", resolvedRoutes);
     return {
-      internalEvent: eventOrResult,
+      internalEvent,
       isExternalRewrite,
       origin: false,
       isISR,
       resolvedRoutes,
       initialURL: event.url,
-      locale: NextConfig.i18n ? detectLocale(eventOrResult, NextConfig.i18n) : void 0
+      locale: NextConfig.i18n ? detectLocale(internalEvent, NextConfig.i18n) : void 0
     };
   } catch (e) {
     error("Error in routingHandler", e);
@@ -2284,25 +2248,18 @@ async function routingHandler(event, { assetResolver }) {
     };
   }
 }
-function isInternalResult(eventOrResult) {
-  return eventOrResult != null && "statusCode" in eventOrResult;
-}
 
 // node_modules/@opennextjs/aws/dist/adapters/middleware.js
 globalThis.internalFetch = fetch;
 globalThis.__openNextAls = new AsyncLocalStorage();
 var defaultHandler = async (internalEvent, options) => {
-  const config = globalThis.openNextConfig.middleware;
-  const originResolver = await resolveOriginResolver(config?.originResolver);
-  const externalRequestProxy = await resolveProxyRequest(config?.override?.proxyExternalRequest);
-  const assetResolver = await resolveAssetResolver(config?.assetResolver);
-  const requestId = Math.random().toString(36);
+  const originResolver = await resolveOriginResolver(globalThis.openNextConfig.middleware?.originResolver);
+  const externalRequestProxy = await resolveProxyRequest(globalThis.openNextConfig.middleware?.override?.proxyExternalRequest);
   return runWithOpenNextRequestContext({
     isISRRevalidation: internalEvent.headers["x-isr"] === "1",
-    waitUntil: options?.waitUntil,
-    requestId
+    waitUntil: options?.waitUntil
   }, async () => {
-    const result = await routingHandler(internalEvent, { assetResolver });
+    const result = await routingHandler(internalEvent);
     if ("internalEvent" in result) {
       debug("Middleware intercepted event", internalEvent);
       if (!result.isExternalRewrite) {
@@ -2314,8 +2271,7 @@ var defaultHandler = async (internalEvent, options) => {
             headers: {
               ...result.internalEvent.headers,
               [INTERNAL_HEADER_INITIAL_URL]: internalEvent.url,
-              [INTERNAL_HEADER_RESOLVED_ROUTES]: JSON.stringify(result.resolvedRoutes),
-              [INTERNAL_EVENT_REQUEST_ID]: requestId
+              [INTERNAL_HEADER_RESOLVED_ROUTES]: JSON.stringify(result.resolvedRoutes)
             }
           },
           isExternalRewrite: result.isExternalRewrite,
@@ -2333,10 +2289,6 @@ var defaultHandler = async (internalEvent, options) => {
           type: "middleware",
           internalEvent: {
             ...result.internalEvent,
-            headers: {
-              ...result.internalEvent.headers,
-              [INTERNAL_EVENT_REQUEST_ID]: requestId
-            },
             rawPath: "/500",
             url: constructNextUrl(result.internalEvent.url, "/500"),
             method: "GET"
@@ -2350,7 +2302,6 @@ var defaultHandler = async (internalEvent, options) => {
         };
       }
     }
-    result.headers[INTERNAL_EVENT_REQUEST_ID] = requestId;
     debug("Middleware response", result);
     return result;
   });

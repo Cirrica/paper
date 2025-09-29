@@ -8,6 +8,7 @@ import OverviewPanels from '@/app/components/overviewPanels';
 export default function Dashboard() {
   const [token, setToken] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -27,8 +28,16 @@ export default function Dashboard() {
     localStorage.removeItem('cirricaToken');
     setToken(null);
     setIsAuthenticated(false);
+    setIsSidebarOpen(false);
     router.push('/');
   };
+
+  const handleCreateTournament = () => {
+    router.push('/createTournament');
+  };
+
+  const openSidebar = () => setIsSidebarOpen(true);
+  const closeSidebar = () => setIsSidebarOpen(false);
 
   if (!isAuthenticated) {
     return (
@@ -44,13 +53,31 @@ export default function Dashboard() {
     <div className="h-screen overflow-hidden bg-black text-white">
       <div className="flex h-full flex-col lg:flex-row">
         {/* Sidebar (flush left, full height) */}
-        <aside className="sticky top-0 hidden h-screen border-r border-white/10 bg-surface px-5 py-6 lg:flex lg:w-[209px] lg:flex-col lg:shrink-0">
+        <aside className="sticky top-0 hidden h-screen border-r border-white/10 bg-surface px-5 py-6 lg:flex lg:w-52 lg:flex-col lg:shrink-0">
           {/* use your Sidebar and pass logout */}
           <Sidebar onLogout={handleLogout} activeItem="dashboard" />
         </aside>
 
         {/* Main content (centered container lives inside main) */}
         <main className="flex-1 overflow-y-auto">
+          <div className="sticky top-0 z-30 flex items-center justify-between gap-3 bg-black px-5 py-4 lg:hidden">
+            <button
+              type="button"
+              onClick={openSidebar}
+              className="inline-flex items-center gap-2 rounded-md border border-white/20 px-3 py-2 text-sm font-medium text-white transition hover:bg-white/10"
+              aria-label="Open navigation"
+            >
+              <svg width="20" height="14" viewBox="0 0 20 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M1 1H19" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                <path d="M1 7H19" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                <path d="M1 13H19" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+              </svg>
+              <span className="font-poppins text-xs font-semibold uppercase tracking-wider text-current">Menu</span>
+            </button>
+            <div className="flex-1 text-right">
+              <p className="font-poppins text-xs font-medium uppercase tracking-widest text-white/60">Dashboard</p>
+            </div>
+          </div>
           <div className="mx-auto max-w-7xl px-5 py-6 lg:px-8">
             {/* Header */}
             <div className="flex items-center justify-between gap-3">
@@ -59,7 +86,10 @@ export default function Dashboard() {
                 <p className="mt-2 font-poppins text-sm font-medium leading-none tracking-wide text-white">Welcome back to Cirrica</p>
               </div>
               <div className="flex items-center gap-3">
-                <button className="inline-flex items-center gap-2 rounded-md bg-gradient-to-r from-gold to-gold-soft px-4 py-2 font-poppins text-sm font-medium text-surface shadow-md">
+                <button
+                  className="inline-flex items-center gap-2 rounded-md bg-gradient-to-r from-gold to-gold-soft px-4 py-2 font-poppins text-sm font-medium text-surface shadow-md cursor-pointer"
+                  onClick={handleCreateTournament}
+                >
                   <svg className="h-4 w-4" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                     <path d="M15.5514 2.92291C15.2701 2.6829 14.8884 2.62209 14.5534 2.76357L11.0447 4.25116L9.31437 0.585112C9.14534 0.226767 8.79977 0 8.42178 0C8.0438 0 7.69823 0.226107 7.52919 0.584452L5.79951 4.25118L2.29082 2.76359C1.95523 2.62144 1.57349 2.68226 1.29218 2.92292C1.01149 3.16359 0.874881 3.54705 0.936008 3.92457L2.13425 11.3399C2.20473 11.7697 2.58835 12.0593 2.99441 11.9892L3.54831 11.892C6.77501 11.3247 10.0685 11.3247 13.2952 11.892L13.8491 11.9892C14.2551 12.0606 14.6394 11.771 14.7086 11.3406L15.9075 3.92455C15.968 3.54703 15.8321 3.16423 15.5514 2.92291ZM13.7674 10.9029L13.4587 10.8487H13.458C10.1234 10.2623 6.72026 10.2623 3.38561 10.8487L3.07685 10.9029L1.91978 3.74599L5.42911 5.23358C5.91065 5.43391 6.45707 5.21375 6.69223 4.7245L8.42191 1.05777L10.1516 4.7245C10.3868 5.21375 10.9332 5.43391 11.4147 5.23358L14.924 3.74533L13.7674 10.9029Z" fill="currentColor" />
                   </svg>
@@ -88,6 +118,14 @@ export default function Dashboard() {
           </div>
         </main>
       </div>
+      {isSidebarOpen ? (
+        <div className="fixed inset-0 z-40 flex lg:hidden">
+          <button type="button" className="absolute inset-0 bg-black/70" aria-label="Close navigation overlay" onClick={closeSidebar} />
+          <div className="relative z-10 h-full w-64 max-w-[80vw] p-4 pt-6 shadow-2xl">
+            <Sidebar onLogout={handleLogout} activeItem="dashboard" onNavigate={closeSidebar} onClose={closeSidebar} />
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 }

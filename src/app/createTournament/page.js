@@ -99,6 +99,7 @@ export default function CreateTournament() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isCheckingAuth, setIsCheckingAuth] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const submitTimeoutRef = useRef(null);
   const router = useRouter();
 
@@ -117,6 +118,7 @@ export default function CreateTournament() {
   const handleLogout = () => {
     localStorage.removeItem('cirricaToken');
     setIsAuthenticated(false);
+    setIsSidebarOpen(false);
     router.push('/');
   };
 
@@ -253,27 +255,45 @@ export default function CreateTournament() {
   return (
     <div className="h-screen overflow-hidden bg-black text-white">
       <div className="flex h-full flex-col lg:flex-row">
-        <aside className="sticky top-0 hidden h-screen border-r border-white/10 bg-surface px-5 py-6 lg:flex lg:w-[209px] lg:flex-col lg:shrink-0">
+        <aside className="sticky top-0 hidden h-screen border-r border-white/10 bg-surface px-5 py-6 lg:flex lg:w-52 lg:flex-col lg:shrink-0">
           <Sidebar onLogout={handleLogout} activeItem="tournaments" />
         </aside>
 
         <main className="flex-1 overflow-y-auto">
+          <div className="sticky top-0 z-30 flex items-center justify-between gap-3 bg-black px-5 py-4 lg:hidden">
+            <button
+              type="button"
+              onClick={() => setIsSidebarOpen(true)}
+              className="inline-flex items-center gap-2 rounded-md border border-white/20 px-3 py-2 text-sm font-medium text-white transition hover:bg-white/10"
+              aria-label="Open navigation"
+            >
+              <svg width="20" height="14" viewBox="0 0 20 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M1 1H19" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                <path d="M1 7H19" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                <path d="M1 13H19" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+              </svg>
+              <span className="font-poppins text-xs font-semibold uppercase tracking-wider text-current">Menu</span>
+            </button>
+            <div className="flex-1 text-right">
+              <p className="font-poppins text-xs font-medium uppercase tracking-widest text-white/60">Create Tournament</p>
+            </div>
+          </div>
           <div className="mx-auto max-w-7xl px-5 py-8 pl-12">
             <div className="flex w-full flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
               <div>
-                <h1 className="font-poppins text-[22px] font-semibold leading-[100%] tracking-[0.06em] text-white">Create Tournament</h1>
-                <p className="font-poppins mt-2 text-[14px] font-medium leading-[100%] tracking-[0.06em] text-white">
+                <h1 className="font-poppins text-2xl font-semibold leading-tight tracking-wider text-white">Create Tournament</h1>
+                <p className="font-poppins mt-2 text-sm font-medium leading-snug tracking-wide text-white">
                   Set up a new stock trading competition
                 </p>
               </div>
               <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:gap-6">
-                <p className="font-poppins text-[14.45px] font-normal leading-[100%] text-right text-white">
+                <p className="font-poppins text-sm font-normal leading-snug text-right text-white">
                   Selected: {selectedTeams}/{teamLimit}
                 </p>
                 <div className="flex items-center gap-3">
                   <button
                     type="button"
-                    className="inline-flex h-[36px] w-[133px] items-center justify-center gap-[7.16px] rounded-[3.58px] bg-gradient-to-r from-gold to-gold-soft px-[7.16px] font-poppins text-[13px] font-medium leading-[16.1px] text-surface transition"
+                    className="inline-flex h-9 items-center justify-center gap-2 rounded-sm bg-gradient-to-r from-gold to-gold-soft px-4 font-poppins text-sm font-medium leading-5 text-surface transition"
                   >
                     Create Team ({selectedTeams})
                   </button>
@@ -297,22 +317,22 @@ export default function CreateTournament() {
               </div>
             )}
 
-            <div className="mt-10 gap-3 grid w-full lg:grid-cols-[minmax(0,1fr)_440px]">
+            <div className="mt-10 grid w-full gap-3 lg:grid-cols-[minmax(0,1fr)_27.5rem]">
               <form
                 id="create-tournament-form"
                 onSubmit={handleSubmit}
-                className="space-y-8 w-full max-w-[707px] mx-auto lg:mx-0"
+                className="mx-auto w-full max-w-[44rem] space-y-8 lg:mx-0"
               >
-                <section className="w-full max-w-[707px] h-[422px] rounded-[10px] border border-panel-border bg-panel p-6 shadow-lg shadow-black/30">
+                <section className="w-full max-w-[44rem] rounded-xl border border-panel-border bg-panel p-6 shadow-lg shadow-black/30">
                   <div className="flex flex-col gap-1">
-                    <h2 className="font-poppins text-[18.45px] font-semibold leading-[100%] tracking-[0.06em] text-white">
+                    <h2 className="font-poppins text-lg font-semibold leading-tight tracking-wider text-white">
                       Basic Information
                     </h2>
                   </div>
 
                   <div className="mt-6 space-y-3">
                     <div>
-                      <label className="font-poppins text-[14.45px] font-thin leading-[100%] text-white" htmlFor="tournament-name">
+                      <label className="font-poppins text-sm font-thin leading-snug text-white" htmlFor="tournament-name">
                         Tournament Name
                       </label>
                       <input
@@ -322,7 +342,7 @@ export default function CreateTournament() {
                         value={formData.name}
                         onChange={handleFieldChange('name')}
                         placeholder="eg. Tech Giants Weekly Challenge"
-                        className={`mt-1 w-[649px] h-[42px] rounded-[6px] border px-4 font-poppins text-[14.45px] font-thin leading-[100%] text-white/60 placeholder:text-white/60 focus:border-gold focus:outline-none focus:ring-0 ${
+                        className={`mt-1 h-11 w-full rounded-md border px-4 font-poppins text-sm font-thin leading-snug text-white/60 placeholder:text-white/60 focus:border-gold focus:outline-none focus:ring-0 ${
                           errors.name ? 'border-danger/60' : 'border-white/20'
                         }`}
                       />
@@ -332,7 +352,7 @@ export default function CreateTournament() {
                     </div>
 
                     <div>
-                      <label className="font-poppins text-[14.45px] font-thin leading-[100%] text-white" htmlFor="tournament-description">
+                      <label className="font-poppins text-sm font-thin leading-snug text-white" htmlFor="tournament-description">
                         Description
                       </label>
                       <textarea
@@ -342,22 +362,22 @@ export default function CreateTournament() {
                         onChange={handleFieldChange('description')}
                         placeholder="Describe your tournament rules and objectives ..."
                         rows={4}
-                        className="mt-1 h-[113px] w-[649px] resize-none rounded-[6px] border border-white/20 px-4 py-3 font-poppins text-[14.45px] font-thin leading-[100%] text-white/60 placeholder:text-white/60 focus:border-gold focus:outline-none focus:ring-0"
+                        className="mt-1 min-h-[7rem] w-full resize-none rounded-md border border-white/20 px-4 py-3 font-poppins text-sm font-thin leading-snug text-white/60 placeholder:text-white/60 focus:border-gold focus:outline-none focus:ring-0"
                       />
                     </div>
 
                     <div className="grid gap-5 md:grid-cols-2">
                       <div>
-                      <label className="font-poppins text-[14.45px] font-thin leading-[100%] text-white" htmlFor="tournament-type">
+                        <label className="font-poppins text-sm font-thin leading-snug text-white" htmlFor="tournament-type">
                         Tournament Type
                       </label>
-                        <div className="relative mt-1 h-[42px] w-[315px]">
+                        <div className="relative mt-1 h-11 w-full">
                           <select
                             id="tournament-type"
                             name="tournamentType"
                             value={formData.tournamentType}
                             onChange={handleFieldChange('tournamentType')}
-                            className="h-full w-full appearance-none rounded-[6px] border border-white/20 bg-transparent pl-3 pr-8 font-poppins text-[14.45px] leading-[100%] text-white/60 font-thin focus:border-gold focus:outline-none focus:ring-0"
+                            className="h-full w-full appearance-none rounded-md border border-white/20 bg-transparent pl-3 pr-8 font-poppins text-sm leading-snug text-white/60 font-thin focus:border-gold focus:outline-none focus:ring-0"
                           >
                             {tournamentTypeOptions.map((option) => (
                               <option
@@ -378,16 +398,16 @@ export default function CreateTournament() {
                       </div>
 
                       <div>
-                        <label className="font-poppins text-[14.45px] font-thin leading-[100%] text-white" htmlFor="trade-mode">
+                        <label className="font-poppins text-sm font-thin leading-snug text-white" htmlFor="trade-mode">
                           Trade Mode
                         </label>
-                        <div className="relative mt-1 h-[42px] w-[315px]">
+                        <div className="relative mt-1 h-11 w-full">
                           <select
                             id="trade-mode"
                             name="tradeMode"
                             value={formData.tradeMode}
                             onChange={handleFieldChange('tradeMode')}
-                            className="h-full w-full appearance-none rounded-[6px] border border-white/20 bg-transparent pl-3 pr-8 font-poppins text-[14.45px] leading-[100%] text-white/60 font-thin focus:border-gold focus:outline-none focus:ring-0"
+                            className="h-full w-full appearance-none rounded-md border border-white/20 bg-transparent pl-3 pr-8 font-poppins text-sm leading-snug text-white/60 font-thin focus:border-gold focus:outline-none focus:ring-0"
                           >
                             {tradeModeOptions.map((option) => (
                               <option
@@ -410,24 +430,24 @@ export default function CreateTournament() {
                   </div>
                 </section>
 
-                <section className="w-[707px] h-[584px] rounded-[10px] border border-panel-border bg-panel p-6 shadow-lg shadow-black/30">
+                <section className="w-full max-w-[44rem] rounded-xl border border-panel-border bg-panel p-6 shadow-lg shadow-black/30">
                   <div className="flex flex-col gap-1">
-                    <h2 className="font-poppins text-[18.45px] font-semibold leading-[100%] tracking-[0.06em] text-white">Tournament Setting</h2>
+                    <h2 className="font-poppins text-lg font-semibold leading-tight tracking-wider text-white">Tournament Setting</h2>
                   </div>
 
                   <div className="mt-6 space-y-8">
                     <div className="grid gap-5 md:grid-cols-2">
                       <div>
-                        <label className="font-poppins text-[14px] font-normal leading-[100%] tracking-[0%] text-white" htmlFor="duration">
+                        <label className="font-poppins text-sm font-normal leading-snug text-white" htmlFor="duration">
                           Duration
                         </label>
-                        <div className="relative mt-1 h-[42px] w-[315px]">
+                        <div className="relative mt-1 h-11 w-full">
                           <select
                             id="duration"
                             name="duration"
                             value={formData.duration}
                             onChange={handleFieldChange('duration')}
-                          className="h-full w-full appearance-none rounded-[6px] border border-white/20 bg-transparent pl-3 pr-8 font-poppins text-[14px] font-normal leading-[100%] tracking-[0%] text-white/60 focus:border-gold focus:outline-none focus:ring-0"
+                            className="h-full w-full appearance-none rounded-md border border-white/20 bg-transparent pl-3 pr-8 font-poppins text-sm font-normal leading-snug text-white/60 focus:border-gold focus:outline-none focus:ring-0"
                           >
                             {durationOptions.map((option) => (
                               <option key={option.value} value={option.value} className="bg-panel font-thin text-white">
@@ -444,16 +464,16 @@ export default function CreateTournament() {
                       </div>
 
                       <div>
-                        <label className="font-poppins text-[14px] font-normal leading-[100%] tracking-[0%] text-white" htmlFor="win-condition">
+                        <label className="font-poppins text-sm font-normal leading-snug text-white" htmlFor="win-condition">
                           Win Condition
                         </label>
-                        <div className="relative mt-1 h-[42px] w-[315px]">
+                        <div className="relative mt-1 h-11 w-full">
                           <select
                             id="win-condition"
                             name="winCondition"
                             value={formData.winCondition}
                             onChange={handleFieldChange('winCondition')}
-                            className="h-full w-full appearance-none rounded-[6px] border border-white/20 bg-transparent pl-3 pr-8 font-poppins text-[14px] font-normal leading-[100%] tracking-[0%] text-white/60 focus:border-gold focus:outline-none focus:ring-0"
+                            className="h-full w-full appearance-none rounded-md border border-white/20 bg-transparent pl-3 pr-8 font-poppins text-sm font-normal leading-snug text-white/60 focus:border-gold focus:outline-none focus:ring-0"
                           >
                             {winConditionOptions.map((option) => (
                               <option key={option.value} value={option.value} className="bg-panel font-thin text-white">
@@ -470,7 +490,7 @@ export default function CreateTournament() {
                       </div>
 
                       <div>
-                        <label className="font-poppins text-[14px] font-normal leading-[100%] tracking-[0%] text-white" htmlFor="entry-fee">
+                        <label className="font-poppins text-sm font-normal leading-snug text-white" htmlFor="entry-fee">
                           Entry Fee ($)
                         </label>
                         <input
@@ -481,7 +501,7 @@ export default function CreateTournament() {
                           step="5"
                           value={formData.entryFee}
                           onChange={handleFieldChange('entryFee')}
-                          className={`mt-1 h-[42px] w-[315px] rounded-[6px] border bg-transparent px-4 font-poppins text-[14px] font-normal leading-[100%] tracking-[0%] text-white/60 placeholder:text-white/60 focus:border-gold focus:outline-none focus:ring-0 ${
+                          className={`mt-1 h-11 w-full rounded-md border bg-transparent px-4 font-poppins text-sm font-normal leading-snug text-white/60 placeholder:text-white/60 focus:border-gold focus:outline-none focus:ring-0 ${
                             errors.entryFee ? 'border-danger/60' : 'border-white/20'
                           }`}
                         />
@@ -491,7 +511,7 @@ export default function CreateTournament() {
                       </div>
 
                       <div>
-                        <label className="font-poppins text-[14px] font-normal leading-[100%] tracking-[0%] text-white" htmlFor="max-participants">
+                        <label className="font-poppins text-sm font-normal leading-snug text-white" htmlFor="max-participants">
                           Max Participants
                         </label>
                         <input
@@ -502,7 +522,7 @@ export default function CreateTournament() {
                           step="50"
                           value={formData.maxParticipants}
                           onChange={handleFieldChange('maxParticipants')}
-                          className={`mt-1 h-[42px] w-[315px] rounded-[6px] border bg-transparent px-4 font-poppins text-[14px] font-normal leading-[100%] tracking-[0%] text-white/60 placeholder:text-white/60 focus:border-gold focus:outline-none focus:ring-0 ${
+                          className={`mt-1 h-11 w-full rounded-md border bg-transparent px-4 font-poppins text-sm font-normal leading-snug text-white/60 placeholder:text-white/60 focus:border-gold focus:outline-none focus:ring-0 ${
                             errors.maxParticipants ? 'border-danger/60' : 'border-white/20'
                           }`}
                         />
@@ -514,7 +534,7 @@ export default function CreateTournament() {
 
                     <div>
                       <div className="flex flex-col gap-1">
-                        <h3 className="font-poppins text-[18.45px] font-semibold leading-[100%] tracking-[0.06em] text-white">Prize Multiplier</h3>
+                    <h3 className="font-poppins text-lg font-semibold leading-tight tracking-wider text-white">Prize Multiplier</h3>
                       </div>
 
                       <div className="mt-4 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
@@ -526,13 +546,13 @@ export default function CreateTournament() {
                               key={option.value}
                               type="button"
                               onClick={() => handlePrizeSelect(option.value)}
-                              className={`flex h-[118px] w-[207px] flex-col items-center justify-center gap-1 rounded-[6px] border px-5 py-4 text-center transition ${
+                          className={`flex h-32 w-full flex-col items-center justify-center gap-2 rounded-md border px-5 py-4 text-center transition ${
                                 isActive
                                   ? 'border-gold bg-gradient-to-b from-gold-deep to-gold-dark'
                                   : 'border-white/20 text-white/70 hover:border-white hover:text-white'
                               }`}
                             >
-                              <span className="flex h-[28px] w-[68px] items-center justify-center gap-2 font-poppins text-[18.45px] font-semibold leading-[100%] tracking-[0.06em] text-gold-muted">
+                              <span className="flex items-center justify-center gap-2 rounded-full bg-gold/10 px-4 py-1 font-poppins text-lg font-semibold leading-tight tracking-wider text-gold-muted">
                                 <svg
                                   width="10"
                                   height="16"
@@ -549,7 +569,7 @@ export default function CreateTournament() {
                                 </svg>
                                 {option.title}
                               </span>
-                              <span className="flex h-[42px] w-[108px] items-center justify-center font-poppins text-sm text-center">
+                              <span className="flex items-center justify-center px-3 py-2 font-poppins text-sm text-center">
                                 {option.description}
                               </span>
                             </button>
@@ -560,22 +580,22 @@ export default function CreateTournament() {
                   </div>
                 </section>
 
-                <section className="w-[707px] h-[388px] rounded-[10px] border border-panel-border bg-panel px-6 py-10 shadow-lg shadow-black/30">
+                <section className="w-full max-w-[44rem] rounded-xl border border-panel-border bg-panel px-6 py-10 shadow-lg shadow-black/30">
                   <div className="flex flex-col gap-1">
-                    <h2 className="font-poppins text-[18.45px] font-semibold leading-[100%] tracking-[0.06em] text-white">Advanced Settings</h2>
+                    <h2 className="font-poppins text-lg font-semibold leading-tight tracking-wider text-white">Advanced Settings</h2>
                   </div>
 
                   <div className="mt-6 space-y-6">
                     {advancedSettingFields.map((setting) => (
                       <div key={setting.key} className="flex items-center justify-between py-1">
                         <div className="space-y-2">
-                          <p className="font-poppins text-[16px] font-medium leading-[100%] tracking-[0%] text-white">{setting.label}</p>
-                          <p className="font-poppins text-[14px] font-normal leading-[100%] tracking-[0%] text-white/60">{setting.description}</p>
+                          <p className="font-poppins text-base font-medium leading-snug text-white">{setting.label}</p>
+                          <p className="font-poppins text-sm font-normal leading-snug text-white/60">{setting.description}</p>
                         </div>
                         <button
                           type="button"
                           onClick={handleToggle(setting.key)}
-                          className={`relative h-[37px] w-[70px] rounded-[100px] transition ${
+                          className={`relative h-9 w-16 rounded-full transition ${
                             formData[setting.key]
                               ? 'bg-gold-muted'
                               : 'bg-toggle-off'
@@ -583,9 +603,9 @@ export default function CreateTournament() {
                           aria-pressed={formData[setting.key]}
                         >
                           <span
-                            className={`absolute top-[4px] left-[4px] h-[29px] w-[29px] rounded-full transition-transform ${
+                            className={`absolute left-1 top-1 h-7 w-7 rounded-full transition-transform ${
                               formData[setting.key]
-                                ? 'translate-x-[33px] bg-toggle-knob'
+                                ? 'translate-x-7 bg-toggle-knob'
                                 : 'translate-x-0 bg-white'
                             }`}
                           />
@@ -596,11 +616,11 @@ export default function CreateTournament() {
                 </section>
               </form>
 
-              <aside className="space-y-6 w-full max-w-[440px] mx-auto lg:mx-0">
-                <section className="w-full max-w-[440px] h-[369px] rounded-[10px] border border-panel-border bg-panel p-6 shadow-xl shadow-black/40">
+              <aside className="mx-auto w-full max-w-md space-y-6 lg:mx-0">
+                <section className="w-full rounded-xl border border-panel-border bg-panel p-6 shadow-xl shadow-black/40">
                   <header className="flex flex-col gap-3">
                     <div className="flex items-center justify-between gap-3">
-                      <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2">
                         <svg
                           width="28"
                           height="27"
@@ -617,18 +637,18 @@ export default function CreateTournament() {
                             strokeWidth="0"
                           />
                         </svg>
-                        <p className="font-poppins text-[18.45px] font-semibold leading-[100%] tracking-[6%] not-italic text-white">
+                        <p className="font-poppins text-lg font-semibold leading-tight tracking-widest not-italic text-white">
                           Tournament Preview
                         </p>
                       </div>
-                      <div className="flex h-[28px] w-[68px] items-center gap-2 text-gold-muted">
+                      <div className="flex items-center gap-2 text-gold-muted">
                         <svg
                           width="10"
                           height="16"
                           viewBox="0 0 10 16"
                           fill="none"
                           xmlns="http://www.w3.org/2000/svg"
-                          className="h-4 w-[10px] shrink-0"
+                          className="h-4 w-3 shrink-0"
                           aria-hidden="true"
                         >
                           <path
@@ -636,25 +656,25 @@ export default function CreateTournament() {
                             fill="currentColor"
                           />
                         </svg>
-                        <span className="font-poppins text-[18.45px] font-semibold leading-[100%] tracking-[6%] text-right text-gold-muted">
+                        <span className="font-poppins text-lg font-semibold leading-tight tracking-widest text-right text-gold-muted">
                           {formData.prizeMultiplier.toUpperCase()}
                         </span>
                       </div>
                     </div>
                     <div className="flex items-center justify-between gap-3">
-                      <h3 className="pl-2 font-poppins text-[14.45px] font-normal leading-[100%] tracking-[0%] text-white">
+                      <h3 className="pl-2 font-poppins text-sm font-normal leading-snug text-white">
                         {formData.name || 'Tech Giant weekly Challenge'}
                       </h3>
-                      <span className="flex h-[24px] w-[111px] items-center justify-center rounded-[100px] bg-gold-muted font-poppins text-[12px] font-normal leading-[100%] tracking-[0%] text-black">
+                      <span className="flex items-center justify-center rounded-full bg-gold-muted px-3 py-1 font-poppins text-xs font-normal leading-snug text-black">
                         {`${getOptionLabel(tournamentTypeOptions, formData.tournamentType).split(' ')[0].toLowerCase()} + ${getOptionLabel(tradeModeOptions, formData.tradeMode).split(' ')[0].toLowerCase()}`}
                       </span>
                     </div>
                   </header>
 
-                  <div className="mt-5 space-y-5 text-sm text-white/70 px-2">
+                  <div className="mt-5 space-y-5 px-2 text-sm text-white/70">
                     <dl className="space-y-3">
                       <div className="flex items-center justify-between py-1">
-                        <dt className="flex items-center gap-2 font-poppins text-[14.45px] font-normal leading-[100%] tracking-[0%] text-white/60">
+                        <dt className="flex items-center gap-2 font-poppins text-sm font-normal leading-snug text-white/60">
                           <svg
                             width="19"
                             height="19"
@@ -679,12 +699,12 @@ export default function CreateTournament() {
                           </svg>
                           Entry Fee
                         </dt>
-                        <dd className="font-poppins text-[14.45px] font-normal leading-[100%] tracking-[0%] text-right text-white">
+                        <dd className="font-poppins text-sm font-normal leading-snug text-right text-white">
                           {formatCurrency(entryFeeValue)}
                         </dd>
                       </div>
                       <div className="flex items-center justify-between py-1">
-                        <dt className="flex items-center gap-2 font-poppins text-[14.45px] font-normal leading-[100%] tracking-[0%] text-white/60">
+                        <dt className="flex items-center gap-2 font-poppins text-sm font-normal leading-snug text-white/60">
                           <svg
                             width="20"
                             height="14"
@@ -701,12 +721,12 @@ export default function CreateTournament() {
                           </svg>
                           Max Participants
                         </dt>
-                        <dd className="font-poppins text-[14.45px] font-normal leading-[100%] tracking-[0%] text-right text-white">
+                        <dd className="font-poppins text-sm font-normal leading-snug text-right text-white">
                           {maxParticipantsValue.toLocaleString()}
                         </dd>
                       </div>
                       <div className="flex items-center justify-between py-1">
-                        <dt className="flex items-center gap-2 font-poppins text-[14.45px] font-normal leading-[100%] tracking-[0%] text-white/60">
+                        <dt className="flex items-center gap-2 font-poppins text-sm font-normal leading-snug text-white/60">
                           <svg
                             width="17"
                             height="17"
@@ -725,12 +745,12 @@ export default function CreateTournament() {
                           </svg>
                           Duration
                         </dt>
-                        <dd className="font-poppins text-[14.45px] font-normal leading-[100%] tracking-[0%] text-right text-white">
+                        <dd className="font-poppins text-sm font-normal leading-snug text-right text-white">
                           {getOptionLabel(durationOptions, formData.duration)}
                         </dd>
                       </div>
                       <div className="flex items-center justify-between py-1">
-                        <dt className="flex items-center gap-2 font-poppins text-[14.45px] font-normal leading-[100%] tracking-[0%] text-white/60">
+                        <dt className="flex items-center gap-2 font-poppins text-sm font-normal leading-snug text-white/60">
                           <svg
                             width="16"
                             height="16"
@@ -755,20 +775,20 @@ export default function CreateTournament() {
                           </svg>
                           Win Condition
                         </dt>
-                        <dd className="font-poppins text-[14.45px] font-normal leading-[100%] tracking-[0%] text-right text-white">
+                        <dd className="font-poppins text-sm font-normal leading-snug text-right text-white">
                           {getOptionLabel(winConditionOptions, formData.winCondition)}
                         </dd>
                       </div>
                     </dl>
 
                     <div className="rounded-xl px-4 py-4 text-center">
-                      <p className="font-poppins text-[14.45px] font-normal leading-[100%] tracking-[0%] text-white/60">
+                      <p className="font-poppins text-sm font-normal leading-snug text-white/60">
                         Estimated Prize Pool
                       </p>
-                      <p className="font-poppins mt-3 text-[20.45px] font-bold leading-[100%] tracking-[0%] text-gold-muted">
+                      <p className="font-poppins mt-3 text-xl font-bold leading-snug text-gold-muted">
                         {formatCurrency(estimatedPrizePool)}
                       </p>
-                      <p className="font-poppins mt-2 text-[14.45px] font-normal leading-[100%] tracking-[0%] text-white/60">
+                      <p className="font-poppins mt-2 text-sm font-normal leading-snug text-white/60">
                         (90% of entry fees, 10% platform fee)
                       </p>
                     </div>
@@ -782,9 +802,9 @@ export default function CreateTournament() {
                     form="create-tournament-form"
                     data-action="create"
                     disabled={isSubmitting}
-                    className="inline-flex h-[43px] w-[440px] items-center justify-center rounded-[3.58px] bg-gradient-to-r from-gold to-gold-soft px-[7.16px] py-[7.16px] font-poppins text-[13px] font-medium leading-[16.1px] tracking-[0%] text-surface shadow-md transition-opacity disabled:cursor-not-allowed disabled:opacity-60"
+                    className="inline-flex h-11 w-full items-center justify-center rounded bg-gradient-to-r from-gold to-gold-soft px-4 py-2 font-poppins text-sm font-medium leading-5 text-surface shadow-md transition-opacity disabled:cursor-not-allowed disabled:opacity-60"
                   >
-                    <span className="flex items-center gap-[7.16px] align-middle">
+                    <span className="flex items-center gap-2 align-middle">
                       <svg
                         width="15"
                         height="12"
@@ -810,7 +830,7 @@ export default function CreateTournament() {
                   </button>
                   <button
                     type="button"
-                    className="inline-flex h-[43px] w-[440px] items-center justify-center gap-[7.16px] rounded-[3.58px] border border-panel bg-panel px-[7.16px] font-poppins text-[13px] font-medium leading-[16.1px] tracking-[0%] text-white transition hover:border-panel hover:bg-panel"
+                    className="inline-flex h-11 w-full items-center justify-center gap-2 rounded border border-panel bg-panel px-4 font-poppins text-sm font-medium leading-5 text-white transition hover:border-panel hover:bg-panel"
                   >
                     Schedule for later
                   </button>
@@ -819,7 +839,7 @@ export default function CreateTournament() {
                     form="create-tournament-form"
                     data-action="draft"
                     disabled={isSubmitting}
-                    className="inline-flex h-[43px] w-[440px] items-center justify-center gap-[7.16px] rounded-[3.58px] border border-white bg-transparent px-[7.16px] font-poppins text-[13px] font-medium leading-[16.1px] tracking-[0%] text-white transition hover:border-white hover:bg-white/5 disabled:cursor-not-allowed disabled:opacity-60"
+                    className="inline-flex h-11 w-full items-center justify-center gap-2 rounded border border-white bg-transparent px-4 font-poppins text-sm font-medium leading-5 text-white transition hover:border-white hover:bg-white/5 disabled:cursor-not-allowed disabled:opacity-60"
                   >
                     Save as Draft
                   </button>
@@ -829,6 +849,24 @@ export default function CreateTournament() {
           </div>
         </main>
       </div>
+      {isSidebarOpen ? (
+        <div className="fixed inset-0 z-40 flex lg:hidden">
+          <button
+            type="button"
+            className="absolute inset-0 bg-black/70"
+            aria-label="Close navigation overlay"
+            onClick={() => setIsSidebarOpen(false)}
+          />
+          <div className="relative z-10 h-full w-64 max-w-[80vw] p-4 pt-6 shadow-2xl">
+            <Sidebar
+              onLogout={handleLogout}
+              activeItem="tournaments"
+              onNavigate={() => setIsSidebarOpen(false)}
+              onClose={() => setIsSidebarOpen(false)}
+            />
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 }

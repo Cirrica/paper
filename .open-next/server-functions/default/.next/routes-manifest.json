@@ -28,6 +28,12 @@
       "namedRegex": "^/_not\\-found(?:/)?$"
     },
     {
+      "page": "/createTournament",
+      "regex": "^/createTournament(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/createTournament(?:/)?$"
+    },
+    {
       "page": "/dashboard",
       "regex": "^/dashboard(?:/)?$",
       "routeKeys": {},
