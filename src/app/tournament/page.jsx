@@ -2,11 +2,11 @@
 
 import React, { useState } from 'react';
 import { Crown, Star, Trophy } from 'lucide-react'; // ✅ Lucide icons
-import Sidebar from '../../app/components/Sidebar';
+import Sidebar from '../components/Sidebar';
 import SearchAndFilter from '../../app/components/tournaments/SearchAndFilter';
-import TournamentTabs from '../../app/components/tournaments/TournamentTabs';
+import TournamentTabs from '../components/tournaments/TournamentTabs';
 import FeaturedTournament from '../../app/components/tournaments/FeaturedTournament';
-import TournamentGrid from '../../app/components/tournaments/TournamentGrid';
+import TournamentGrid from '../components/tournaments/Tournamentgrid';
 import { allTournaments, tabs } from '../../app/data/tournamentdata';
 
 const TournamentsPage = () => {
