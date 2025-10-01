@@ -6,7 +6,7 @@ import {
   getStatusColor,
   getStatusLabel,
   handleJoinTournament,
-} from '../../utils/tournamentHelpers';
+} from '../../utils/tournamenthelpers';
 
 const TournamentCard = ({ tournament }) => {
   const status = getStatusLabel(tournament.status);

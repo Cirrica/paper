@@ -5,7 +5,7 @@ import {
   getProgress,
   getLevelColor,
   handleJoinTournament,
-} from '../../utils/tournamentHelpers';
+} from '../../utils/tournamenthelpers';
 
 const FeaturedTournament = ({ tournament }) => {
   const progress = getProgress(
