@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Sidebar from '@/app/components/Sidebar';
-import OverviewPanels from '@/app/components/OverviewPanels';
+import Sidebar from '../components/Sidebar';
+import OverviewPanels from '../components/OverviewPanels';
 
 export default function Dashboard() {
   const [token, setToken] = useState(null);

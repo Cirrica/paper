@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Sidebar from '@/app/components/Sidebar';
+import Sidebar from '../components/Sidebar';
 
 const initialFormState = {
   name: '',
@@ -18,7 +18,8 @@ const initialFormState = {
   optionsTrading: false,
   realTimeLeaderboard: true,
   copyTrading: false,
-};
+}
+;
 
 const tournamentTypeOptions = [
   { value: 'public', label: 'Public Tournament' },
