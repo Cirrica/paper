@@ -119,7 +119,7 @@ export default function StockDashboard() {
   const [orderType, setOrderType] = useState(orderTypes[0]);
   const [selectedQuantity, setSelectedQuantity] = useState(100);
   const [timeInForce, setTimeInForce] = useState(timeInForceOptions[0]);
-  const [stopPrice, setStopPrice] = useState(400);
+  const [stopPrice, setStopPrice] = useState(400.00);
   const [isStopEnabled, setIsStopEnabled] = useState(true);
   const router = useRouter();
 
@@ -249,8 +249,8 @@ export default function StockDashboard() {
               </div>
             </header>
 
-            <div className="grid h-[848.3330078125px] w-[1231px] gap-[7.16px] p-[7.16px] lg:grid-cols-[minmax(0,1fr)_340px]">
-              <div className="flex flex-col">
+            <div className="flex justify-between h-[848.3330078125px] w-[1231px] gap-[7.16px] p-[7.16px] lg:flex-row mb-10">
+              <div className="flex flex-col bg-[#0A0A0A]">
                 <div className="top container">
                     <div className="flex h-[50.99563980102539px] w-[896.4113159179688px] items-center justify-between overflow-x-auto border-b-[0.89px] border-[#1F1F1F] bg-[#1F1F1F] pr-[21.47px] pl-[21.47px]">
                     {chartTabs.map((tab) => (
@@ -258,10 +258,10 @@ export default function StockDashboard() {
                         key={tab}
                         type="button"
                         onClick={() => setActiveTab(tab)}
-                        className={`rounded-full px-4 py-2 text-xs font-semibold transition ${
-                          activeTab === tab
-                            ? 'bg-gradient-to-r from-[#F0C37A]/60 to-[#C78444]/60 text-white shadow-[0_6px_18px_rgba(239,178,92,0.25)]'
-                            : 'text-white/40 hover:text-white/70'
+                        className={`rounded-full px-4 py-2 text-[12.52px] leading-[16.1px] font-normal text-center transition
+                          ${activeTab === tab
+                            ? 'text-[#DAA56A] border border-[#DAA56A40] bg-[radial-gradient(50%_50%_at_50%_50%,rgba(218,165,106,0.1)_0%,rgba(218,165,106,0.025)_73.82%)]'
+                            : 'text-[#999999] hover:text-white'
                         }`}
                       >
                         {tab}
@@ -447,7 +447,7 @@ export default function StockDashboard() {
                 </div>
 
                 <div className="chart flex-1 mt-3">
-                  <div className="flex h-[646.767578125px] w-[896.4113159179688px] flex-col gap-[14.31px] px-6 py-6">
+                  <div className="flex h-[646.767578125px] w-[896.4113159179688px] flex-col gap-[14.31px] px-6">
                     <div className="border-b border-white/5 px-4 pb-4">
                       <div className="flex flex-wrap items-center gap-x-6 gap-y-3 font-poppins text-[13px] text-white/70">
                         <span>
@@ -535,11 +535,11 @@ export default function StockDashboard() {
                 </div>
               </div>
 
-              <aside className="flex h-full flex-col gap-6">
-                <section className="">
-                  <header className="flex items-center justify-between bg-[#111111] px-5 py-4">
-                    <h3 className="font-poppins text-lg font-semibold text-white">Trade</h3>
-                    <button type="button" aria-label="Trade menu" className="rounded-md border border-white/15 p-2 text-white/60 transition hover:text-white">
+              <aside className="flex w-[313.1177673339844px] h-[834.01904296875px] flex-col gap-[7.16px]">
+                <section className="flex flex-col items-center justify-between w-full h-[583.8401489257812px] rounded-[3.58px] pb-[14.31px] bg-[#0A0A0A]">
+                  <header className="flex items-center justify-between w-full h-[50.627906799316406px] gap-[7.16px] pt-[14.31px] pr-[21.47px] pb-[14.31px] pl-[21.47px] bg-[#1F1F1F]">
+                    <h3 className="font-poppins text-[14.31px] font-semibold leading-[21.47px] tracking-[0] text-white">Trade</h3>
+                    <button type="button" aria-label="Trade menu" className="rounded-md p-2 text-white/60 transition hover:text-white">
                       <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                         <path d="M6 2C6.55228 2 7 1.55228 7 1C7 0.447715 6.55228 0 6 0C5.44772 0 5 0.447715 5 1C5 1.55228 5.44772 2 6 2Z" fill="currentColor" />
                         <path d="M6 7C6.55228 7 7 6.55228 7 6C7 5.44772 6.55228 5 6 5C5.44772 5 5 5.44772 5 6C5 6.55228 5.44772 7 6 7Z" fill="currentColor" />
@@ -547,179 +547,321 @@ export default function StockDashboard() {
                       </svg>
                     </button>
                   </header>
-                  <div className="m-5 flex bg-[#111111] text-sm font-poppins">
-                    <button
-                      type="button"
-                      onClick={() => setTradeSide('buy')}
-                      className={`flex flex-1 items-center justify-center rounded-xl px-4 py-3 text-center font-semibold transition ${
-                        tradeSide === 'buy'
-                          ? 'bg-gradient-to-r from-[#F0C37A] to-[#C78444] text-black shadow-[0_8px_20px_rgba(239,178,92,0.35)]'
-                          : 'text-white/60 hover:text-white'
-                      }`}
-                    >
-                      Buy
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setTradeSide('sell')}
-                      className={`flex flex-1 items-center justify-center rounded-xl px-4 py-3 text-center font-semibold transition ${
-                        tradeSide === 'sell'
-                          ? 'bg-gradient-to-r from-[#6450FF] to-[#9933FF] text-white'
-                          : 'text-white/60 hover:text-white'
-                      }`}
-                    >
-                      Sell
-                    </button>
-                  </div>
-                  <div className="space-y-5 px-5 pb-5">
-                    <div className="space-y-3">
-                      <label htmlFor="orderType" className="font-poppins text-sm font-semibold text-white/70">Order Type</label>
-                      <select
-                        id="orderType"
-                        value={orderType}
-                        onChange={(event) => setOrderType(event.target.value)}
-                        className="h-12 w-full rounded-xl border border-[#2A2A2A] bg-[#0E0E0E] px-4 font-poppins text-sm text-white/80 focus:border-[#C99046] focus:outline-none"
+                  <div className="w-[313.1178px] h-[525px] flex flex-col gap-[14.31px]">
+                    <div className="w-full h-[45.6279px] flex items-center bg-[#111111] font-poppins text-[14.31px]">
+                      <button
+                        type="button"
+                        onClick={() => setTradeSide('buy')}
+                        className={`flex items-center justify-center w-[156.5588836669922px] h-[45.627906799316406px] gap-[7.16px]
+                          p-[15px] text-center font-normal text-[12.52px] leading-[16.1px] transition
+                          ${tradeSide === 'buy'
+                            ? 'text-[#DAA56A] border-b-[1.79px] border-b-[#DAA56A] bg-[linear-gradient(180deg,rgba(250,218,189,0)_32.15%,rgba(250,218,189,0.25)_100%)]'
+                            : 'text-[#999999] border-b-[0.89px] border-b-[#999999]'
+                        }`}
                       >
-                        {orderTypes.map((type) => (
-                          <option key={type} value={type} className="bg-[#0E0E0E] text-white">
-                            {type}
-                          </option>
-                        ))}
-                      </select>
+                        Buy
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setTradeSide('sell')}
+                        className={`flex items-center justify-center w-[156.5588836669922px] h-[45.627906799316406px] gap-[7.16px]
+                          p-[15px] text-center font-normal text-[12.52px] leading-[16.1px] transition
+                          ${tradeSide === 'sell'
+                            ? 'text-[#DAA56A] border-b-[1.79px] border-b-[#DAA56A] bg-[linear-gradient(180deg,rgba(250,218,189,0)_32.15%,rgba(250,218,189,0.25)_100%)]'
+                            : 'text-[#999999] border-b-[0.89px] border-b-[#999999]'
+                        }`}
+                      >
+                        Sell
+                      </button>
                     </div>
-
-                    <div className="space-y-3">
-                      <div className="flex items-center justify-between">
-                        <label className="font-poppins text-sm font-semibold text-white/70">Quantity</label>
-                        <span className="rounded-full border border-[#C99046]/40 bg-[#2A1A04] px-3 py-0.5 text-xs font-semibold  tracking-[0.24em] text-[#E9B872]">Shares</span>
-                      </div>
-                      <div className="relative">
-                        <input
-                          type="number"
-                          value={selectedQuantity}
-                          min={1}
-                          step={1}
-                          onChange={(event) => setSelectedQuantity(Number(event.target.value))}
-                          className="h-12 w-full rounded-xl border border-[#2A2A2A] bg-[#0E0E0E] px-4 font-poppins text-sm text-white/80 focus:border-[#C99046] focus:outline-none"
-                        />
-                        <span className="pointer-events-none absolute inset-y-0 right-4 flex items-center text-[11px]  tracking-[0.24em] text-white/40">Shares</span>
-                      </div>
-                      <div className="flex flex-wrap gap-3">
-                        {quickQuantities.map((quantity) => (
-                          <button
-                            key={quantity}
-                            type="button"
-                            onClick={() => setSelectedQuantity(quantity)}
-                            className={`rounded-full px-4 py-2 font-poppins text-xs font-semibold transition ${
-                              selectedQuantity === quantity
-                                ? 'bg-gradient-to-r from-[#F0C37A] to-[#C78444] text-black shadow-[0_6px_18px_rgba(239,178,92,0.35)]'
-                                : 'bg-[#151515] text-white/70 hover:text-white'
-                            }`}
+                    <div className="flex flex-col w-[313.1178px] h-[355px] gap-[14.31px] pr-[21.47px] pb-[14.31px] pl-[21.47px]
+                      bg-[repeating-linear-gradient(to_right,#1F1F1F_0_14px,transparent_14px_28px)] bg-bottom bg-repeat-x bg-[length:28px_1px]">
+                      <div className="flex flex-col w-[270.1759px] h-[54.5719px] space-y-[3.58px]">
+                        <label htmlFor="orderType" className="font-[poppins] font-medium text-[12.52px] leading-[16.1px] align-middle text-white/70">Order Type</label>
+                        <div className="relative rounded-[5.37px] p-[0.5px] 
+                                        bg-[radial-gradient(70.97%_837.53%_at_98.29%_13.75%,rgba(255,255,255,0.75)_0%,rgba(255,255,255,0.075)_14.95%),radial-gradient(57.27%_124.88%_at_28.43%_0%,rgba(218,165,106,0.427451)_0%,rgba(255,255,255,0.05)_78.07%),linear-gradient(180deg,rgba(255,255,255,0)_0%,rgba(0,0,0,0.5)_100%)] 
+                                        shadow-[0px_1.79px_5.37px_0px_#00000080]">
+                          <select
+                            id="orderType"
+                            value={orderType}
+                            onChange={(e) => setOrderType(e.target.value)}
+                            className="
+                              appearance-none w-[270.1759px] h-[35.7849px] rounded-[5.37px] bg-[#191919] pl-[10.74px] pr-[28px]
+                              font-[Font-family] font-normal text-[12.52px] leading-[16.1px] tracking-[0%] text-white focus:outline-none focus:ring-0"
                           >
-                            {quantity}
-                          </button>
-                        ))}
-                        <button type="button" className="flex items-center gap-2 rounded-full bg-[#151515] px-4 py-2 text-xs font-semibold text-white/60 transition hover:text-white">
-                          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                            <path d="M11.0833 2.91675L6.41667 7.58341" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" strokeLinejoin="round" />
-                            <path d="M11.0833 2.91675L8.16667 11.0834L6.41667 7.58341L2.91667 5.83341L11.0833 2.91675Z" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" strokeLinejoin="round" />
-                          </svg>
-                          Custom
-                        </button>
+                            {orderTypes.map((type) => (
+                              <option
+                                key={type}
+                                value={type}
+                                className="bg-[#191919] text-white font-[Font-family] font-normal text-[12.52px] leading-[16.1px] tracking-[0%]">
+                                {type}
+                              </option>
+                            ))}
+                          </select>
+                          <span className="pointer-events-none absolute right-[10.74px] top-1/2 -translate-y-1/2 text-white">
+                            <svg
+                              width="10" height="4.5" viewBox="0 0 8 5" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                              <path d="M4.39844 4.14319L0.832031 0.576782H7.96484L4.39844 4.14319Z" />
+                            </svg>
+                          </span>
+
+                        </div>
                       </div>
-                    </div>
 
-                    <div className="space-y-3">
-                      <label htmlFor="timeInForce" className="font-poppins text-sm font-semibold text-white/70">Time-in-Force</label>
-                      <select
-                        id="timeInForce"
-                        value={timeInForce}
-                        onChange={(event) => setTimeInForce(event.target.value)}
-                        className="h-12 w-full rounded-xl border border-[#2A2A2A] bg-[#0E0E0E] px-4 font-poppins text-sm text-white/80 focus:border-[#C99046] focus:outline-none"
-                      >
-                        {timeInForceOptions.map((option) => (
-                          <option key={option} value={option} className="bg-[#0E0E0E] text-white">
-                            {option}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-
-                    <div className="space-y-3">
-                      <div className="flex items-center justify-between">
-                        <span className="font-poppins text-sm font-semibold text-white">Stop Price</span>
-                        <button
-                          type="button"
-                          onClick={() => setIsStopEnabled((prev) => !prev)}
-                          className={`relative inline-flex h-7 w-14 items-center rounded-full transition ${
-                            isStopEnabled ? 'bg-gradient-to-r from-[#F0C37A] to-[#C78444]' : 'bg-[#2A2A2A]'
-                          }`}
-                        >
-                          <span
-                            className={`inline-block h-6 w-6 transform rounded-full bg-black transition ${
-                              isStopEnabled ? 'translate-x-7' : 'translate-x-1'
-                            }`}
+                      <div className="w-[270.1759px] h-[96.6236px] space-y-2">
+                        <div className="flex items-center w-[270.1759px] h-[17px] gap-[3.58px]">
+                          <label className="font-[Font-family] font-medium text-[12.52px] leading-[16.1px] align-middle text-[#999999]">Quantity</label>
+                          <span className="flex items-center justify-center w-[46.7355px] h-[17px] gap-[7.16px] rounded-[89.46px] border border-[#C99046]/40 px-[5.37px] text-[10.74px] leading-[16.1px] font-normal text-[#DAA56A] align-middle font-[Font-family]">Shares</span>
+                        </div>
+                        <div className="p-[0.45px] rounded-[5.37px] bg-[radial-gradient(70.97%_837.53%_at_98.29%_13.75%,rgba(255,255,255,0.75)_0%,rgba(255,255,255,0.075)_14.95%),radial-gradient(57.27%_124.88%_at_28.43%_0%,#DAA56A_0%,rgba(255,255,255,0.1)_64.02%),linear-gradient(180deg,rgba(255,255,255,0)_0%,rgba(0,0,0,0.5)_100%)] shadow-[0px_1.79px_5.37px_0px_#00000080]">
+                          <input
+                            type="number"
+                            value={selectedQuantity}
+                            min={1}
+                            step={1}
+                            onChange={(event) => setSelectedQuantity(Number(event.target.value))}
+                            className="w-[270.1759px] h-[35.7849px] rounded-[5.37px] bg-[#191919] px-[10.74px] font-[Font-family] font-normal text-[12.52px] leading-[16.1px] text-white/80 focus:outline-none focus:ring-0 focus-visible:ring-0 block
+                                        appearance-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-moz-appearance:textfield]"
                           />
-                        </button>
-                      </div>
-                      <div className={`flex items-center gap-3 rounded-2xl border px-4 py-3 ${
-                        isStopEnabled ? 'border-[#C99046] bg-[#1C1406]' : 'border-[#2A2A2A] bg-[#0E0E0E]'
-                      }`}
-                      >
-                        <span className="rounded-full border border-white/10 px-3 py-1 text-xs font-semibold  tracking-[0.3em] text-white/60">$</span>
-                        <input
-                          type="number"
-                          value={stopPrice}
-                          min={0}
-                          step="0.01"
-                          onChange={(event) => setStopPrice(Number(event.target.value))}
-                          className="w-full bg-transparent font-poppins text-sm font-semibold text-white placeholder:text-white/30 focus:outline-none"
-                          placeholder="0.00"
-                          disabled={!isStopEnabled}
-                        />
-                      </div>
-                      <p className="font-poppins text-xs text-white/50">Est. Loss · <span className="font-semibold text-[#FF4D4D]">$12,057.36</span></p>
-                    </div>
+                        </div>
+                        
+                        <div className="flex items-center w-[270.1759px] h-[31.314px] gap-[8.95px]">
+                          {quickQuantities.map((quantity) => (
+                            <span
+                              key={quantity}
+                              className="flex w-[56px] h-[31px] p-[0.45px] rounded-[894.62px]
+                                        bg-[radial-gradient(42.19%_194.24%_at_30.88%_57.81%,rgba(255,255,255,0.3)_0%,rgba(255,255,255,0)_100%),linear-gradient(0deg,rgba(255,255,255,0.06),rgba(255,255,255,0.06))]
+                                        shadow-[0px_1.79px_5.37px_0px_#00000080]">
+                              <button
+                                type="button"
+                                onClick={() => setSelectedQuantity(quantity)}
+                                className="flex w-full h-full items-center justify-center
+                                          rounded-[894.62px] bg-[#1F1F1F]
+                                          font-[Font-family] font-normal
+                                          text-[12.52px] leading-[16.1px] text-white
+                                          transition"
+                              >
+                                {quantity}
+                              </button>
+                            </span>
+                          ))}
 
-                    <div className="space-y-3 rounded-2xl border border-dashed border-white/15 bg-[#0B0B0B] px-4 py-4 text-sm">
-                      <div className="flex items-center justify-between text-white/70">
-                        <span className="font-poppins">Buying Power</span>
-                        <span className="font-poppins">{formatCurrency(122912.5)}</span>
+                          <div className="flex items-center justify-center w-[14.31px] h-[14.31px] rounded-[1.79px]">
+                            <svg
+                              width="12.41"
+                              height="12.35"
+                              viewBox="0 0 12 12"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                              aria-hidden="true"
+                              className="text-white"
+                            >
+                              <path
+                                d="M8.5 1.5l2 2-6.5 6.5-2.5.5.5-2.5L8.5 1.5Z"
+                                stroke="currentColor"
+                                strokeWidth="1"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              />
+                              <path
+                                d="M7 3l2 2"
+                                stroke="currentColor"
+                                strokeWidth="1"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              />
+                            </svg>
+                          </div>
+                        </div>
                       </div>
-                      <div className="flex items-center justify-between text-white/70">
-                        <span className="font-poppins">Transaction Fees</span>
-                        <span className="font-poppins">$4.00</span>
+
+                      <div className="flex flex-col w-[270.1759px] h-[54.5719px] space-y-[3.58px]">
+                        <label
+                          htmlFor="timeInForce"
+                          className="font-[poppins] font-medium text-[12.52px] leading-[16.1px] align-middle text-white/70"
+                        >
+                          Time-in-Force
+                        </label>
+
+                        <div
+                          className="relative rounded-[5.37px] p-[0.5px]
+                                    bg-[radial-gradient(70.97%_837.53%_at_98.29%_13.75%,rgba(255,255,255,0.75)_0%,rgba(255,255,255,0.075)_14.95%),radial-gradient(57.27%_124.88%_at_28.43%_0%,rgba(218,165,106,0.427451)_0%,rgba(255,255,255,0.05)_78.07%),linear-gradient(180deg,rgba(255,255,255,0)_0%,rgba(0,0,0,0.5)_100%)]
+                                    shadow-[0px_1.79px_5.37px_0px_#00000080]"
+                        >
+                          <select
+                            id="timeInForce"
+                            value={timeInForce}
+                            onChange={(e) => setTimeInForce(e.target.value)}
+                            className="
+                              appearance-none w-[270.1759px] h-[35.7849px] rounded-[5.37px] bg-[#191919]
+                              pl-[10.74px] pr-[28px]
+                              font-[Font-family] font-normal text-[12.52px] leading-[16.1px] tracking-[0%] text-white
+                              focus:outline-none focus:ring-0
+                            "
+                          >
+                            {timeInForceOptions.map((option) => (
+                              <option
+                                key={option}
+                                value={option}
+                                className="bg-[#191919] text-white font-[Font-family] font-normal text-[12.52px] leading-[16.1px] tracking-[0%]"
+                              >
+                                {option}
+                              </option>
+                            ))}
+                          </select>
+
+                          <span className="pointer-events-none absolute right-[10.74px] top-1/2 -translate-y-1/2 text-white">
+                            <svg
+                              width="10"
+                              height="4.5"
+                              viewBox="0 0 8 5"
+                              fill="currentColor"
+                              xmlns="http://www.w3.org/2000/svg"
+                              aria-hidden="true"
+                            >
+                              <path d="M4.39844 4.14319L0.832031 0.576782H7.96484L4.39844 4.14319Z" />
+                            </svg>
+                          </span>
+                        </div>
                       </div>
-                      <div className="flex items-center justify-between text-white/70">
-                        <span className="font-poppins">Estimated Total</span>
-                        <span className="font-poppins">{formatCurrency(selectedQuantity * latestCandle.close)}</span>
+
+                      <div className="flex flex-col w-[270.1759px] h-[84.9913px] gap-[5.37px]">
+                        <div className="flex items-center w-[102.3634px] h-[21.4709px] gap-[10.74px] pb-[3.58px] mt-1">
+                          <button
+                            type="button"
+                            onClick={() => setIsStopEnabled((prev) => !prev)}
+                            className={`relative inline-flex w-[32.2064px] h-[17.8924px] items-center rounded-[894.62px] p-[3.58px] transition 
+                              ${isStopEnabled ? 'bg-[#DAA56A]' : 'bg-[#2A2A2A]'}`}
+                            >
+                            <span
+                              className={`inline-block w-[10.7355px] h-[10.7355px] transform rounded-full bg-[#050505] shadow-[0px_1.34px_1.79px_0px_#0000004D] transition 
+                                ${isStopEnabled ? 'translate-x-[14px]' : 'translate-x-[0px]'}`}
+                            />
+                          </button>
+
+                          <span className="font-[Font-family] font-medium text-[13px] leading-[16.1px] tracking-[0%] align-middle text-white">Stop Price</span>
+                        </div>
+                        <div className="w-[270.1758728027344px] h-[35.78488540649414px] rounded-[5.37px] p-[0.5px] bg-[linear-gradient(180deg,rgba(255,255,255,0.5)_0%,rgba(0,0,0,0.5)_100%),radial-gradient(47.93%_96.25%_at_7.45%_3.75%,#2DCAFF_0%,rgba(255,255,255,0.1)_64.02%)] shadow-[0px_1.79px_5.37px_0px_#00000080]">
+                          <div className="flex items-center justify-around gap-[10.74px] rounded-[5.37px] p-[11px] h-full w-full bg-[#191919]">
+                            <span className="rounded-full font-[Golos_Text] font-normal text-[14.31px] leading-[21.47px] text-white">$</span>
+                            <div className="relative flex items-center">
+                              <input
+                                type="number"
+                                value={stopPrice}
+                                min={0}
+                                step="0.01"
+                                onChange={(event) => setStopPrice(Number(event.target.value))}
+                                className="w-[210.077px] h-[17px] bg-transparent 
+                                          font-[Font-family] font-normal
+                                          text-[12.52px] leading-[16.1px] 
+                                          text-white placeholder:text-white/30 focus:outline-none
+                                          appearance-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-moz-appearance:textfield]"
+                                placeholder="400.00"
+                                disabled={!isStopEnabled}
+                              />
+
+                              {/* custom arrows */}
+                              <div className="flex flex-col items-center justify-between h-[12.5247px] w-[7.1569px] gap-[1.5px] bg-transparent">
+                                {/* Up arrow */}
+                                <button
+                                  type="button"
+                                  className="flex items-center justify-center text-white"
+                                  onClick={() => setStopPrice((prev) => Number((prev + 0.01).toFixed(2)))}
+                                >
+                                  <svg
+                                    width="7.15"
+                                    height="6.25"
+                                    viewBox="0 0 8 5"
+                                    fill="currentColor"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                  >
+                                    <path d="M4.39844 0.856812L0.832031 4.42322H7.96484L4.39844 0.856812Z" />
+                                  </svg>
+                                </button>
+
+                                {/* Down arrow */}
+                                <button
+                                  type="button"
+                                  className="flex items-center justify-center text-white"
+                                  onClick={() => setStopPrice((prev) => Math.max(0, Number((prev - 0.01).toFixed(2))))}
+                                >
+                                  <svg
+                                    width="7.15"
+                                    height="6.25"
+                                    viewBox="0 0 8 5"
+                                    fill="currentColor"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                  >
+                                    <path d="M4.39844 4.14319L0.832031 0.576782H7.96484L4.39844 4.14319Z" />
+                                  </svg>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <p className="flex w-[120.5785px] h-[17px] items-center justify-center">
+                          <span className="w-[59px] h-[17px] font-[Font-family] font-normal 
+                                          text-[13px] leading-[16.1px] text-[#999999]">
+                            Est. Loss:
+                          </span>
+                          <span className="w-[58px] h-[17px] font-[Font-family] font-normal
+                                          text-[13px] leading-[16.1px] text-[#D70000]">
+                            $12,057.36
+                          </span>
+                        </p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex flex-col w-[313.1178px] h-[65.314px] gap-[7.16px] bg-[#0B0B0B] px-[21.47px]">
+                      <div className="flex w-[270.176px] h-[17px] items-center justify-between gap-[14.31px] text-white/70">
+                        <span className="font-[Font-family] font-normal text-[12.52px] leading-[16.1px] tracking-[0%] align-middle text-[#999999]">Buying Power</span>
+                        <span className="font-[Font-family] font-normal text-[12.52px] leading-[16.1px] tracking-[0%] text-right text-white [font-variant-numeric:lining-nums_tabular-nums]">{formatCurrency(122912.5)}</span>
+                      </div>
+                      <div className="flex w-[270.176px] h-[17px] items-center justify-between gap-[14.31px] text-white/70">
+                        <span className="font-[Font-family] font-normal text-[12.52px] leading-[16.1px] tracking-[0%] align-middle text-[#999999]">Transaction Fees</span>
+                        <span className="font-[Font-family] font-normal text-[12.52px] leading-[16.1px] tracking-[0%] text-right text-white [font-variant-numeric:lining-nums_tabular-nums]">$4.00</span>
+                      </div>
+                      <div className="flex w-[270.176px] h-[17px] items-center justify-between gap-[14.31px] text-white/70">
+                        <span className="font-[Font-family] font-normal text-[12.52px] leading-[16.1px] tracking-[0%] align-middle text-[#999999]">Estimated Total</span>
+                        <span className="font-[Font-family] font-normal text-[12.52px] leading-[16.1px] tracking-[0%] text-right text-white [font-variant-numeric:lining-nums_tabular-nums]">{formatCurrency(selectedQuantity * latestCandle.close)}</span>
                       </div>
                     </div>
 
                     <button
                       type="button"
-                      className={`w-full rounded-2xl px-4 py-3 font-poppins text-sm font-semibold  tracking-[0.3em] transition ${
-                        tradeSide === 'buy'
-                          ? 'bg-gradient-to-r from-[#F0C37A] to-[#C78444] text-black shadow-[0_12px_30px_rgba(239,178,92,0.3)] hover:brightness-110'
-                          : 'bg-gradient-to-r from-[#FF5E5E] to-[#D02A2A] text-white shadow-[0_12px_30px_rgba(255,94,94,0.25)] hover:brightness-110'
-                      }`}
-                    >
-                      Submit {tradeSide === 'buy' ? 'Buy' : 'Sell'} Order
-                    </button>
-
-                    <button type="button" className="flex items-center justify-center gap-2 text-xs font-semibold  tracking-[0.3em] text-white/50 transition hover:text-white/70">
+                      className="flex w-[313.1178px] h-[17px] items-center justify-center  
+                                px-[21.47px] py-2 font-[Font-family] font-normal 
+                                text-[12px] leading-[16.1px] tracking-[0%] text-white transition">
                       Disclaimer
-                      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                        <path d="M4.5 3.5l3 2.5-3 2.5" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" />
+                      <svg
+                        width="25"
+                        height="15"
+                        viewBox="0 0 12 12"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true"
+                        className="relative top-[1px] text-white"
+                      >
+                        <path
+                          d="M4.5 3.5l3 2.5-3 2.5"
+                          stroke="currentColor"
+                          strokeWidth="1"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
                       </svg>
                     </button>
+
+
                   </div>
                 </section>
 
-                <section className="flex-1 overflow-hidden rounded-2xl border border-white/10 bg-[#080808] shadow-[0_20px_60px_rgba(0,0,0,0.45)]">
-                  <header className="flex items-center justify-between bg-gradient-to-b from-[#1F1F1F] to-[#111111] px-5 py-4">
-                    <h3 className="font-poppins text-base font-semibold text-white">Time &amp; Sales</h3>
-                    <button type="button" className="flex h-8 w-8 items-center justify-center rounded-md border border-white/15 text-white/60 transition hover:text-white" aria-label="Time & sales menu">
+                <section className="w-[313.1178px] h-[243.0219px] overflow-hidden rounded-[3.58px] bg-[#0A0A0A]">
+                  <header className="flex w-[313.1178px] h-[50.6279px] items-center justify-between gap-[7.16px] 
+                    border-b-[0.89px] border-white/10 
+                    px-[21.47px] py-[14.31px] bg-[#1F1F1F]">
+                    <h3 className="font-[Font-family] font-semibold text-[14.31px] leading-[21.47px] text-white">Time &amp; Sales</h3>
+                    <button type="button" className="flex h-8 w-8 items-center justify-center rounded-md text-white/60 transition hover:text-white" aria-label="Time & sales menu">
                       <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                         <path d="M1.5 3h9" stroke="currentColor" strokeWidth="1" strokeLinecap="round" />
                         <path d="M1.5 6h9" stroke="currentColor" strokeWidth="1" strokeLinecap="round" />
@@ -727,21 +869,15 @@ export default function StockDashboard() {
                       </svg>
                     </button>
                   </header>
-                  <div className="m-5 rounded-2xl border border-[#2A2A2A]">
-                    <div className="grid grid-cols-3 border-b border-[#2A2A2A] bg-[#121212] px-4 py-2 text-[11px] font-poppins  tracking-[0.2em] text-white/40">
-                      <span>Time</span>
-                      <span className="text-right">Price</span>
-                      <span className="text-right">Size</span>
-                    </div>
-                    <div className="max-h-[220px] divide-y divide-[#2A2A2A] overflow-hidden">
-                      {timeSalesRows.map((row) => (
-                        <div key={`${row.time}-${row.price}`} className="grid grid-cols-3 px-4 py-2 text-sm font-poppins text-white/80">
-                          <span>{row.time}</span>
-                          <span className="text-right">{row.price}</span>
-                          <span className="text-right">{row.size}</span>
-                        </div>
-                      ))}
-                    </div>
+                  <div className="w-[313.1178px] h-[192.394px] rounded-[3.58px] flex flex-col gap-[12.52px] 
+                                  pt-[18px] pr-[21.47px] pb-[21.47px] pl-[21.47px] overflow-hidden">
+                    {timeSalesRows.map((row) => (
+                      <div key={`${row.time}-${row.price}`} className="flex w-[270.176px] h-[17.56px] justify-between text-sm font-poppins text-white/80">
+                        <span className="font-[Font-family] font-normal not-italic text-[12.52px] leading-[16.1px] tracking-[0%] text-white [font-variant-numeric:lining-nums_tabular-nums]">{row.time}</span>
+                        <span className="font-[Font-family] font-normal not-italic text-[12.52px] leading-[16.1px] tracking-[0%] text-white [font-variant-numeric:lining-nums_tabular-nums]">{row.price}</span>
+                        <span className="font-[Font-family] font-normal not-italic text-[12.52px] leading-[16.1px] tracking-[0%] text-white [font-variant-numeric:lining-nums_tabular-nums]">{row.size}</span>
+                      </div>
+                    ))}
                   </div>
                 </section>
               </aside>
