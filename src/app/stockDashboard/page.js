@@ -2,10 +2,11 @@
 
 import { useEffect, useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import ChartPlaceHolder from '@/app/components/chartPlaceHolder';
 import Sidebar from '@/app/components/sidebar';
+import { TIMEFRAME_OPTIONS, generateMockStockData } from '@/app/components/chartPlaceHolderData';
 
 const chartTabs = ['Chart', 'Options', 'News', 'Financials', 'Analysts', 'Risk Analysis', 'Releases', 'Notes', 'Profile'];
-const timeframePresets = ['1m', '5m', '15m', '30m', '1h', '2h', '4h', 'D', 'W', 'All', '2m ▼'];
 const quickQuantities = [10, 50, 100, 500];
 const orderTypes = ['Market Price', 'Limit Order', 'Stop Order', 'Trailing Stop'];
 const timeInForceOptions = ['Day', 'GTC', 'IOC', 'FOK'];
@@ -19,79 +20,6 @@ const timeSalesRows = [
   { time: '16:59:26', price: '420.32', size: 25 },
   { time: '16:59:25', price: '420.40', size: 25 },
 ];
-
-function roundToTwo(value) {
-  return Math.round(value * 100) / 100;
-}
-
-function generateMockStockData() {
-  const candles = [];
-  const ma50 = [];
-  const ma200 = [];
-  const indicator = [];
-  const startTimestamp = Math.floor(new Date('2023-11-01T00:00:00Z').getTime() / 1000);
-  const totalPoints = 240;
-  let baseline = 340;
-  let ma50Sum = 0;
-  let ma200Sum = 0;
-
-  for (let index = 0; index < totalPoints; index += 1) {
-    const time = startTimestamp + index * 24 * 60 * 60;
-    const trend = index * 0.45;
-    const volatility = Math.sin(index * 0.24) * 4.8 + Math.cos(index * 0.11) * 3.2;
-    const open = baseline + trend + volatility;
-    const drift = Math.sin((index + 5) * 0.31) * 2.7;
-    const close = open + drift;
-    const highest = Math.max(open, close) + Math.abs(Math.cos(index * 0.22)) * 4.4 + 1.2;
-    const lowest = Math.min(open, close) - Math.abs(Math.sin(index * 0.27)) * 4.1 - 1.2;
-    const volume = 2200000 + Math.floor(Math.abs(Math.sin(index * 0.53)) * 1100000 + index * 1200);
-
-    const candle = {
-      time,
-      open: roundToTwo(open),
-      high: roundToTwo(highest),
-      low: roundToTwo(lowest),
-      close: roundToTwo(close),
-      volume,
-    };
-
-    candles.push(candle);
-    baseline = candle.close;
-
-    ma50Sum += candle.close;
-    ma200Sum += candle.close;
-
-    if (index >= 50) {
-      ma50Sum -= candles[index - 50].close;
-    }
-
-    if (index >= 200) {
-      ma200Sum -= candles[index - 200].close;
-    }
-
-    if (index >= 49) {
-      ma50.push({ time, value: roundToTwo(ma50Sum / 50) });
-    }
-
-    if (index >= 199) {
-      ma200.push({ time, value: roundToTwo(ma200Sum / 200) });
-    }
-    const oscillator = 50 + Math.sin(index * 0.35) * 18 + Math.cos(index * 0.09) * 9;
-    indicator.push({
-      time,
-      value: Math.max(20, Math.min(80, roundToTwo(oscillator))),
-    });
-  }
-
-  return {
-    candles,
-    overlays: [
-      { label: 'MA50', color: '#5B8DEF', colorClass: 'bg-[#5B8DEF]', lineWidth: 2, data: ma50 },
-      { label: 'MA200', color: '#1EC8FF', colorClass: 'bg-[#1EC8FF]', lineWidth: 2, data: ma200 },
-    ],
-    indicator,
-  };
-}
 
 function formatCurrency(value) {
   return new Intl.NumberFormat('en-US', {
@@ -114,7 +42,7 @@ export default function StockDashboard() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [activeTab, setActiveTab] = useState('Chart');
-  const [selectedTimeframe, setSelectedTimeframe] = useState('1h');
+  const [selectedTimeframe, setSelectedTimeframe] = useState('2h');
   const [tradeSide, setTradeSide] = useState('buy');
   const [orderType, setOrderType] = useState(orderTypes[0]);
   const [selectedQuantity, setSelectedQuantity] = useState(100);
@@ -128,11 +56,8 @@ export default function StockDashboard() {
   const previousCandle = candles[candles.length - 2];
   const dailyChange = latestCandle.close - previousCandle.close;
   const dailyChangePct = (dailyChange / previousCandle.close) * 100;
-  const dailyChangeClass = dailyChange >= 0 ? 'text-positive' : 'text-danger';
   const fiftyTwoWeekHigh = candles.reduce((maxValue, candle) => (candle.high > maxValue ? candle.high : maxValue), candles[0].high);
   const fiftyTwoWeekLow = candles.reduce((minValue, candle) => (candle.low < minValue ? candle.low : minValue), candles[0].low);
-  const latestMA50 = overlays[0]?.data ? overlays[0].data[overlays[0].data.length - 1]?.value : null;
-  const latestMA200 = overlays[1]?.data ? overlays[1].data[overlays[1].data.length - 1]?.value : null;
 
   useEffect(() => {
     const storedToken = localStorage.getItem('cirricaToken');
@@ -249,10 +174,10 @@ export default function StockDashboard() {
               </div>
             </header>
 
-            <div className="flex justify-between h-[848.3330078125px] w-[1231px] gap-[7.16px] p-[7.16px] lg:flex-row mb-10">
-              <div className="flex flex-col bg-[#0A0A0A]">
+            <div className="flex justify-between h-[848.3330078125px] w-full max-w-[1231px] min-w-0 gap-[7.16px] p-[7.16px] lg:flex-row mb-10">
+              <div className="flex flex-col bg-[#0A0A0A] min-w-0">
                 <div className="top container">
-                    <div className="flex h-[50.99563980102539px] w-[896.4113159179688px] items-center justify-between overflow-x-auto border-b-[0.89px] border-[#1F1F1F] bg-[#1F1F1F] pr-[21.47px] pl-[21.47px]">
+                    <div className="flex h-[50.99563980102539px] w-full max-w-[896.4113159179688px] min-w-0 items-center justify-between overflow-x-auto border-b-[0.89px] border-[#1F1F1F] bg-[#1F1F1F] pr-[21.47px] pl-[21.47px]">
                     {chartTabs.map((tab) => (
                       <button
                         key={tab}
@@ -269,7 +194,7 @@ export default function StockDashboard() {
                     ))}
                   </div>
 
-                  <div className="border-b border-white/5 h-[121.94186401367188px] w-[896.4113159179688px] gap-[35.78px] pt-[10.74px] pr-[21.47px] pb-[10.74px] pl-[21.47px]">
+                  <div className="border-b border-white/5 h-[121.94186401367188px] w-full max-w-[896.4113159179688px] min-w-0 gap-[35.78px] pt-[10.74px] pr-[21.47px] pb-[10.74px] pl-[21.47px]">
                     <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
                         <div className="flex h-[100.47093200683594px] w-[313.0494079589844px] flex-col gap-[10.74px]">
                         <div className="flex h-[100.47093200683594px] w-[313.0494079589844px] flex-wrap items-center gap-[10.74px]">
@@ -446,91 +371,16 @@ export default function StockDashboard() {
                   </div>
                 </div>
 
-                <div className="chart flex-1 mt-3">
-                  <div className="flex h-[646.767578125px] w-[896.4113159179688px] flex-col gap-[14.31px] px-6">
-                    <div className="border-b border-white/5 px-4 pb-4">
-                      <div className="flex flex-wrap items-center gap-x-6 gap-y-3 font-poppins text-[13px] text-white/70">
-                        <span>
-                          Open <span className="text-white">{latestCandle.open.toFixed(2)}</span>
-                        </span>
-                        <span>
-                          High <span className="text-white">{latestCandle.high.toFixed(2)}</span>
-                        </span>
-                        <span>
-                          Low <span className="text-white">{latestCandle.low.toFixed(2)}</span>
-                        </span>
-                        <span>
-                          Close <span className={`font-semibold ${dailyChange >= 0 ? 'text-positive' : 'text-danger'}`}>{latestCandle.close.toFixed(2)}</span>
-                        </span>
-                        <span>
-                          Vol <span className="text-white">{formatCompactNumber(latestCandle.volume)}</span>
-                        </span>
-                        {latestMA50 !== null ? (
-                          <span>
-                            MA50 <span className="text-positive">{latestMA50.toFixed(2)}</span>
-                          </span>
-                        ) : null}
-                        {latestMA200 !== null ? (
-                          <span>
-                            MA200 <span className="text-positive">{latestMA200.toFixed(2)}</span>
-                          </span>
-                        ) : null}
-                      </div>
-                    </div>
-                    <div className="border-b border-white/5 px-4 pb-4">
-                      <div className="flex flex-wrap items-center justify-between gap-4 rounded-xl border border-[#1F1F1F] bg-[#101010] px-4 py-3 text-xs text-white/60">
-                        <div className="flex flex-wrap items-center gap-3">
-                          {overlays.map((overlay) => {
-                            const latestValue = overlay.data[overlay.data.length - 1]?.value;
-
-                            return (
-                              <span key={overlay.label} className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-[#0F0F0F] px-3 py-1 font-poppins">
-                                <span className={`h-2 w-2 rounded-full ${overlay.colorClass}`} />
-                                {overlay.label}: {latestValue !== undefined ? latestValue.toFixed(2) : '--'}
-                              </span>
-                            );
-                          })}
-                        </div>
-                        <div className="flex flex-wrap items-center gap-2">
-                          {['cursor','trend','measure','notes','fullscreen'].map((tool) => (
-                            <button key={tool} type="button" className="flex h-8 w-8 items-center justify-center rounded-md border border-white/10 bg-[#0F0F0F] text-white/50 transition hover:text-white">
-                              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                <path d="M3 3l8 4-4 1-1 4-3-9Z" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" />
-                              </svg>
-                            </button>
-                          ))}
-                          <button type="button" className="rounded-md border border-white/15 px-3 py-1 font-poppins text-xs font-semibold  tracking-[0.24em] text-white/60 transition hover:text-white">
-                            Indicators
-                          </button>
-                          <button type="button" className="rounded-md border border-white/15 px-3 py-1 font-poppins text-xs font-semibold  tracking-[0.24em] text-white/60 transition hover:text-white">
-                            Compare
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="flex min-h-0 flex-1 items-center justify-center rounded-2xl border border-[#1F1F1F] bg-[#090909] text-white/40">
-                      <div className="flex flex-col items-center justify-center gap-6">
-                        <span className="font-poppins text-sm  tracking-[0.3em]">Chart Placeholder</span>
-                      </div>
-                    </div>
-                    <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-[#1F1F1F] bg-[#101010] px-4 py-3 text-xs font-poppins  tracking-[0.24em] text-white/60">
-                      <div className="flex flex-wrap items-center gap-2">
-                        {timeframePresets.map((preset) => (
-                          <button
-                            key={preset}
-                            type="button"
-                            onClick={() => setSelectedTimeframe(preset)}
-                            className={`rounded-full px-3 py-1.5 transition ${
-                              selectedTimeframe === preset
-                                ? 'bg-gradient-to-r from-[#F0C37A]/60 to-[#C78444]/60 text-white shadow-[0_6px_18px_rgba(239,178,92,0.25)]'
-                                : 'bg-[#151515] text-white/60 hover:text-white'
-                            }`}
-                          >
-                            {preset}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
+                <div className="chart flex w-full min-w-0 flex-1">
+                  <div className="flex h-[646.767578125px] w-full max-w-[896.4113159179688px] min-w-0 flex-col gap-[14.31px]">
+                    <ChartPlaceHolder
+                      candles={candles}
+                      overlays={overlays}
+                      indicator={indicator}
+                      timeframeOptions={TIMEFRAME_OPTIONS}
+                      selectedTimeframe={selectedTimeframe}
+                      onTimeframeChange={setSelectedTimeframe}
+                    />
                   </div>
                 </div>
               </div>
