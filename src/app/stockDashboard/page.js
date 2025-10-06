@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import ChartPlaceHolder from '@/app/components/chartPlaceHolder';
 import Sidebar from '@/app/components/sidebar';
@@ -42,6 +42,9 @@ export default function StockDashboard() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [activeTab, setActiveTab] = useState('Chart');
+  const [indicatorStyle, setIndicatorStyle] = useState({ width: 0, left: 0 });
+  const tabsContainerRef = useRef(null);
+  const tabRefs = useRef({});
   const [selectedTimeframe, setSelectedTimeframe] = useState('2h');
   const [tradeSide, setTradeSide] = useState('buy');
   const [orderType, setOrderType] = useState(orderTypes[0]);
@@ -58,6 +61,32 @@ export default function StockDashboard() {
   const dailyChangePct = (dailyChange / previousCandle.close) * 100;
   const fiftyTwoWeekHigh = candles.reduce((maxValue, candle) => (candle.high > maxValue ? candle.high : maxValue), candles[0].high);
   const fiftyTwoWeekLow = candles.reduce((minValue, candle) => (candle.low < minValue ? candle.low : minValue), candles[0].low);
+
+  const updateIndicator = useCallback(() => {
+    const container = tabsContainerRef.current;
+    const activeButton = tabRefs.current[activeTab];
+
+    if (!container || !activeButton) {
+      return;
+    }
+
+    const width = Math.max(activeButton.offsetWidth, 0);
+    const left = activeButton.offsetLeft;
+
+    setIndicatorStyle({ width, left });
+  }, [activeTab]);
+
+  useLayoutEffect(() => {
+    updateIndicator();
+  }, [updateIndicator]);
+
+  useEffect(() => {
+    window.addEventListener('resize', updateIndicator);
+
+    return () => {
+      window.removeEventListener('resize', updateIndicator);
+    };
+  }, [updateIndicator]);
 
   useEffect(() => {
     const storedToken = localStorage.getItem('cirricaToken');
@@ -78,32 +107,14 @@ export default function StockDashboard() {
   return (
     <div className="min-h-screen bg-black text-white">
       <div className="flex">
-        <aside className="hidden h-full border-r border-white/10 bg-surface px-5 py-6 lg:flex lg:w-56 lg:flex-col lg:shrink-0">
+        <aside className="hidden h-full bg-surface px-5 py-6 lg:flex lg:w-56 lg:flex-col lg:shrink-0">
           <Sidebar onLogout={handleLogout} activeItem="dashboard" />
         </aside>
 
-        <main className="flex flex-1 flex-col items-center">
-          <div className="sticky top-0 z-30 flex items-center justify-between gap-3 bg-black px-5 py-4 lg:hidden">
-            <button
-              type="button"
-              
-              className="inline-flex items-center gap-2 rounded-md border border-white/20 px-3 py-2 text-sm font-medium text-white transition hover:bg-white/10"
-              aria-label="Open navigation"
-            >
-              <svg width="20" height="14" viewBox="0 0 20 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <path d="M1 1H19" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-                <path d="M1 7H19" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-                <path d="M1 13H19" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-              </svg>
-              <span className="font-poppins text-xs font-semibold  tracking-wider text-current">Menu</span>
-            </button>
-            <div className="flex-1 text-right">
-              <p className="font-poppins text-xs font-medium  tracking-widest text-white/60">Dashboard</p>
-            </div>
-          </div>
+        <main className="flex flex-1 flex-col items-center border-l border-white/10">
 
           <div className="flex flex-1 flex-col items-center w-full">
-            <header className="mb-3 flex w-full max-w-[1250px] items-center justify-between border border-white/10 px-4 py-3 shadow-[0_8px_28px_rgba(0,0,0,0.4)]">
+            <header className="mb-3 flex w-full max-w-[1250px] items-center justify-between border-b border-white/10 px-4 py-3 shadow-[0_8px_28px_rgba(0,0,0,0.4)]">
               <div className="flex w-[997.7021484375px] items-center">
                 <div className="flex items-center gap-2 bg-black/70 py-2">
                   <svg
@@ -174,20 +185,43 @@ export default function StockDashboard() {
               </div>
             </header>
 
-            <div className="flex justify-between h-[848.3330078125px] w-full max-w-[1231px] min-w-0 gap-[7.16px] p-[7.16px] lg:flex-row mb-10">
-              <div className="flex flex-col bg-[#0A0A0A] min-w-0">
+            <div className="flex justify-evenly h-[848.3330078125px] w-full max-w-[1231px] min-w-0 gap-[7.16px]  lg:flex-row mb-10">
+              <div className="flex flex-col justify-between bg-[#0A0A0A] min-w-0 w-[896.4113159179688px] h-[834.01904296875px]">
                 <div className="top container">
-                    <div className="flex h-[50.99563980102539px] w-full max-w-[896.4113159179688px] min-w-0 items-center justify-between overflow-x-auto border-b-[0.89px] border-[#1F1F1F] bg-[#1F1F1F] pr-[21.47px] pl-[21.47px]">
+                  <div
+                    ref={tabsContainerRef}
+                    className="relative flex h-[50.99563980102539px] w-full max-w-[896.4113159179688px] min-w-0 items-center justify-between overflow-x-auto border-b-[0.89px] border-[#1F1F1F] bg-[#1F1F1F] pr-[21.47px] pl-[21.47px]"
+                  >
+                    <span
+                      aria-hidden
+                      className="pointer-events-none absolute bottom-0 h-[0.89px] rounded-full"
+                      style={{
+                        width: `${indicatorStyle.width}px`,
+                        left: `${indicatorStyle.left}px`,
+                        opacity: indicatorStyle.width > 0 ? 1 : 0,
+                        transition: 'left 150ms ease, width 150ms ease, opacity 150ms ease',
+                        backgroundImage:
+                          'radial-gradient(42.4% 100% at 50% 101.79%, #DAA56A 34.47%, rgba(5, 5, 5, 0) 100%)',
+                      }}
+                    />
                     {chartTabs.map((tab) => (
                       <button
                         key={tab}
+                        ref={(element) => {
+                          if (element) {
+                            tabRefs.current[tab] = element;
+                          } else {
+                            delete tabRefs.current[tab];
+                          }
+                        }}
                         type="button"
                         onClick={() => setActiveTab(tab)}
-                        className={`rounded-full px-4 py-2 text-[12.52px] leading-[16.1px] font-normal text-center transition
+                        className={`relative rounded-full px-4 py-2 text-[12.52px] leading-[16.1px] font-normal text-center transition
                           ${activeTab === tab
                             ? 'text-[#DAA56A] border border-[#DAA56A40] bg-[radial-gradient(50%_50%_at_50%_50%,rgba(218,165,106,0.1)_0%,rgba(218,165,106,0.025)_73.82%)]'
                             : 'text-[#999999] hover:text-white'
                         }`}
+                        aria-pressed={activeTab === tab}
                       >
                         {tab}
                       </button>
@@ -372,7 +406,7 @@ export default function StockDashboard() {
                 </div>
 
                 <div className="chart flex w-full min-w-0 flex-1">
-                  <div className="flex h-[646.767578125px] w-full max-w-[896.4113159179688px] min-w-0 flex-col gap-[14.31px]">
+                  <div className="flex h-full w-full max-w-[896.4113159179688px] min-w-0 flex-col gap-[14.31px]">
                     <ChartPlaceHolder
                       candles={candles}
                       overlays={overlays}
@@ -385,7 +419,7 @@ export default function StockDashboard() {
                 </div>
               </div>
 
-              <aside className="flex w-[313.1177673339844px] h-[834.01904296875px] flex-col gap-[7.16px]">
+              <aside className="flex justify-between w-[313.1177673339844px] h-[834.01904296875px] flex-col gap-[14.31px]">
                 <section className="flex flex-col items-center justify-between w-full h-[583.8401489257812px] rounded-[3.58px] pb-[14.31px] bg-[#0A0A0A]">
                   <header className="flex items-center justify-between w-full h-[50.627906799316406px] gap-[7.16px] pt-[14.31px] pr-[21.47px] pb-[14.31px] pl-[21.47px] bg-[#1F1F1F]">
                     <h3 className="font-poppins text-[14.31px] font-semibold leading-[21.47px] tracking-[0] text-white">Trade</h3>
@@ -397,7 +431,7 @@ export default function StockDashboard() {
                       </svg>
                     </button>
                   </header>
-                  <div className="w-[313.1178px] h-[525px] flex flex-col gap-[14.31px]">
+                  <div className="w-[313.1178px] h-[518.8983154296875px] flex flex-col gap-[14.31px]">
                     <div className="w-full h-[45.6279px] flex items-center bg-[#111111] font-poppins text-[14.31px]">
                       <button
                         type="button"
@@ -406,7 +440,7 @@ export default function StockDashboard() {
                           p-[15px] text-center font-normal text-[12.52px] leading-[16.1px] transition
                           ${tradeSide === 'buy'
                             ? 'text-[#DAA56A] border-b-[1.79px] border-b-[#DAA56A] bg-[linear-gradient(180deg,rgba(250,218,189,0)_32.15%,rgba(250,218,189,0.25)_100%)]'
-                            : 'text-[#999999] border-b-[0.89px] border-b-[#999999]'
+                            : 'text-[#999999] border-b-[0.89px] border-b-[#999999] bg-[#0A0A0A]'
                         }`}
                       >
                         Buy
@@ -418,13 +452,13 @@ export default function StockDashboard() {
                           p-[15px] text-center font-normal text-[12.52px] leading-[16.1px] transition
                           ${tradeSide === 'sell'
                             ? 'text-[#DAA56A] border-b-[1.79px] border-b-[#DAA56A] bg-[linear-gradient(180deg,rgba(250,218,189,0)_32.15%,rgba(250,218,189,0.25)_100%)]'
-                            : 'text-[#999999] border-b-[0.89px] border-b-[#999999]'
+                            : 'text-[#999999] border-b-[0.89px] border-b-[#999999] bg-[#0A0A0A]'
                         }`}
                       >
                         Sell
                       </button>
                     </div>
-                    <div className="flex flex-col w-[313.1178px] h-[355px] gap-[14.31px] pr-[21.47px] pb-[14.31px] pl-[21.47px]
+                    <div className="flex flex-col w-[313.1178px] h-[355px] gap-[14.31px] pr-[21.47px] pb-[20.31px] pl-[21.47px]
                       bg-[repeating-linear-gradient(to_right,#1F1F1F_0_14px,transparent_14px_28px)] bg-bottom bg-repeat-x bg-[length:28px_1px]">
                       <div className="flex flex-col w-[270.1759px] h-[54.5719px] space-y-[3.58px]">
                         <label htmlFor="orderType" className="font-[poppins] font-medium text-[12.52px] leading-[16.1px] align-middle text-white/70">Order Type</label>
@@ -458,21 +492,61 @@ export default function StockDashboard() {
                         </div>
                       </div>
 
-                      <div className="w-[270.1759px] h-[96.6236px] space-y-2">
+                      <div className="w-[270.1759px] h-[96.6236px] space-y-1">
                         <div className="flex items-center w-[270.1759px] h-[17px] gap-[3.58px]">
                           <label className="font-[Font-family] font-medium text-[12.52px] leading-[16.1px] align-middle text-[#999999]">Quantity</label>
                           <span className="flex items-center justify-center w-[46.7355px] h-[17px] gap-[7.16px] rounded-[89.46px] border border-[#C99046]/40 px-[5.37px] text-[10.74px] leading-[16.1px] font-normal text-[#DAA56A] align-middle font-[Font-family]">Shares</span>
                         </div>
                         <div className="p-[0.45px] rounded-[5.37px] bg-[radial-gradient(70.97%_837.53%_at_98.29%_13.75%,rgba(255,255,255,0.75)_0%,rgba(255,255,255,0.075)_14.95%),radial-gradient(57.27%_124.88%_at_28.43%_0%,#DAA56A_0%,rgba(255,255,255,0.1)_64.02%),linear-gradient(180deg,rgba(255,255,255,0)_0%,rgba(0,0,0,0.5)_100%)] shadow-[0px_1.79px_5.37px_0px_#00000080]">
-                          <input
-                            type="number"
-                            value={selectedQuantity}
-                            min={1}
-                            step={1}
-                            onChange={(event) => setSelectedQuantity(Number(event.target.value))}
-                            className="w-[270.1759px] h-[35.7849px] rounded-[5.37px] bg-[#191919] px-[10.74px] font-[Font-family] font-normal text-[12.52px] leading-[16.1px] text-white/80 focus:outline-none focus:ring-0 focus-visible:ring-0 block
-                                        appearance-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-moz-appearance:textfield]"
-                          />
+                          <div className="relative">
+                            <input
+                              type="number"
+                              value={selectedQuantity}
+                              min={1}
+                              step={1}
+                              onChange={(event) => setSelectedQuantity(Number(event.target.value))}
+                              className="w-[270.1759px] h-[35.7849px] rounded-[5.37px] bg-[#191919] px-[10.74px] pr-[28px] font-[Font-family] font-normal text-[12.52px] leading-[16.1px] text-white/80 focus:outline-none focus:ring-0 focus-visible:ring-0 block
+                                          appearance-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-moz-appearance:textfield]"
+                            />
+                            <div className="absolute right-[10.74px] top-1/2 flex h-[12.5247px] w-[7.1569px] -translate-y-1/2 flex-col items-center justify-between gap-[1.5px]">
+                              <button
+                                type="button"
+                                className="flex items-center justify-center text-white"
+                                onClick={() =>
+                                  setSelectedQuantity((prev) => Math.max(1, (Number.isFinite(prev) ? prev : 0) + 1))
+                                }
+                              >
+                                <svg
+                                  width="7.15"
+                                  height="6.25"
+                                  viewBox="0 0 8 5"
+                                  fill="currentColor"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path d="M4.39844 0.856812L0.832031 4.42322H7.96484L4.39844 0.856812Z" />
+                                </svg>
+                              </button>
+                              <button
+                                type="button"
+                                className="flex items-center justify-center text-white"
+                                onClick={() =>
+                                  setSelectedQuantity((prev) =>
+                                    Math.max(1, (Number.isFinite(prev) ? prev : 1) - 1)
+                                  )
+                                }
+                              >
+                                <svg
+                                  width="7.15"
+                                  height="6.25"
+                                  viewBox="0 0 8 5"
+                                  fill="currentColor"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path d="M4.39844 4.14319L0.832031 0.576782H7.96484L4.39844 4.14319Z" />
+                                </svg>
+                              </button>
+                            </div>
+                          </div>
                         </div>
                         
                         <div className="flex items-center w-[270.1759px] h-[31.314px] gap-[8.95px]">
@@ -597,10 +671,13 @@ export default function StockDashboard() {
                             <div className="relative flex items-center">
                               <input
                                 type="number"
-                                value={stopPrice}
+                                value={Number.isFinite(stopPrice) ? stopPrice.toFixed(2) : ''}
                                 min={0}
                                 step="0.01"
-                                onChange={(event) => setStopPrice(Number(event.target.value))}
+                                onChange={(event) => {
+                                  const { value } = event.target;
+                                  setStopPrice(value === '' ? Number.NaN : Number(value));
+                                }}
                                 className="w-[210.077px] h-[17px] bg-transparent 
                                           font-[Font-family] font-normal
                                           text-[12.52px] leading-[16.1px] 
@@ -616,7 +693,12 @@ export default function StockDashboard() {
                                 <button
                                   type="button"
                                   className="flex items-center justify-center text-white"
-                                  onClick={() => setStopPrice((prev) => Number((prev + 0.01).toFixed(2)))}
+                                  onClick={() =>
+                                    setStopPrice((prev) => {
+                                      const next = Number.isFinite(prev) ? prev + 0.01 : 0.01;
+                                      return Number(next.toFixed(2));
+                                    })
+                                  }
                                 >
                                   <svg
                                     width="7.15"
@@ -633,7 +715,13 @@ export default function StockDashboard() {
                                 <button
                                   type="button"
                                   className="flex items-center justify-center text-white"
-                                  onClick={() => setStopPrice((prev) => Math.max(0, Number((prev - 0.01).toFixed(2))))}
+                                  onClick={() =>
+                                    setStopPrice((prev) => {
+                                      const base = Number.isFinite(prev) ? prev : 0;
+                                      const next = Math.max(0, base - 0.01);
+                                      return Number(next.toFixed(2));
+                                    })
+                                  }
                                 >
                                   <svg
                                     width="7.15"
@@ -662,7 +750,7 @@ export default function StockDashboard() {
                       </div>
                     </div>
                     
-                    <div className="flex flex-col w-[313.1178px] h-[65.314px] gap-[7.16px] bg-[#0B0B0B] px-[21.47px]">
+                    <div className="flex flex-col w-[313.1178px] h-[65.314px] gap-[7.16px] bg-[#0B0B0B] px-[21.47px] py-1">
                       <div className="flex w-[270.176px] h-[17px] items-center justify-between gap-[14.31px] text-white/70">
                         <span className="font-[Font-family] font-normal text-[12.52px] leading-[16.1px] tracking-[0%] align-middle text-[#999999]">Buying Power</span>
                         <span className="font-[Font-family] font-normal text-[12.52px] leading-[16.1px] tracking-[0%] text-right text-white [font-variant-numeric:lining-nums_tabular-nums]">{formatCurrency(122912.5)}</span>
@@ -680,7 +768,7 @@ export default function StockDashboard() {
                     <button
                       type="button"
                       className="flex w-[313.1178px] h-[17px] items-center justify-center  
-                                px-[21.47px] py-2 font-[Font-family] font-normal 
+                                px-[21.47px] pb-2 font-[Font-family] font-normal 
                                 text-[12px] leading-[16.1px] tracking-[0%] text-white transition">
                       Disclaimer
                       <svg
@@ -707,15 +795,21 @@ export default function StockDashboard() {
                 </section>
 
                 <section className="w-[313.1178px] h-[243.0219px] overflow-hidden rounded-[3.58px] bg-[#0A0A0A]">
-                  <header className="flex w-[313.1178px] h-[50.6279px] items-center justify-between gap-[7.16px] 
-                    border-b-[0.89px] border-white/10 
-                    px-[21.47px] py-[14.31px] bg-[#1F1F1F]">
+                  <header className="flex w-[313.1178px] h-[50.6279px] items-center justify-between gap-[7.16px] pl-[21.47px] pr-[14.31px] py-[14.31px] bg-[#1F1F1F]">
                     <h3 className="font-[Font-family] font-semibold text-[14.31px] leading-[21.47px] text-white">Time &amp; Sales</h3>
-                    <button type="button" className="flex h-8 w-8 items-center justify-center rounded-md text-white/60 transition hover:text-white" aria-label="Time & sales menu">
-                      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                        <path d="M1.5 3h9" stroke="currentColor" strokeWidth="1" strokeLinecap="round" />
-                        <path d="M1.5 6h9" stroke="currentColor" strokeWidth="1" strokeLinecap="round" />
-                        <path d="M1.5 9h9" stroke="currentColor" strokeWidth="1" strokeLinecap="round" />
+                    <button type="button" className="flex h-8 w-8 items-center justify-center rounded-md text-white transition" aria-label="Time & sales menu">
+                      <svg
+                        width="11.926973342895508"
+                        height="8.34980583190918"
+                        viewBox="0 0 13 10"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true"
+                      >
+                        <path
+                          d="M0.847707 7.98168H8.00468C8.1567 7.98185 8.30291 8.04006 8.41345 8.14441C8.52398 8.24877 8.5905 8.39139 8.59941 8.54314C8.60832 8.6949 8.55895 8.84433 8.46138 8.9609C8.36381 9.07747 8.22541 9.15238 8.07446 9.17034L8.00468 9.17451H0.847707C0.695693 9.17434 0.549481 9.11614 0.438943 9.01178C0.328406 8.90743 0.261888 8.7648 0.252979 8.61305C0.24407 8.4613 0.293444 8.31187 0.391011 8.1953C0.488579 8.07873 0.626976 8.00381 0.777927 7.98586L0.847707 7.98168ZM0.847707 4.4032H11.5832C11.7352 4.40336 11.8814 4.46157 11.9919 4.56593C12.1025 4.67028 12.169 4.8129 12.1779 4.96466C12.1868 5.11641 12.1374 5.26584 12.0399 5.38241C11.9423 5.49898 11.8039 5.5739 11.653 5.59185L11.5832 5.59602H0.847707C0.695693 5.59586 0.549481 5.53765 0.438943 5.43329C0.328406 5.32894 0.261888 5.18632 0.252979 5.03456C0.24407 4.88281 0.293444 4.73338 0.391011 4.61681C0.488579 4.50024 0.626976 4.42532 0.777927 4.40737L0.847707 4.4032ZM0.847707 0.824707H9.79393C9.94594 0.824876 10.0922 0.883083 10.2027 0.987438C10.3132 1.09179 10.3797 1.23442 10.3887 1.38617C10.3976 1.53792 10.3482 1.68735 10.2506 1.80392C10.1531 1.92049 10.0147 1.99541 9.86371 2.01336L9.79393 2.01754H0.847707C0.695693 2.01737 0.549481 1.95916 0.438943 1.85481C0.328406 1.75045 0.261888 1.60783 0.252979 1.45607C0.24407 1.30432 0.293444 1.15489 0.391011 1.03832C0.488579 0.921752 0.626976 0.846836 0.777927 0.828882L0.847707 0.824707Z"
+                          fill="currentColor"
+                        />
                       </svg>
                     </button>
                   </header>
