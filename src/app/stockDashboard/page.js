@@ -104,6 +104,9 @@ export default function StockDashboard() {
     setIsSidebarOpen(false);
     router.push('/');
   };
+
+  const openSidebar = () => setIsSidebarOpen(true);
+  const closeSidebar = () => setIsSidebarOpen(false);
   return (
     <div className="min-h-screen bg-black text-white">
       <div className="flex">
@@ -112,7 +115,24 @@ export default function StockDashboard() {
         </aside>
 
         <main className="flex flex-1 flex-col items-center border-l border-white/10">
-
+          <div className="sticky top-0 z-30 flex w-full items-center justify-between gap-3 border-b border-white/10 bg-black px-4 py-3 lg:hidden">
+            <button
+              type="button"
+              onClick={openSidebar}
+              className="inline-flex items-center gap-2 rounded-md border border-white/20 px-3 py-2 text-sm font-medium text-white transition hover:bg-white/10"
+              aria-label="Open navigation"
+            >
+              <svg width="20" height="14" viewBox="0 0 20 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M1 1H19" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                <path d="M1 7H19" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                <path d="M1 13H19" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+              </svg>
+              <span className="font-poppins text-xs font-semibold uppercase tracking-wider text-current">Menu</span>
+            </button>
+            <div className="flex-1 text-right">
+              <p className="font-poppins text-xs font-medium uppercase tracking-widest text-white/60">Stock Dashboard</p>
+            </div>
+          </div>
           <div className="flex flex-1 flex-col items-center w-full">
             <header className="mb-3 flex w-full max-w-[1250px] items-center justify-between border-b border-white/10 px-4 py-3 shadow-[0_8px_28px_rgba(0,0,0,0.4)]">
               <div className="flex w-[997.7021484375px] items-center">
@@ -187,7 +207,7 @@ export default function StockDashboard() {
 
             <div className="flex justify-evenly h-[848.3330078125px] w-full max-w-[1231px] min-w-0 gap-[7.16px]  lg:flex-row mb-10">
               <div className="flex flex-col justify-between bg-[#0A0A0A] min-w-0 w-[896.4113159179688px] h-[834.01904296875px]">
-                <div className="top container">
+                <div className="w-full">
                   <div
                     ref={tabsContainerRef}
                     className="relative flex h-[50.99563980102539px] w-full max-w-[896.4113159179688px] min-w-0 items-center justify-between overflow-x-auto border-b-[0.89px] border-[#1F1F1F] bg-[#1F1F1F] pr-[21.47px] pl-[21.47px]"
@@ -228,8 +248,8 @@ export default function StockDashboard() {
                     ))}
                   </div>
 
-                  <div className="border-b border-white/5 h-[121.94186401367188px] w-full max-w-[896.4113159179688px] min-w-0 gap-[35.78px] pt-[10.74px] pr-[21.47px] pb-[10.74px] pl-[21.47px]">
-                    <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
+                  <div className="border-b border-white/5 h-[121.94186401367188px] w-full max-w-[896.4113159179688px] min-w-0 gap-[35.78px] overflow-x-auto pt-[10.74px] pr-[21.47px] pb-[10.74px] pl-[21.47px]">
+                    <div className="flex items-start justify-between gap-6">
                         <div className="flex h-[100.47093200683594px] w-[313.0494079589844px] flex-col gap-[10.74px]">
                         <div className="flex h-[100.47093200683594px] w-[313.0494079589844px] flex-wrap items-center gap-[10.74px]">
                           <span className="font-['Font-family'] text-[17.89px] font-normal leading-[21.47px]  text-white">MSFT</span>
@@ -267,11 +287,11 @@ export default function StockDashboard() {
                             </button>
                           </div>
                         </div>
-                        <div className="flex h-[40px] w-[174.156982421875px] items-end justify-between gap-[7.16px]">
+                        <div className="flex h-[40px] w-[174.156982421875px] gap-[7.16px]">
                             <span className="font-['Font-family'] text-[35.78px] font-semibold leading-[39.36px]  text-[#DAA56A] [font-variant-numeric:lining-nums_tabular-nums]">
                               {latestCandle.close.toFixed(2)}
                             </span>
-                            <div className="flex h-[37.578487396240234px] w-[44px] flex-col gap-[3.58px] text-right">
+                            <div className="flex items-start h-[37.578487396240234px] w-[44px] flex-col gap-[3.58px] text-right">
                               <span className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px]  text-[#0FEDBE]">
                                 {formatSigned(dailyChange)}
                               </span>
