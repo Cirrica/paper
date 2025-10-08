@@ -35,7 +35,7 @@ function NavItem({ icon, label, active = false, href, onClick }) {
 
 export default function Sidebar({ onLogout, activeItem = 'dashboard', onNavigate, onClose }) {
   return (
-    <div className="relative flex h-full w-full max-w-xs flex-col overflow-hidden bg-surface lg:w-52">
+    <div className="relative flex h-full w-full max-w-xs flex-col overflow-hidden bg-surface lg:w-50">
       {onClose ? (
         <button
           type="button"
@@ -122,6 +122,8 @@ export default function Sidebar({ onLogout, activeItem = 'dashboard', onNavigate
           }
           label="Tournaments"
           active={activeItem === 'tournaments'}
+          href="/tournament"
+          onClick={onNavigate}
         />
 
         {/* Select Stock (INLINE SVG FROM FIGMA) */}

@@ -276,10 +276,10 @@ export default function CreateTournament() {
   const teamLimit = 10;
 
   return (
-    <div className='h-screen overflow-hidden bg-black text-white'>
-      <div className='flex h-full flex-col lg:flex-row'>
-        <aside className='sticky top-0 hidden h-screen border-r border-white/10 bg-surface px-5 py-6 lg:flex lg:w-52 lg:flex-col lg:shrink-0'>
-          <Sidebar onLogout={handleLogout} activeItem='tournaments' />
+    <div className="h-screen overflow-hidden bg-black text-white">
+      <div className="flex h-full flex-col lg:flex-row">
+        <aside className="sticky top-0 hidden h-screen border-r border-white/10 bg-surface px-5 py-6 lg:flex lg:w-56 lg:flex-col lg:shrink-0">
+          <Sidebar onLogout={handleLogout} activeItem="tournaments" />
         </aside>
 
         <main className='flex-1 overflow-y-auto'>
@@ -327,8 +327,8 @@ export default function CreateTournament() {
               </p>
             </div>
           </div>
-          <div className='mx-auto max-w-7xl px-5 py-8 pl-12'>
-            <div className='flex w-full flex-col gap-6 lg:flex-row lg:items-center lg:justify-between'>
+          <div className="mx-auto max-w-7xl px-5 py-8 pl-10">
+            <div className="flex w-full flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
               <div>
                 <h1 className='font-poppins text-2xl font-semibold leading-tight tracking-wider text-white'>
                   Create Tournament
