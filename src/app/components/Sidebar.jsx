@@ -122,6 +122,8 @@ export default function Sidebar({ onLogout, activeItem = 'dashboard', onNavigate
           }
           label="Tournaments"
           active={activeItem === 'tournaments'}
+          href="/tournament"
+          onClick={onNavigate}
         />
 
         {/* Select Stock (INLINE SVG FROM FIGMA) */}

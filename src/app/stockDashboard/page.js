@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import ChartPlaceHolder from '@/app/components/chartPlaceHolder';
-import Sidebar from '@/app/components/sidebar';
+import Sidebar from '@/app/components/Sidebar';
 import { TIMEFRAME_OPTIONS, generateMockStockData } from '@/app/components/chartPlaceHolderData';
 
 const chartTabs = ['Chart', 'Options', 'News', 'Financials', 'Analysts', 'Risk Analysis', 'Releases', 'Notes', 'Profile'];
