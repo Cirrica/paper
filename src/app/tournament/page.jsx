@@ -6,7 +6,7 @@ import Sidebar from '../components/Sidebar';
 import SearchAndFilter from '../../app/components/tournaments/SearchAndFilter';
 import TournamentTabs from '../components/tournaments/TournamentTabs';
 import FeaturedTournament from '../../app/components/tournaments/FeaturedTournament';
-import TournamentGrid from '../components/tournaments/Tournamentgrid';
+import TournamentGrid from '../components/tournaments/TournamentGrid';
 import { allTournaments, tabs } from '../../app/data/tournamentdata';
 
 const TournamentsPage = () => {
