@@ -108,13 +108,13 @@ export default function StockDashboard() {
   const openSidebar = () => setIsSidebarOpen(true);
   const closeSidebar = () => setIsSidebarOpen(false);
   return (
-    <div className="min-h-screen bg-black text-white">
-      <div className="flex">
-        <aside className="hidden h-full bg-surface px-5 py-6 lg:flex lg:w-56 lg:flex-col lg:shrink-0">
+    <div className="h-screen overflow-hidden bg-black text-white">
+      <div className="flex h-full">
+        <aside className="sticky top-0 hidden h-full bg-surface px-5 py-6 lg:flex lg:w-56 lg:flex-col lg:shrink-0">
           <Sidebar onLogout={handleLogout} activeItem="dashboard" />
         </aside>
 
-        <main className="flex flex-1 flex-col items-center border-l border-white/10">
+        <main className="flex min-h-0 flex-1 flex-col items-center overflow-y-auto border-l border-white/10">
           <div className="sticky top-0 z-30 flex w-full items-center justify-between gap-3 border-b border-white/10 bg-black px-4 py-3 lg:hidden">
             <button
               type="button"
@@ -133,9 +133,9 @@ export default function StockDashboard() {
               <p className="font-poppins text-xs font-medium uppercase tracking-widest text-white/60">Stock Dashboard</p>
             </div>
           </div>
-          <div className="flex flex-1 flex-col items-center w-full">
-            <header className="mb-3 flex w-full max-w-[1250px] items-center justify-between border-b border-white/10 px-4 py-3 shadow-[0_8px_28px_rgba(0,0,0,0.4)]">
-              <div className="flex w-[997.7021484375px] items-center">
+          <div className="flex w-full flex-1 flex-col items-center gap-6 pb-10">
+            <header className="flex w-full max-w-[1250px] items-center justify-between border-b border-white/10 px-4 py-3 shadow-[0_8px_28px_rgba(0,0,0,0.4)]">
+              <div className="flex flex-1 min-w-0 items-center">
                 <div className="flex items-center gap-2 bg-black/70 py-2">
                   <svg
                     width="12"
@@ -172,7 +172,7 @@ export default function StockDashboard() {
                     </svg>
                   </button>
                 </div>
-                <div className="ml-6 grid h-[39px] w-[199.53125px] grid-cols-2 gap-[28.53px]">
+                <div className="ml-6 grid h-[39px] w-full max-w-[199.53125px] grid-cols-2 gap-[28.53px]">
                   <div className="flex flex-col">
                     <span className="font-[Golos Text] text-[10.7px] font-normal leading-[21.4px] text-[#999999]">Portfolio Balance</span>
                     <span className="font-poppins text-[12.48px] font-normal leading-[16.05px] text-white [font-variant-numeric:lining-nums_tabular-nums]">{formatCurrency(623098.17)}</span>
@@ -183,7 +183,7 @@ export default function StockDashboard() {
                   </div>
                 </div>
               </div>
-              <div className="w-[200.61036682128906px] rounded-[5.35px] bg-gradient-to-b from-white/50 to-black/50 p-[0.45px]">
+              <div className="w-full max-w-[200.61036682128906px] rounded-[5.35px] bg-gradient-to-b from-white/50 to-black/50 p-[0.45px]">
                 <div className="flex h-[28.53125px] w-full items-center rounded-[5.35px] bg-[#191919] px-[10.7px]">
                   <svg
                     width="15"
@@ -205,8 +205,8 @@ export default function StockDashboard() {
               </div>
             </header>
 
-            <div className="flex justify-evenly h-[848.3330078125px] w-full max-w-[1231px] min-w-0 gap-[7.16px]  lg:flex-row mb-10">
-              <div className="flex flex-col justify-between bg-[#0A0A0A] min-w-0 w-[896.4113159179688px] h-[834.01904296875px]">
+            <div className="flex w-full max-w-[1231px] flex-1 min-w-0 flex-col gap-[14.31px] px-4 lg:flex-row lg:items-stretch">
+              <section className="flex w-full flex-1 min-w-0 flex-col overflow-hidden bg-[#0A0A0A]">
                 <div className="w-full">
                   <div
                     ref={tabsContainerRef}
@@ -425,8 +425,8 @@ export default function StockDashboard() {
                   </div>
                 </div>
 
-                <div className="chart flex w-full min-w-0 flex-1">
-                  <div className="flex h-full w-full max-w-[896.4113159179688px] min-w-0 flex-col gap-[14.31px]">
+                <div className="chart flex w-full min-h-0 min-w-0 flex-1 px-[21.47px] pb-[14.31px] pt-[14.31px]">
+                  <div className="flex h-full w-full min-w-0 flex-col gap-[14.31px]">
                     <ChartPlaceHolder
                       candles={candles}
                       overlays={overlays}
@@ -437,11 +437,11 @@ export default function StockDashboard() {
                     />
                   </div>
                 </div>
-              </div>
+              </section>
 
-              <aside className="flex justify-between w-[313.1177673339844px] h-[834.01904296875px] flex-col gap-[14.31px]">
-                <section className="flex flex-col items-center justify-between w-full h-[583.8401489257812px] rounded-[3.58px] pb-[14.31px] bg-[#0A0A0A]">
-                  <header className="flex items-center justify-between w-full h-[50.627906799316406px] gap-[7.16px] pt-[14.31px] pr-[21.47px] pb-[14.31px] pl-[21.47px] bg-[#1F1F1F]">
+              <aside className="flex w-full flex-col gap-[14.31px] lg:w-[320px]">
+                <section className="flex w-full flex-col rounded-[3.58px] bg-[#0A0A0A] pb-[14.31px]">
+                  <header className="flex w-full items-center justify-between gap-[7.16px] bg-[#1F1F1F] px-[21.47px] py-[14.31px]">
                     <h3 className="font-poppins text-[14.31px] font-semibold leading-[21.47px] tracking-[0] text-white">Trade</h3>
                     <button type="button" aria-label="Trade menu" className="rounded-md p-2 text-white/60 transition hover:text-white">
                       <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -451,13 +451,13 @@ export default function StockDashboard() {
                       </svg>
                     </button>
                   </header>
-                  <div className="w-[313.1178px] h-[518.8983154296875px] flex flex-col gap-[14.31px]">
-                    <div className="w-full h-[45.6279px] flex items-center bg-[#111111] font-poppins text-[14.31px]">
+                  <div className="flex flex-col gap-[14.31px]">
+                    <div className="flex w-full bg-[#111111] font-poppins text-[14.31px]">
                       <button
                         type="button"
                         onClick={() => setTradeSide('buy')}
-                        className={`flex items-center justify-center w-[156.5588836669922px] h-[45.627906799316406px] gap-[7.16px]
-                          p-[15px] text-center font-normal text-[12.52px] leading-[16.1px] transition
+                        className={`flex flex-1 items-center justify-center gap-[7.16px] py-3
+                          px-[15px] text-center font-normal text-[12.52px] leading-[16.1px] transition
                           ${tradeSide === 'buy'
                             ? 'text-[#DAA56A] border-b-[1.79px] border-b-[#DAA56A] bg-[linear-gradient(180deg,rgba(250,218,189,0)_32.15%,rgba(250,218,189,0.25)_100%)]'
                             : 'text-[#999999] border-b-[0.89px] border-b-[#999999] bg-[#0A0A0A]'
@@ -468,8 +468,8 @@ export default function StockDashboard() {
                       <button
                         type="button"
                         onClick={() => setTradeSide('sell')}
-                        className={`flex items-center justify-center w-[156.5588836669922px] h-[45.627906799316406px] gap-[7.16px]
-                          p-[15px] text-center font-normal text-[12.52px] leading-[16.1px] transition
+                        className={`flex flex-1 items-center justify-center gap-[7.16px] py-3
+                          px-[15px] text-center font-normal text-[12.52px] leading-[16.1px] transition
                           ${tradeSide === 'sell'
                             ? 'text-[#DAA56A] border-b-[1.79px] border-b-[#DAA56A] bg-[linear-gradient(180deg,rgba(250,218,189,0)_32.15%,rgba(250,218,189,0.25)_100%)]'
                             : 'text-[#999999] border-b-[0.89px] border-b-[#999999] bg-[#0A0A0A]'
@@ -478,7 +478,7 @@ export default function StockDashboard() {
                         Sell
                       </button>
                     </div>
-                    <div className="flex flex-col w-[313.1178px] h-[355px] gap-[14.31px] pr-[21.47px] pb-[20.31px] pl-[21.47px]
+                    <div className="flex flex-col gap-[14.31px] px-[21.47px] pb-[20.31px]
                       bg-[repeating-linear-gradient(to_right,#1F1F1F_0_14px,transparent_14px_28px)] bg-bottom bg-repeat-x bg-[length:28px_1px]">
                       <div className="flex flex-col w-[270.1759px] h-[54.5719px] space-y-[3.58px]">
                         <label htmlFor="orderType" className="font-[poppins] font-medium text-[12.52px] leading-[16.1px] align-middle text-white/70">Order Type</label>
@@ -770,16 +770,16 @@ export default function StockDashboard() {
                       </div>
                     </div>
                     
-                    <div className="flex flex-col w-[313.1178px] h-[65.314px] gap-[7.16px] bg-[#0B0B0B] px-[21.47px] py-1">
-                      <div className="flex w-[270.176px] h-[17px] items-center justify-between gap-[14.31px] text-white/70">
+                    <div className="flex w-full flex-col gap-[7.16px] bg-[#0B0B0B] px-[21.47px] py-1">
+                      <div className="flex w-full items-center justify-between gap-[14.31px] text-white/70">
                         <span className="font-[Font-family] font-normal text-[12.52px] leading-[16.1px] tracking-[0%] align-middle text-[#999999]">Buying Power</span>
                         <span className="font-[Font-family] font-normal text-[12.52px] leading-[16.1px] tracking-[0%] text-right text-white [font-variant-numeric:lining-nums_tabular-nums]">{formatCurrency(122912.5)}</span>
                       </div>
-                      <div className="flex w-[270.176px] h-[17px] items-center justify-between gap-[14.31px] text-white/70">
+                      <div className="flex w-full items-center justify-between gap-[14.31px] text-white/70">
                         <span className="font-[Font-family] font-normal text-[12.52px] leading-[16.1px] tracking-[0%] align-middle text-[#999999]">Transaction Fees</span>
                         <span className="font-[Font-family] font-normal text-[12.52px] leading-[16.1px] tracking-[0%] text-right text-white [font-variant-numeric:lining-nums_tabular-nums]">$4.00</span>
                       </div>
-                      <div className="flex w-[270.176px] h-[17px] items-center justify-between gap-[14.31px] text-white/70">
+                      <div className="flex w-full items-center justify-between gap-[14.31px] text-white/70">
                         <span className="font-[Font-family] font-normal text-[12.52px] leading-[16.1px] tracking-[0%] align-middle text-[#999999]">Estimated Total</span>
                         <span className="font-[Font-family] font-normal text-[12.52px] leading-[16.1px] tracking-[0%] text-right text-white [font-variant-numeric:lining-nums_tabular-nums]">{formatCurrency(selectedQuantity * latestCandle.close)}</span>
                       </div>
@@ -787,7 +787,7 @@ export default function StockDashboard() {
 
                     <button
                       type="button"
-                      className="flex w-[313.1178px] h-[17px] items-center justify-center  
+                      className="flex w-full items-center justify-center  
                                 px-[21.47px] pb-2 font-[Font-family] font-normal 
                                 text-[12px] leading-[16.1px] tracking-[0%] text-white transition">
                       Disclaimer
@@ -814,8 +814,8 @@ export default function StockDashboard() {
                   </div>
                 </section>
 
-                <section className="w-[313.1178px] h-[243.0219px] overflow-hidden rounded-[3.58px] bg-[#0A0A0A]">
-                  <header className="flex w-[313.1178px] h-[50.6279px] items-center justify-between gap-[7.16px] pl-[21.47px] pr-[14.31px] py-[14.31px] bg-[#1F1F1F]">
+                <section className="flex w-full flex-col overflow-hidden rounded-[3.58px] bg-[#0A0A0A]">
+                  <header className="flex w-full items-center justify-between gap-[7.16px] bg-[#1F1F1F] px-[21.47px] py-[14.31px]">
                     <h3 className="font-[Font-family] font-semibold text-[14.31px] leading-[21.47px] text-white">Time &amp; Sales</h3>
                     <button type="button" className="flex h-8 w-8 items-center justify-center rounded-md text-white transition" aria-label="Time & sales menu">
                       <svg
@@ -833,10 +833,9 @@ export default function StockDashboard() {
                       </svg>
                     </button>
                   </header>
-                  <div className="w-[313.1178px] h-[192.394px] rounded-[3.58px] flex flex-col gap-[12.52px] 
-                                  pt-[18px] pr-[21.47px] pb-[21.47px] pl-[21.47px] overflow-hidden">
+                  <div className="flex h-full w-full flex-col gap-[12.52px] overflow-hidden px-[21.47px] pb-[21.47px] pt-[18px]">
                     {timeSalesRows.map((row) => (
-                      <div key={`${row.time}-${row.price}`} className="flex w-[270.176px] h-[17.56px] justify-between text-sm font-poppins text-white/80">
+                      <div key={`${row.time}-${row.price}`} className="flex w-full justify-between text-sm font-poppins text-white/80">
                         <span className="font-[Font-family] font-normal not-italic text-[12.52px] leading-[16.1px] tracking-[0%] text-white [font-variant-numeric:lining-nums_tabular-nums]">{row.time}</span>
                         <span className="font-[Font-family] font-normal not-italic text-[12.52px] leading-[16.1px] tracking-[0%] text-white [font-variant-numeric:lining-nums_tabular-nums]">{row.price}</span>
                         <span className="font-[Font-family] font-normal not-italic text-[12.52px] leading-[16.1px] tracking-[0%] text-white [font-variant-numeric:lining-nums_tabular-nums]">{row.size}</span>
