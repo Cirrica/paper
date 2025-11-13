@@ -1,5 +1,5 @@
 'use client';
-
+// CHECK!
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import ChartPlaceHolder from '@/app/components/chartPlaceHolder';
@@ -108,13 +108,13 @@ export default function StockDashboard() {
   const openSidebar = () => setIsSidebarOpen(true);
   const closeSidebar = () => setIsSidebarOpen(false);
   return (
-    <div className="min-h-screen bg-black text-white">
-      <div className="flex">
-        <aside className="hidden h-full bg-surface px-5 py-6 lg:flex lg:w-56 lg:flex-col lg:shrink-0">
+    <div className="h-screen overflow-hidden bg-black text-white">
+      <div className="flex h-full">
+        <aside className="sticky top-0 hidden h-full bg-surface px-5 py-6 lg:flex lg:w-56 lg:flex-col lg:shrink-0">
           <Sidebar onLogout={handleLogout} activeItem="dashboard" />
         </aside>
 
-        <main className="flex flex-1 flex-col items-center border-l border-white/10">
+        <main className="flex min-h-0 flex-1 flex-col items-center overflow-y-auto border-l border-white/10">
           <div className="sticky top-0 z-30 flex w-full items-center justify-between gap-3 border-b border-white/10 bg-black px-4 py-3 lg:hidden">
             <button
               type="button"
@@ -133,9 +133,9 @@ export default function StockDashboard() {
               <p className="font-poppins text-xs font-medium uppercase tracking-widest text-white/60">Stock Dashboard</p>
             </div>
           </div>
-          <div className="flex flex-1 flex-col items-center w-full">
-            <header className="mb-3 flex w-full max-w-[1250px] items-center justify-between border-b border-white/10 px-4 py-3 shadow-[0_8px_28px_rgba(0,0,0,0.4)]">
-              <div className="flex w-[997.7021484375px] items-center">
+          <div className="flex w-full flex-1 flex-col items-center gap-3 pb-10">
+            <header className="flex w-full max-w-full lg:max-w-[78.125rem] flex-col gap-4 lg:flex-row lg:items-center lg:justify-between border-b border-white/10 px-4 py-3 shadow-lg lg:shadow-[0_0.5rem_1.75rem_rgba(0,0,0,0.4)]">
+              <div className="flex w-full flex-1 min-w-0 items-center gap-6">
                 <div className="flex items-center gap-2 bg-black/70 py-2">
                   <svg
                     width="12"
@@ -147,14 +147,14 @@ export default function StockDashboard() {
                   >
                     <path d="M4.39844 4.14319L0.832031 0.576782H7.96484L4.39844 4.14319Z" fill="#FFFFFF" />
                   </svg>
-                  <div className="flex h-[21.3984375px] w-[21.3984375px] items-center justify-center overflow-hidden rounded-full border border-white/20 bg-black">
-                    <span className="font-poppins text-[9px] text-white">JR</span>
+                  <div className="flex h-5 lg:h-[1.3374rem] w-5 lg:w-[1.3374rem] items-center justify-center overflow-hidden rounded-full border border-white/20 bg-black">
+                    <span className="font-poppins text-[0.625rem] sm:text-[0.6875rem] lg:text-[0.5625rem] text-white">JR</span>
                   </div>
                   <div className="flex flex-col leading-none">
-                    <span className="font-poppins text-[12.48px] font-normal leading-[16.05px] text-white">James Raymond</span>
-                    <span className="mt-1 font-poppins text-[10.7px] font-normal leading-[16.05px] text-[#999999]">Account: 4453728992</span>
+                    <span className="font-poppins text-[0.75rem] sm:text-[0.8125rem] lg:text-[0.78rem] font-normal leading-4 sm:leading-[1.0625rem] lg:leading-[1.00313rem] text-white whitespace-nowrap overflow-hidden text-ellipsis">James Raymond</span>
+                    <span className="mt-1 font-poppins text-[0.6875rem] sm:text-[0.75rem] lg:text-[0.66875rem] font-normal leading-4 sm:leading-[1.0625rem] lg:leading-[1.00313rem] text-[#999999] whitespace-nowrap overflow-hidden text-ellipsis">Account: 4453728992</span>
                   </div>
-                  <span className="mx-1 h-4 w-px border-[0.89px] border-[#595959]" aria-hidden="true" />
+                  <span className="mx-1 h-4 w-px border lg:border-[0.05563rem] border-[#595959]" aria-hidden="true" />
                   <button type="button" aria-label="Notifications" className="flex h-6 w-6 items-center justify-center text-[#999999] transition hover:text-white">
                     <svg
                       width="12"
@@ -172,19 +172,19 @@ export default function StockDashboard() {
                     </svg>
                   </button>
                 </div>
-                <div className="ml-6 grid h-[39px] w-[199.53125px] grid-cols-2 gap-[28.53px]">
+                <div className="grid h-10 lg:h-[2.4375rem] w-full max-w-full lg:max-w-[12.4707rem] grid-cols-2 gap-7 lg:gap-[1.78313rem]">
                   <div className="flex flex-col">
-                    <span className="font-[Golos Text] text-[10.7px] font-normal leading-[21.4px] text-[#999999]">Portfolio Balance</span>
-                    <span className="font-poppins text-[12.48px] font-normal leading-[16.05px] text-white [font-variant-numeric:lining-nums_tabular-nums]">{formatCurrency(623098.17)}</span>
+                    <span className="font-['Golos Text'] text-[0.6875rem] sm:text-[0.75rem] lg:text-[0.66875rem] font-normal leading-tight sm:leading-[1.375rem] lg:leading-[1.3375rem] text-[#999999]">Portfolio Balance</span>
+                    <span className="font-poppins text-[0.6875rem] sm:text-[0.75rem] lg:text-[0.78rem] font-normal leading-4 sm:leading-[1.0625rem] lg:leading-[1.00313rem] text-white">{formatCurrency(623098.17)}</span>
                   </div>
                   <div className="flex flex-col">
-                    <span className="font-[Golos Text] text-[10.7px] font-normal leading-[21.4px] text-[#999999]">Available Funds</span>
-                    <span className="font-poppins text-[12.48px] font-normal leading-[16.05px] text-white [font-variant-numeric:lining-nums_tabular-nums]">{formatCurrency(122912.5)}</span>
+                    <span className="font-['Golos Text'] text-[0.6875rem] sm:text-[0.75rem] lg:text-[0.66875rem] font-normal leading-tight sm:leading-[1.375rem] lg:leading-[1.3375rem] text-[#999999]">Available Funds</span>
+                    <span className="font-poppins text-[0.6875rem] sm:text-[0.75rem] lg:text-[0.78rem] font-normal leading-4 sm:leading-[1.0625rem] lg:leading-[1.00313rem] text-white">{formatCurrency(122912.5)}</span>
                   </div>
                 </div>
               </div>
-              <div className="w-[200.61036682128906px] rounded-[5.35px] bg-gradient-to-b from-white/50 to-black/50 p-[0.45px]">
-                <div className="flex h-[28.53125px] w-full items-center rounded-[5.35px] bg-[#191919] px-[10.7px]">
+              <div className="w-full max-w-full lg:max-w-[12.53815rem] rounded-md lg:rounded-[0.33437rem] bg-gradient-to-b from-white/50 to-black/50 p-px lg:p-[0.02813rem]">
+                <div className="flex h-7 lg:h-[1.7832rem] w-full items-center rounded-md lg:rounded-[0.33437rem] bg-[#191919] px-3 lg:px-[0.66875rem]">
                   <svg
                     width="15"
                     height="15"
@@ -199,22 +199,22 @@ export default function StockDashboard() {
                   <input
                     type="search"
                     placeholder="Search"
-                    className="ml-3 w-full bg-transparent font-poppins text-[12.48px] font-normal leading-[16.05px] text-[#999999] placeholder:text-white/40 focus:outline-none"
+                    className="ml-3 w-full bg-transparent font-poppins text-xs lg:text-[0.78rem] font-normal leading-4 lg:leading-[1.00313rem] text-[#999999] placeholder:text-white/40 focus:outline-none"
                   />
                 </div>
               </div>
             </header>
 
-            <div className="flex justify-evenly h-[848.3330078125px] w-full max-w-[1231px] min-w-0 gap-[7.16px]  lg:flex-row mb-10">
-              <div className="flex flex-col justify-between bg-[#0A0A0A] min-w-0 w-[896.4113159179688px] h-[834.01904296875px]">
+            <div className="flex w-full max-w-full lg:max-w-[76.9375rem] flex-1 min-w-0 flex-col gap-4 lg:gap-[0.89438rem] px-2 lg:flex-row lg:items-stretch">
+              <section className="flex w-full flex-1 min-w-0 flex-col overflow-hidden bg-[#0A0A0A]">
                 <div className="w-full">
                   <div
                     ref={tabsContainerRef}
-                    className="relative flex h-[50.99563980102539px] w-full max-w-[896.4113159179688px] min-w-0 items-center justify-between overflow-x-auto border-b-[0.89px] border-[#1F1F1F] bg-[#1F1F1F] pr-[21.47px] pl-[21.47px]"
+                    className="relative flex h-12 lg:h-[3.18723rem] w-full max-w-full lg:max-w-[56.02571rem] min-w-0 items-center justify-between overflow-x-auto border-b lg:border-b-[0.05563rem] border-[#1F1F1F] bg-[#1F1F1F] pr-5 lg:pr-[1.34187rem] pl-5 lg:pl-[1.34187rem]"
                   >
                     <span
                       aria-hidden
-                      className="pointer-events-none absolute bottom-0 h-[0.89px] rounded-full"
+                      className="pointer-events-none absolute bottom-0 h-px lg:h-[0.05563rem] rounded-full"
                       style={{
                         width: `${indicatorStyle.width}px`,
                         left: `${indicatorStyle.left}px`,
@@ -236,7 +236,7 @@ export default function StockDashboard() {
                         }}
                         type="button"
                         onClick={() => setActiveTab(tab)}
-                        className={`relative rounded-full px-4 py-2 text-[12.52px] leading-[16.1px] font-normal text-center transition
+                        className={`relative rounded-full px-4 py-2 text-xs lg:text-[0.7825rem] leading-4 lg:leading-[1.00625rem] font-normal text-center transition
                           ${activeTab === tab
                             ? 'text-[#DAA56A] border border-[#DAA56A40] bg-[radial-gradient(50%_50%_at_50%_50%,rgba(218,165,106,0.1)_0%,rgba(218,165,106,0.025)_73.82%)]'
                             : 'text-[#999999] hover:text-white'
@@ -248,14 +248,17 @@ export default function StockDashboard() {
                     ))}
                   </div>
 
-                  <div className="border-b border-white/5 h-[121.94186401367188px] w-full max-w-[896.4113159179688px] min-w-0 gap-[35.78px] overflow-x-auto pt-[10.74px] pr-[21.47px] pb-[10.74px] pl-[21.47px]">
-                    <div className="flex items-start justify-between gap-6">
-                        <div className="flex h-[100.47093200683594px] w-[313.0494079589844px] flex-col gap-[10.74px]">
-                        <div className="flex h-[100.47093200683594px] w-[313.0494079589844px] flex-wrap items-center gap-[10.74px]">
-                          <span className="font-['Font-family'] text-[17.89px] font-normal leading-[21.47px]  text-white">MSFT</span>
-                          <span className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px]  text-white">Microsoft Corp NASDAQ</span>
-                          <div className="flex h-[21.470930099487305px] w-[50.09884262084961px] items-center gap-[7.16px]">
-                            <button type="button" className="flex h-[21.470930099487305px] w-[21.470930099487305px] items-center justify-center gap-[7.16px] rounded-[89.46px] border-[0.45px] border-[#999999] p-[3.58px] text-white/60 transition hover:text-white">
+                  <div className="border-b border-white/5 w-full max-w-full lg:max-w-[56.02571rem] min-w-0 overflow-x-auto px-4 py-3 sm:px-5 lg:px-[1.34187rem] lg:py-[0.67125rem]">
+                    <div className="flex flex-wrap lg:flex-nowrap lg:items-start lg:justify-around">
+                      <div className="flex min-w-0 lg:min-w-[15rem] flex-1 flex-col gap-2">
+                        <div className="flex flex-wrap items-center gap-3 text-white">
+                          <span className="font-['Font-family'] text-lg lg:text-[1.11813rem] font-normal leading-6 lg:leading-[1.34187rem]">MSFT</span>
+                          <span className="font-['Font-family'] text-xs lg:text-[0.7825rem] font-normal leading-4 lg:leading-[1.00625rem]">Microsoft Corp NASDAQ</span>
+                          <div className="flex items-center gap-2">
+                            <button
+                              type="button"
+                              className="flex h-6 w-6 items-center justify-center rounded-full border border-[#999999] p-1 text-white/60 transition hover:text-white"
+                            >
                               <svg
                                 width="11.596595764160156"
                                 height="6.861751079559326"
@@ -270,7 +273,10 @@ export default function StockDashboard() {
                                 />
                               </svg>
                             </button>
-                            <button type="button" className="flex h-[21.470930099487305px] w-[21.470930099487305px] items-center justify-center gap-[7.16px] rounded-[89.46px] border-[0.45px] border-[#999999] p-[3.58px] text-white/60 transition hover:text-white">
+                            <button
+                              type="button"
+                              className="flex h-6 w-6 items-center justify-center rounded-full border border-[#999999] p-1 text-white/60 transition hover:text-white"
+                            >
                               <svg
                                 width="10.734420776367188"
                                 height="11.6299467086792"
@@ -287,127 +293,95 @@ export default function StockDashboard() {
                             </button>
                           </div>
                         </div>
-                        <div className="flex h-[40px] w-[174.156982421875px] gap-[7.16px]">
-                            <span className="font-['Font-family'] text-[35.78px] font-semibold leading-[39.36px]  text-[#DAA56A] [font-variant-numeric:lining-nums_tabular-nums]">
-                              {latestCandle.close.toFixed(2)}
+                        <div className="flex flex-wrap items-center gap-3">
+                          <span className="font-['Font-family'] text-4xl lg:text-[2.23625rem] font-semibold leading-10 lg:leading-[2.46rem] text-[#DAA56A]">
+                            {latestCandle.close.toFixed(2)}
+                          </span>
+                          <div className="flex flex-col">
+                            <span className="font-['Font-family'] text-xs lg:text-[0.7825rem] font-normal leading-4 lg:leading-[1.00625rem] text-[#0FEDBE]">
+                              {formatSigned(dailyChange)}
                             </span>
-                            <div className="flex items-start h-[37.578487396240234px] w-[44px] flex-col gap-[3.58px] text-right">
-                              <span className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px]  text-[#0FEDBE]">
-                                {formatSigned(dailyChange)}
-                              </span>
-                              <span className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px]  text-[#0FEDBE]">
-                                {formatSigned(dailyChangePct)}%
-                              </span>
-                            </div>
-                          </div>
-                        <div className="flex h-[17px] w-[313.0494079589844px] items-center gap-[7px] font-poppins text-white/60">
-                          <div className="flex h-[17px] w-[199.73545837402344px] justify-between items-center gap-[3.58px] tracking-wider">
-                            <span className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px]  text-[#999999]">
-                              After hours:
-                            </span>
-                            <div className="flex h-[17px] w-[124.15697479248047px] justify-between items-center gap-[3.58px]">
-                              <span className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px]  text-[#D70000]">
-                                406.83
-                              </span>
-                              <span className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px]  text-[#D70000]">
-                                -0.27
-                              </span>
-                              <span className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px]  text-[#D70000]">
-                                -0.07%
-                              </span>
-                            </div>
-                          </div>
-                          <div className="flex h-[8.946221351623535px] w-[0.89px] items-center justify-center text-[#999999]">
-                            |
-                          </div>
-                          <div className="flex h-[17px] items-center">
-                            <span className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px] text-white tracking-wide">
-                              19:59 04/26 EDT
+                            <span className="font-['Font-family'] text-xs lg:text-[0.7825rem] font-normal leading-4 lg:leading-[1.00625rem] text-[#0FEDBE]">
+                              {formatSigned(dailyChangePct)}%
                             </span>
                           </div>
                         </div>
+                        <div className="flex flex-wrap items-center gap-3 font-poppins text-white/60">
+                          <div className="flex flex-wrap items-center gap-2 tracking-wider">
+                            <span className="font-['Font-family'] text-xs lg:text-[0.7825rem] font-normal leading-4 lg:leading-[1.00625rem] text-[#999999]">After hours:</span>
+                            <div className="flex flex-wrap items-center gap-3">
+                              <span className="font-['Font-family'] text-xs lg:text-[0.7825rem] font-normal leading-4 lg:leading-[1.00625rem] text-[#D70000]">406.83</span>
+                              <span className="font-['Font-family'] text-xs lg:text-[0.7825rem] font-normal leading-4 lg:leading-[1.00625rem] text-[#D70000]">-0.27</span>
+                              <span className="font-['Font-family'] text-xs lg:text-[0.7825rem] font-normal leading-4 lg:leading-[1.00625rem] text-[#D70000]">-0.07%</span>
+                            </div>
+                          </div>
+                          <span className="hidden h-4 w-px bg-white/30 sm:inline-flex" aria-hidden="true" />
+                          <div className="flex items-center">
+                            <span className="font-['Font-family'] text-xs lg:text-[0.7825rem] font-normal leading-4 lg:leading-[1.00625rem] text-white tracking-wide">19:59 04/26 EDT</span>
+                          </div>
+                        </div>
                       </div>
-                      <div className="grid h-[99.31395721435547px] w-[504.6351623535156px] grid-cols-2 gap-[28.63px] text-sm font-poppins text-white/70">
-                        <div className="flex h-[99.31395721435547px] w-[238.00363159179688px] flex-col gap-[3.58px]">
-                          <div className="flex h-[17px] w-[238.00363159179688px] items-center justify-between gap-[14.31px]">
-                            <span className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px] text-[#999999]">Open</span>
-                            <span
-                              className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px] tracking-[0px] text-[#D70000] [font-variant-numeric:lining-nums_tabular-nums]"
-                            >
+                      <div className="grid flex-1 min-w-0 lg:min-w-[16.25rem] gap-4 text-sm font-poppins text-white/70 sm:grid-cols-2 md:gap-6">
+                        <div className="flex flex-col gap-1">
+                          <div className="flex items-center justify-between gap-4">
+                            <span className="font-['Font-family'] text-xs lg:text-[0.7825rem] font-normal leading-4 lg:leading-[1.00625rem] text-[#999999]">Open</span>
+                            <span className="font-['Font-family'] text-xs lg:text-[0.7825rem] font-normal leading-4 lg:leading-[1.00625rem] text-[#D70000] [font-variant-numeric:lining-nums_tabular-nums]">
                               401.23
                             </span>
                           </div>
-                          <div className="flex h-[17px] w-[238.00363159179688px] items-center justify-between gap-[14.31px]">
-                            <span className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px] text-[#999999]">Low</span>
-                            <span
-                              className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px] tracking-[0px] text-[#D70000] [font-variant-numeric:lining-nums_tabular-nums]"
-                            >
+                          <div className="flex items-center justify-between gap-4">
+                            <span className="font-['Font-family'] text-xs lg:text-[0.7825rem] font-normal leading-4 lg:leading-[1.00625rem] text-[#999999]">Low</span>
+                            <span className="font-['Font-family'] text-xs lg:text-[0.7825rem] font-normal leading-4 lg:leading-[1.00625rem] text-[#D70000] [font-variant-numeric:lining-nums_tabular-nums]">
                               400.10
                             </span>
                           </div>
-                          <div className="flex h-[17px] w-[238.00363159179688px] items-center justify-between gap-[14.31px]">
-                            <span className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px] text-[#999999]">High</span>
-                            <span
-                              className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px] tracking-[0px] text-[#0FEDBE] [font-variant-numeric:lining-nums_tabular-nums]"
-                            >
+                          <div className="flex items-center justify-between gap-4">
+                            <span className="font-['Font-family'] text-xs lg:text-[0.7825rem] font-normal leading-4 lg:leading-[1.00625rem] text-[#999999]">High</span>
+                            <span className="font-['Font-family'] text-xs lg:text-[0.7825rem] font-normal leading-4 lg:leading-[1.00625rem] text-[#0FEDBE] [font-variant-numeric:lining-nums_tabular-nums]">
                               408.36
                             </span>
                           </div>
-                          <div className="flex h-[17px] w-[238.00363159179688px] items-center justify-between gap-[14.31px]">
-                            <span className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px] text-[#999999]">52 wk high</span>
-                            <span
-                              className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px] tracking-[0px] text-white [font-variant-numeric:lining-nums_tabular-nums]"
-                            >
+                          <div className="flex items-center justify-between gap-4">
+                            <span className="font-['Font-family'] text-xs lg:text-[0.7825rem] font-normal leading-4 lg:leading-[1.00625rem] text-[#999999]">52 wk high</span>
+                            <span className="font-['Font-family'] text-xs lg:text-[0.7825rem] font-normal leading-4 lg:leading-[1.00625rem] text-white [font-variant-numeric:lining-nums_tabular-nums]">
                               430.82
                             </span>
                           </div>
-                          <div className="flex h-[17px] w-[238.00363159179688px] items-center justify-between gap-[14.31px]">
-                            <span className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px] text-[#999999]">52 wk low</span>
-                            <span
-                              className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px] tracking-[0px] text-white [font-variant-numeric:lining-nums_tabular-nums]"
-                            >
+                          <div className="flex items-center justify-between gap-4">
+                            <span className="font-['Font-family'] text-xs lg:text-[0.7825rem] font-normal leading-4 lg:leading-[1.00625rem] text-[#999999]">52 wk low</span>
+                            <span className="font-['Font-family'] text-xs lg:text-[0.7825rem] font-normal leading-4 lg:leading-[1.00625rem] text-white [font-variant-numeric:lining-nums_tabular-nums]">
                               273.13
                             </span>
                           </div>
                         </div>
-                        <div className="flex h-[99.31395721435547px] w-[238.00363159179688px] flex-col gap-[3.58px]">
-                          <div className="flex h-[17px] w-[238.00363159179688px] items-center justify-between gap-[14.31px]">
-                            <span className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px] text-[#999999]">Avg Vol (3M)</span>
-                            <span
-                              className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px] tracking-[0px] text-white [font-variant-numeric:lining-nums_tabular-nums]"
-                            >
+                        <div className="flex flex-col gap-1">
+                          <div className="flex items-center justify-between gap-4">
+                            <span className="font-['Font-family'] text-xs lg:text-[0.7825rem] font-normal leading-4 lg:leading-[1.00625rem] text-[#999999]">Avg Vol (3M)</span>
+                            <span className="font-['Font-family'] text-xs lg:text-[0.7825rem] font-normal leading-4 lg:leading-[1.00625rem] text-white [font-variant-numeric:lining-nums_tabular-nums]">
                               21.73M
                             </span>
                           </div>
-                          <div className="flex h-[17px] w-[238.00363159179688px] items-center justify-between gap-[14.31px]">
-                            <span className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px] text-[#999999]">Shares Outstanding</span>
-                            <span
-                              className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px] tracking-[0px] text-white [font-variant-numeric:lining-nums_tabular-nums]"
-                            >
+                          <div className="flex items-center justify-between gap-4">
+                            <span className="font-['Font-family'] text-xs lg:text-[0.7825rem] font-normal leading-4 lg:leading-[1.00625rem] text-[#999999]">Shares Outstanding</span>
+                            <span className="font-['Font-family'] text-xs lg:text-[0.7825rem] font-normal leading-4 lg:leading-[1.00625rem] text-white [font-variant-numeric:lining-nums_tabular-nums]">
                               7.43B
                             </span>
                           </div>
-                          <div className="flex h-[17px] w-[238.00363159179688px] items-center justify-between gap-[14.31px]">
-                            <span className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px] text-[#999999]">Mkt Cap</span>
-                            <span
-                              className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px] tracking-[0px] text-white [font-variant-numeric:lining-nums_tabular-nums]"
-                            >
+                          <div className="flex items-center justify-between gap-4">
+                            <span className="font-['Font-family'] text-xs lg:text-[0.7825rem] font-normal leading-4 lg:leading-[1.00625rem] text-[#999999]">Mkt Cap</span>
+                            <span className="font-['Font-family'] text-xs lg:text-[0.7825rem] font-normal leading-4 lg:leading-[1.00625rem] text-white [font-variant-numeric:lining-nums_tabular-nums]">
                               3.02T
                             </span>
                           </div>
-                          <div className="flex h-[17px] w-[238.00363159179688px] items-center justify-between gap-[14.31px]">
-                            <span className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px] text-[#999999]">Div Yield</span>
-                            <span
-                              className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px] tracking-[0px] text-white [font-variant-numeric:lining-nums_tabular-nums]"
-                            >
+                          <div className="flex items-center justify-between gap-4">
+                            <span className="font-['Font-family'] text-xs lg:text-[0.7825rem] font-normal leading-4 lg:leading-[1.00625rem] text-[#999999]">Div Yield</span>
+                            <span className="font-['Font-family'] text-xs lg:text-[0.7825rem] font-normal leading-4 lg:leading-[1.00625rem] text-white [font-variant-numeric:lining-nums_tabular-nums]">
                               0.74%
                             </span>
                           </div>
-                          <div className="flex h-[17px] w-[238.00363159179688px] items-center justify-between gap-[14.31px]">
-                            <span className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px] tracking-[0px] text-white">
-                              View all
-                            </span>
-                            <span className="flex h-[15px] w-[30px] items-center justify-end text-white">
+                          <div className="flex items-center justify-between gap-4">
+                            <span className="font-['Font-family'] text-xs lg:text-[0.7825rem] font-normal leading-4 lg:leading-[1.00625rem] text-white">View all</span>
+                            <span className="flex h-4 w-6 items-center justify-end text-white">
                               <svg
                                 className="h-full w-full"
                                 viewBox="0 0 12 12"
@@ -425,8 +399,8 @@ export default function StockDashboard() {
                   </div>
                 </div>
 
-                <div className="chart flex w-full min-w-0 flex-1">
-                  <div className="flex h-full w-full max-w-[896.4113159179688px] min-w-0 flex-col gap-[14.31px]">
+                <div className="chart flex w-full min-h-0 min-w-0 flex-1">
+                  <div className="flex h-full w-full min-w-0 flex-col gap-4 lg:gap-[0.89438rem]">
                     <ChartPlaceHolder
                       candles={candles}
                       overlays={overlays}
@@ -437,12 +411,12 @@ export default function StockDashboard() {
                     />
                   </div>
                 </div>
-              </div>
+              </section>
 
-              <aside className="flex justify-between w-[313.1177673339844px] h-[834.01904296875px] flex-col gap-[14.31px]">
-                <section className="flex flex-col items-center justify-between w-full h-[583.8401489257812px] rounded-[3.58px] pb-[14.31px] bg-[#0A0A0A]">
-                  <header className="flex items-center justify-between w-full h-[50.627906799316406px] gap-[7.16px] pt-[14.31px] pr-[21.47px] pb-[14.31px] pl-[21.47px] bg-[#1F1F1F]">
-                    <h3 className="font-poppins text-[14.31px] font-semibold leading-[21.47px] tracking-[0] text-white">Trade</h3>
+              <aside className="flex w-full flex-col gap-4 lg:gap-[0.89438rem] lg:w-[20rem]">
+                <section className="flex w-full flex-col rounded lg:rounded-[0.22375rem] bg-[#0A0A0A] pb-4 lg:pb-[0.89438rem]">
+                  <header className="flex w-full items-center justify-between gap-2 lg:gap-[0.4475rem] bg-[#1F1F1F] px-5 lg:px-[1.34187rem] py-4 lg:py-[0.89438rem]">
+                    <h3 className="font-poppins text-sm lg:text-[0.89438rem] font-semibold leading-6 lg:leading-[1.34187rem] tracking-normal lg:tracking-[0] text-white">Trade</h3>
                     <button type="button" aria-label="Trade menu" className="rounded-md p-2 text-white/60 transition hover:text-white">
                       <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                         <path d="M6 2C6.55228 2 7 1.55228 7 1C7 0.447715 6.55228 0 6 0C5.44772 0 5 0.447715 5 1C5 1.55228 5.44772 2 6 2Z" fill="currentColor" />
@@ -451,16 +425,16 @@ export default function StockDashboard() {
                       </svg>
                     </button>
                   </header>
-                  <div className="w-[313.1178px] h-[518.8983154296875px] flex flex-col gap-[14.31px]">
-                    <div className="w-full h-[45.6279px] flex items-center bg-[#111111] font-poppins text-[14.31px]">
+                  <div className="flex flex-col gap-4 lg:gap-[0.89438rem]">
+                    <div className="flex w-full bg-[#111111] font-poppins text-sm lg:text-[0.89438rem]">
                       <button
                         type="button"
                         onClick={() => setTradeSide('buy')}
-                        className={`flex items-center justify-center w-[156.5588836669922px] h-[45.627906799316406px] gap-[7.16px]
-                          p-[15px] text-center font-normal text-[12.52px] leading-[16.1px] transition
+                        className={`flex flex-1 items-center justify-center gap-2 lg:gap-[0.4475rem] py-3
+                          px-[0.9375rem] text-center font-normal text-xs lg:text-[0.7825rem] leading-4 lg:leading-[1.00625rem] transition
                           ${tradeSide === 'buy'
-                            ? 'text-[#DAA56A] border-b-[1.79px] border-b-[#DAA56A] bg-[linear-gradient(180deg,rgba(250,218,189,0)_32.15%,rgba(250,218,189,0.25)_100%)]'
-                            : 'text-[#999999] border-b-[0.89px] border-b-[#999999] bg-[#0A0A0A]'
+                            ? 'text-[#DAA56A] border-b-[0.11188rem] border-b-[#DAA56A] bg-[linear-gradient(180deg,rgba(250,218,189,0)_32.15%,rgba(250,218,189,0.25)_100%)]'
+                            : 'text-[#999999] border-b lg:border-b-[0.05563rem] border-b-[#999999] bg-[#0A0A0A]'
                         }`}
                       >
                         Buy
@@ -468,41 +442,41 @@ export default function StockDashboard() {
                       <button
                         type="button"
                         onClick={() => setTradeSide('sell')}
-                        className={`flex items-center justify-center w-[156.5588836669922px] h-[45.627906799316406px] gap-[7.16px]
-                          p-[15px] text-center font-normal text-[12.52px] leading-[16.1px] transition
+                        className={`flex flex-1 items-center justify-center gap-2 lg:gap-[0.4475rem] py-3
+                          px-[0.9375rem] text-center font-normal text-xs lg:text-[0.7825rem] leading-4 lg:leading-[1.00625rem] transition
                           ${tradeSide === 'sell'
-                            ? 'text-[#DAA56A] border-b-[1.79px] border-b-[#DAA56A] bg-[linear-gradient(180deg,rgba(250,218,189,0)_32.15%,rgba(250,218,189,0.25)_100%)]'
-                            : 'text-[#999999] border-b-[0.89px] border-b-[#999999] bg-[#0A0A0A]'
+                            ? 'text-[#DAA56A] border-b-[0.11188rem] border-b-[#DAA56A] bg-[linear-gradient(180deg,rgba(250,218,189,0)_32.15%,rgba(250,218,189,0.25)_100%)]'
+                            : 'text-[#999999] border-b lg:border-b-[0.05563rem] border-b-[#999999] bg-[#0A0A0A]'
                         }`}
                       >
                         Sell
                       </button>
                     </div>
-                    <div className="flex flex-col w-[313.1178px] h-[355px] gap-[14.31px] pr-[21.47px] pb-[20.31px] pl-[21.47px]
-                      bg-[repeating-linear-gradient(to_right,#1F1F1F_0_14px,transparent_14px_28px)] bg-bottom bg-repeat-x bg-[length:28px_1px]">
-                      <div className="flex flex-col w-[270.1759px] h-[54.5719px] space-y-[3.58px]">
-                        <label htmlFor="orderType" className="font-[poppins] font-medium text-[12.52px] leading-[16.1px] align-middle text-white/70">Order Type</label>
-                        <div className="relative rounded-[5.37px] p-[0.5px] 
+                    <div className="flex flex-col gap-4 lg:gap-[0.89438rem] px-5 lg:px-[1.34187rem] pb-5 lg:pb-[1.26937rem]
+                      bg-[repeating-linear-gradient(to_right,#1F1F1F_0_0.875rem,transparent_0.875rem_1.75rem)] bg-bottom bg-repeat-x bg-[length:1.75rem_0.0625rem]">
+                      <div className="flex flex-col w-full lg:w-[16.88599rem] h-14 lg:h-[3.41074rem] space-y-1 lg:space-y-[0.22375rem]">
+                        <label htmlFor="orderType" className="font-[poppins] font-medium text-xs lg:text-[0.7825rem] leading-4 lg:leading-[1.00625rem] align-middle text-white/70">Order Type</label>
+                        <div className="relative rounded-md lg:rounded-[0.33563rem] p-px lg:p-[0.03125rem] 
                                         bg-[radial-gradient(70.97%_837.53%_at_98.29%_13.75%,rgba(255,255,255,0.75)_0%,rgba(255,255,255,0.075)_14.95%),radial-gradient(57.27%_124.88%_at_28.43%_0%,rgba(218,165,106,0.427451)_0%,rgba(255,255,255,0.05)_78.07%),linear-gradient(180deg,rgba(255,255,255,0)_0%,rgba(0,0,0,0.5)_100%)] 
-                                        shadow-[0px_1.79px_5.37px_0px_#00000080]">
+                                        shadow-sm lg:shadow-[0_0.11188rem_0.33563rem_0_#00000080]">
                           <select
                             id="orderType"
                             value={orderType}
                             onChange={(e) => setOrderType(e.target.value)}
                             className="
-                              appearance-none w-[270.1759px] h-[35.7849px] rounded-[5.37px] bg-[#191919] pl-[10.74px] pr-[28px]
-                              font-[Font-family] font-normal text-[12.52px] leading-[16.1px] tracking-[0%] text-white focus:outline-none focus:ring-0"
+                              appearance-none w-full lg:w-[16.88599rem] h-9 lg:h-[2.23656rem] rounded-md lg:rounded-[0.33563rem] bg-[#191919] pl-3 lg:pl-[0.67125rem] pr-7 lg:pr-[1.75rem]
+                              font-[Font-family] font-normal text-xs lg:text-[0.7825rem] leading-4 lg:leading-[1.00625rem] tracking-normal lg:tracking-[0%] text-white focus:outline-none focus:ring-0"
                           >
                             {orderTypes.map((type) => (
                               <option
                                 key={type}
                                 value={type}
-                                className="bg-[#191919] text-white font-[Font-family] font-normal text-[12.52px] leading-[16.1px] tracking-[0%]">
+                                className="bg-[#191919] text-white font-[Font-family] font-normal text-xs lg:text-[0.7825rem] leading-4 lg:leading-[1.00625rem] tracking-normal lg:tracking-[0%]">
                                 {type}
                               </option>
                             ))}
                           </select>
-                          <span className="pointer-events-none absolute right-[10.74px] top-1/2 -translate-y-1/2 text-white">
+                          <span className="pointer-events-none absolute right-[0.67125rem] top-1/2 -translate-y-1/2 text-white">
                             <svg
                               width="10" height="4.5" viewBox="0 0 8 5" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                               <path d="M4.39844 4.14319L0.832031 0.576782H7.96484L4.39844 4.14319Z" />
@@ -512,12 +486,12 @@ export default function StockDashboard() {
                         </div>
                       </div>
 
-                      <div className="w-[270.1759px] h-[96.6236px] space-y-1">
-                        <div className="flex items-center w-[270.1759px] h-[17px] gap-[3.58px]">
-                          <label className="font-[Font-family] font-medium text-[12.52px] leading-[16.1px] align-middle text-[#999999]">Quantity</label>
-                          <span className="flex items-center justify-center w-[46.7355px] h-[17px] gap-[7.16px] rounded-[89.46px] border border-[#C99046]/40 px-[5.37px] text-[10.74px] leading-[16.1px] font-normal text-[#DAA56A] align-middle font-[Font-family]">Shares</span>
+                      <div className="w-full lg:w-[16.88599rem] h-24 lg:h-[6.03897rem] space-y-1">
+                        <div className="flex items-center w-full lg:w-[16.88599rem] h-5 lg:h-[1.0625rem] gap-1 lg:gap-[0.22375rem]">
+                          <label className="font-[Font-family] font-medium text-xs lg:text-[0.7825rem] leading-4 lg:leading-[1.00625rem] align-middle text-[#999999]">Quantity</label>
+                          <span className="flex items-center justify-center w-12 lg:w-[2.92097rem] h-5 lg:h-[1.0625rem] gap-2 lg:gap-[0.4475rem] rounded-full lg:rounded-[5.59125rem] border border-[#C99046]/40 px-1.5 lg:px-[0.33563rem] text-[0.6875rem] lg:text-[0.67125rem] leading-4 lg:leading-[1.00625rem] font-normal text-[#DAA56A] align-middle font-[Font-family]">Shares</span>
                         </div>
-                        <div className="p-[0.45px] rounded-[5.37px] bg-[radial-gradient(70.97%_837.53%_at_98.29%_13.75%,rgba(255,255,255,0.75)_0%,rgba(255,255,255,0.075)_14.95%),radial-gradient(57.27%_124.88%_at_28.43%_0%,#DAA56A_0%,rgba(255,255,255,0.1)_64.02%),linear-gradient(180deg,rgba(255,255,255,0)_0%,rgba(0,0,0,0.5)_100%)] shadow-[0px_1.79px_5.37px_0px_#00000080]">
+                        <div className="p-px lg:p-[0.02813rem] rounded-md lg:rounded-[0.33563rem] bg-[radial-gradient(70.97%_837.53%_at_98.29%_13.75%,rgba(255,255,255,0.75)_0%,rgba(255,255,255,0.075)_14.95%),radial-gradient(57.27%_124.88%_at_28.43%_0%,#DAA56A_0%,rgba(255,255,255,0.1)_64.02%),linear-gradient(180deg,rgba(255,255,255,0)_0%,rgba(0,0,0,0.5)_100%)] shadow-sm lg:shadow-[0_0.11188rem_0.33563rem_0_#00000080]">
                           <div className="relative">
                             <input
                               type="number"
@@ -525,10 +499,10 @@ export default function StockDashboard() {
                               min={1}
                               step={1}
                               onChange={(event) => setSelectedQuantity(Number(event.target.value))}
-                              className="w-[270.1759px] h-[35.7849px] rounded-[5.37px] bg-[#191919] px-[10.74px] pr-[28px] font-[Font-family] font-normal text-[12.52px] leading-[16.1px] text-white/80 focus:outline-none focus:ring-0 focus-visible:ring-0 block
+                              className="w-full lg:w-[16.88599rem] h-9 lg:h-[2.23656rem] rounded-md lg:rounded-[0.33563rem] bg-[#191919] px-3 lg:px-[0.67125rem] pr-7 lg:pr-[1.75rem] font-[Font-family] font-normal text-xs lg:text-[0.7825rem] leading-4 lg:leading-[1.00625rem] text-white/80 focus:outline-none focus:ring-0 focus-visible:ring-0 block
                                           appearance-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-moz-appearance:textfield]"
                             />
-                            <div className="absolute right-[10.74px] top-1/2 flex h-[12.5247px] w-[7.1569px] -translate-y-1/2 flex-col items-center justify-between gap-[1.5px]">
+                            <div className="absolute right-[0.67125rem] top-1/2 flex h-3 lg:h-[0.78279rem] w-2 lg:w-[0.44731rem] -translate-y-1/2 flex-col items-center justify-between gap-px lg:gap-[0.09375rem]">
                               <button
                                 type="button"
                                 className="flex items-center justify-center text-white"
@@ -569,20 +543,20 @@ export default function StockDashboard() {
                           </div>
                         </div>
                         
-                        <div className="flex items-center w-[270.1759px] h-[31.314px] gap-[8.95px]">
+                        <div className="flex items-center w-full lg:w-[16.88599rem] h-8 lg:h-[1.95713rem] gap-2 lg:gap-[0.55937rem]">
                           {quickQuantities.map((quantity) => (
                             <span
                               key={quantity}
-                              className="flex w-[56px] h-[31px] p-[0.45px] rounded-[894.62px]
+                              className="flex w-full lg:w-[3.5rem] h-8 lg:h-[1.9375rem] p-px lg:p-[0.02813rem] rounded-full lg:rounded-[55.91375rem]
                                         bg-[radial-gradient(42.19%_194.24%_at_30.88%_57.81%,rgba(255,255,255,0.3)_0%,rgba(255,255,255,0)_100%),linear-gradient(0deg,rgba(255,255,255,0.06),rgba(255,255,255,0.06))]
-                                        shadow-[0px_1.79px_5.37px_0px_#00000080]">
+                                        shadow-sm lg:shadow-[0_0.11188rem_0.33563rem_0_#00000080]">
                               <button
                                 type="button"
                                 onClick={() => setSelectedQuantity(quantity)}
                                 className="flex w-full h-full items-center justify-center
-                                          rounded-[894.62px] bg-[#1F1F1F]
+                                          rounded-full lg:rounded-[55.91375rem] bg-[#1F1F1F]
                                           font-[Font-family] font-normal
-                                          text-[12.52px] leading-[16.1px] text-white
+                                          text-xs lg:text-[0.7825rem] leading-4 lg:leading-[1.00625rem] text-white
                                           transition"
                               >
                                 {quantity}
@@ -590,7 +564,7 @@ export default function StockDashboard() {
                             </span>
                           ))}
 
-                          <div className="flex items-center justify-center w-[14.31px] h-[14.31px] rounded-[1.79px]">
+                          <div className="flex items-center justify-center w-4 lg:w-[0.89438rem] h-4 lg:h-[0.89438rem] rounded-sm lg:rounded-[0.11188rem]">
                             <svg
                               width="12.41"
                               height="12.35"
@@ -619,27 +593,27 @@ export default function StockDashboard() {
                         </div>
                       </div>
 
-                      <div className="flex flex-col w-[270.1759px] h-[54.5719px] space-y-[3.58px]">
+                      <div className="flex flex-col w-full lg:w-[16.88599rem] h-14 lg:h-[3.41074rem] space-y-1 lg:space-y-[0.22375rem]">
                         <label
                           htmlFor="timeInForce"
-                          className="font-[poppins] font-medium text-[12.52px] leading-[16.1px] align-middle text-white/70"
+                          className="font-[poppins] font-medium text-xs lg:text-[0.7825rem] leading-4 lg:leading-[1.00625rem] align-middle text-white/70"
                         >
                           Time-in-Force
                         </label>
 
                         <div
-                          className="relative rounded-[5.37px] p-[0.5px]
+                          className="relative rounded-md lg:rounded-[0.33563rem] p-px lg:p-[0.03125rem]
                                     bg-[radial-gradient(70.97%_837.53%_at_98.29%_13.75%,rgba(255,255,255,0.75)_0%,rgba(255,255,255,0.075)_14.95%),radial-gradient(57.27%_124.88%_at_28.43%_0%,rgba(218,165,106,0.427451)_0%,rgba(255,255,255,0.05)_78.07%),linear-gradient(180deg,rgba(255,255,255,0)_0%,rgba(0,0,0,0.5)_100%)]
-                                    shadow-[0px_1.79px_5.37px_0px_#00000080]"
+                                    shadow-sm lg:shadow-[0_0.11188rem_0.33563rem_0_#00000080]"
                         >
                           <select
                             id="timeInForce"
                             value={timeInForce}
                             onChange={(e) => setTimeInForce(e.target.value)}
                             className="
-                              appearance-none w-[270.1759px] h-[35.7849px] rounded-[5.37px] bg-[#191919]
-                              pl-[10.74px] pr-[28px]
-                              font-[Font-family] font-normal text-[12.52px] leading-[16.1px] tracking-[0%] text-white
+                              appearance-none w-full lg:w-[16.88599rem] h-9 lg:h-[2.23656rem] rounded-md lg:rounded-[0.33563rem] bg-[#191919]
+                              pl-3 lg:pl-[0.67125rem] pr-7 lg:pr-[1.75rem]
+                              font-[Font-family] font-normal text-xs lg:text-[0.7825rem] leading-4 lg:leading-[1.00625rem] tracking-normal lg:tracking-[0%] text-white
                               focus:outline-none focus:ring-0
                             "
                           >
@@ -647,14 +621,14 @@ export default function StockDashboard() {
                               <option
                                 key={option}
                                 value={option}
-                                className="bg-[#191919] text-white font-[Font-family] font-normal text-[12.52px] leading-[16.1px] tracking-[0%]"
+                                className="bg-[#191919] text-white font-[Font-family] font-normal text-xs lg:text-[0.7825rem] leading-4 lg:leading-[1.00625rem] tracking-normal lg:tracking-[0%]"
                               >
                                 {option}
                               </option>
                             ))}
                           </select>
 
-                          <span className="pointer-events-none absolute right-[10.74px] top-1/2 -translate-y-1/2 text-white">
+                          <span className="pointer-events-none absolute right-[0.67125rem] top-1/2 -translate-y-1/2 text-white">
                             <svg
                               width="10"
                               height="4.5"
@@ -669,127 +643,122 @@ export default function StockDashboard() {
                         </div>
                       </div>
 
-                      <div className="flex flex-col w-[270.1759px] h-[84.9913px] gap-[5.37px]">
-                        <div className="flex items-center w-[102.3634px] h-[21.4709px] gap-[10.74px] pb-[3.58px] mt-1">
+                      <div className="flex flex-col w-full lg:w-[16.88599rem] h-20 lg:h-[5.31196rem] gap-1.5 lg:gap-[0.33563rem]">
+                        <div className="flex items-center w-28 lg:w-[6.39771rem] h-6 lg:h-[1.34193rem] gap-3 lg:gap-[0.67125rem] pb-1 lg:pb-[0.22375rem] mt-1">
                           <button
                             type="button"
                             onClick={() => setIsStopEnabled((prev) => !prev)}
-                            className={`relative inline-flex w-[32.2064px] h-[17.8924px] items-center rounded-[894.62px] p-[3.58px] transition 
+                            className={`relative inline-flex w-[2.0129rem] h-[1.11827rem] items-center rounded-full lg:rounded-[55.91375rem] p-[0.22375rem] transition 
                               ${isStopEnabled ? 'bg-[#DAA56A]' : 'bg-[#2A2A2A]'}`}
                             >
                             <span
-                              className={`inline-block w-[10.7355px] h-[10.7355px] transform rounded-full bg-[#050505] shadow-[0px_1.34px_1.79px_0px_#0000004D] transition 
-                                ${isStopEnabled ? 'translate-x-[14px]' : 'translate-x-[0px]'}`}
+                              className={`inline-block w-[0.67097rem] h-[0.67097rem] transform rounded-full bg-[#050505] shadow-[0_0.08375rem_0.11188rem_0_#0000004D] transition 
+                                ${isStopEnabled ? 'translate-x-[0.875rem]' : 'translate-x-[0]'}`}
                             />
                           </button>
 
-                          <span className="font-[Font-family] font-medium text-[13px] leading-[16.1px] tracking-[0%] align-middle text-white">Stop Price</span>
+                          <span className="font-[Font-family] font-medium text-sm lg:text-[0.8125rem] leading-4 lg:leading-[1.00625rem] tracking-normal lg:tracking-[0%] align-middle text-white">Stop Price</span>
                         </div>
-                        <div className="w-[270.1758728027344px] h-[35.78488540649414px] rounded-[5.37px] p-[0.5px] bg-[linear-gradient(180deg,rgba(255,255,255,0.5)_0%,rgba(0,0,0,0.5)_100%),radial-gradient(47.93%_96.25%_at_7.45%_3.75%,#2DCAFF_0%,rgba(255,255,255,0.1)_64.02%)] shadow-[0px_1.79px_5.37px_0px_#00000080]">
-                          <div className="flex items-center justify-around gap-[10.74px] rounded-[5.37px] p-[11px] h-full w-full bg-[#191919]">
-                            <span className="rounded-full font-[Golos_Text] font-normal text-[14.31px] leading-[21.47px] text-white">$</span>
-                            <div className="relative flex items-center">
-                              <input
-                                type="number"
-                                value={Number.isFinite(stopPrice) ? stopPrice.toFixed(2) : ''}
-                                min={0}
-                                step="0.01"
-                                onChange={(event) => {
-                                  const { value } = event.target;
-                                  setStopPrice(value === '' ? Number.NaN : Number(value));
-                                }}
-                                className="w-[210.077px] h-[17px] bg-transparent 
-                                          font-[Font-family] font-normal
-                                          text-[12.52px] leading-[16.1px] 
-                                          text-white placeholder:text-white/30 focus:outline-none
-                                          appearance-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-moz-appearance:textfield]"
-                                placeholder="400.00"
-                                disabled={!isStopEnabled}
-                              />
-
-                              {/* custom arrows */}
-                              <div className="flex flex-col items-center justify-between h-[12.5247px] w-[7.1569px] gap-[1.5px] bg-transparent">
-                                {/* Up arrow */}
-                                <button
-                                  type="button"
-                                  className="flex items-center justify-center text-white"
-                                  onClick={() =>
-                                    setStopPrice((prev) => {
-                                      const next = Number.isFinite(prev) ? prev + 0.01 : 0.01;
-                                      return Number(next.toFixed(2));
-                                    })
-                                  }
+                        <div className="w-full lg:w-[16.88599rem] h-9 lg:h-[2.23656rem] rounded-md lg:rounded-[0.33563rem] p-px lg:p-[0.03125rem] bg-[linear-gradient(180deg,rgba(255,255,255,0.5)_0%,rgba(0,0,0,0.5)_100%),radial-gradient(47.93%_96.25%_at_7.45%_3.75%,#2DCAFF_0%,rgba(255,255,255,0.1)_64.02%)] shadow-sm lg:shadow-[0_0.11188rem_0.33563rem_0_#00000080]">
+                          <div className="flex items-center justify-between gap-3 lg:gap-[0.67125rem] rounded-md lg:rounded-[0.33563rem] p-3 lg:p-[0.6875rem] h-full w-full bg-[#191919]">
+                            <span className="rounded-full font-[Golos_Text] font-normal text-sm lg:text-[0.89438rem] leading-6 lg:leading-[1.34187rem] text-white">$</span>
+                            <input
+                              type="number"
+                              value={Number.isFinite(stopPrice) ? stopPrice.toFixed(2) : ''}
+                              min={0}
+                              step="0.01"
+                              onChange={(event) => {
+                                const { value } = event.target;
+                                setStopPrice(value === '' ? Number.NaN : Number(value));
+                              }}
+                              className="w-full lg:w-[13.12981rem] h-5 lg:h-[1.0625rem] bg-transparent 
+                                        font-[Font-family] font-normal
+                                        text-xs lg:text-[0.7825rem] leading-4 lg:leading-[1.00625rem] 
+                                        text-white placeholder:text-white/30 focus:outline-none
+                                        appearance-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-moz-appearance:textfield]"
+                              placeholder="400.00"
+                              disabled={!isStopEnabled}
+                            />
+                            <div className="flex flex-col items-center justify-between h-3 lg:h-[0.78279rem] w-2 lg:w-[0.44731rem] gap-px lg:gap-[0.09375rem] bg-transparent">
+                              <button
+                                type="button"
+                                className="flex items-center justify-center text-white"
+                                onClick={() =>
+                                  setStopPrice((prev) => {
+                                    const next = Number.isFinite(prev) ? prev + 0.01 : 0.01;
+                                    return Number(next.toFixed(2));
+                                  })
+                                }
+                              >
+                                <svg
+                                  width="7.15"
+                                  height="6.25"
+                                  viewBox="0 0 8 5"
+                                  fill="currentColor"
+                                  xmlns="http://www.w3.org/2000/svg"
                                 >
-                                  <svg
-                                    width="7.15"
-                                    height="6.25"
-                                    viewBox="0 0 8 5"
-                                    fill="currentColor"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                  >
-                                    <path d="M4.39844 0.856812L0.832031 4.42322H7.96484L4.39844 0.856812Z" />
-                                  </svg>
-                                </button>
+                                  <path d="M4.39844 0.856812L0.832031 4.42322H7.96484L4.39844 0.856812Z" />
+                                </svg>
+                              </button>
 
-                                {/* Down arrow */}
-                                <button
-                                  type="button"
-                                  className="flex items-center justify-center text-white"
-                                  onClick={() =>
-                                    setStopPrice((prev) => {
-                                      const base = Number.isFinite(prev) ? prev : 0;
-                                      const next = Math.max(0, base - 0.01);
-                                      return Number(next.toFixed(2));
-                                    })
-                                  }
+                              {/* Down arrow */}
+                              <button
+                                type="button"
+                                className="flex items-center justify-center text-white"
+                                onClick={() =>
+                                  setStopPrice((prev) => {
+                                    const base = Number.isFinite(prev) ? prev : 0;
+                                    const next = Math.max(0, base - 0.01);
+                                    return Number(next.toFixed(2));
+                                  })
+                                }
+                              >
+                                <svg
+                                  width="7.15"
+                                  height="6.25"
+                                  viewBox="0 0 8 5"
+                                  fill="currentColor"
+                                  xmlns="http://www.w3.org/2000/svg"
                                 >
-                                  <svg
-                                    width="7.15"
-                                    height="6.25"
-                                    viewBox="0 0 8 5"
-                                    fill="currentColor"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                  >
-                                    <path d="M4.39844 4.14319L0.832031 0.576782H7.96484L4.39844 4.14319Z" />
-                                  </svg>
-                                </button>
-                              </div>
+                                  <path d="M4.39844 4.14319L0.832031 0.576782H7.96484L4.39844 4.14319Z" />
+                                </svg>
+                              </button>
                             </div>
                           </div>
                         </div>
-                        <p className="flex w-[120.5785px] h-[17px] items-center justify-center">
-                          <span className="w-[59px] h-[17px] font-[Font-family] font-normal 
-                                          text-[13px] leading-[16.1px] text-[#999999]">
+                        <p className="flex w-32 lg:w-[7.53616rem] h-5 lg:h-[1.0625rem] items-center justify-center">
+                          <span className="w-14 lg:w-[3.6875rem] h-5 lg:h-[1.0625rem] font-[Font-family] font-normal 
+                                          text-sm lg:text-[0.8125rem] leading-4 lg:leading-[1.00625rem] text-[#999999]">
                             Est. Loss:
                           </span>
-                          <span className="w-[58px] h-[17px] font-[Font-family] font-normal
-                                          text-[13px] leading-[16.1px] text-[#D70000]">
+                          <span className="w-14 lg:w-[3.625rem] h-5 lg:h-[1.0625rem] font-[Font-family] font-normal
+                                          text-sm lg:text-[0.8125rem] leading-4 lg:leading-[1.00625rem] text-[#D70000]">
                             $12,057.36
                           </span>
                         </p>
                       </div>
                     </div>
                     
-                    <div className="flex flex-col w-[313.1178px] h-[65.314px] gap-[7.16px] bg-[#0B0B0B] px-[21.47px] py-1">
-                      <div className="flex w-[270.176px] h-[17px] items-center justify-between gap-[14.31px] text-white/70">
-                        <span className="font-[Font-family] font-normal text-[12.52px] leading-[16.1px] tracking-[0%] align-middle text-[#999999]">Buying Power</span>
-                        <span className="font-[Font-family] font-normal text-[12.52px] leading-[16.1px] tracking-[0%] text-right text-white [font-variant-numeric:lining-nums_tabular-nums]">{formatCurrency(122912.5)}</span>
+                    <div className="flex w-full flex-col gap-2 lg:gap-[0.4475rem] bg-[#0B0B0B] px-5 lg:px-[1.34187rem] py-1">
+                      <div className="flex w-full items-center justify-between gap-4 lg:gap-[0.89438rem] text-white/70">
+                        <span className="font-[Font-family] font-normal text-xs lg:text-[0.7825rem] leading-4 lg:leading-[1.00625rem] tracking-normal lg:tracking-[0%] align-middle text-[#999999]">Buying Power</span>
+                        <span className="font-[Font-family] font-normal text-xs lg:text-[0.7825rem] leading-4 lg:leading-[1.00625rem] tracking-normal lg:tracking-[0%] text-right text-white [font-variant-numeric:lining-nums_tabular-nums]">{formatCurrency(122912.5)}</span>
                       </div>
-                      <div className="flex w-[270.176px] h-[17px] items-center justify-between gap-[14.31px] text-white/70">
-                        <span className="font-[Font-family] font-normal text-[12.52px] leading-[16.1px] tracking-[0%] align-middle text-[#999999]">Transaction Fees</span>
-                        <span className="font-[Font-family] font-normal text-[12.52px] leading-[16.1px] tracking-[0%] text-right text-white [font-variant-numeric:lining-nums_tabular-nums]">$4.00</span>
+                      <div className="flex w-full items-center justify-between gap-4 lg:gap-[0.89438rem] text-white/70">
+                        <span className="font-[Font-family] font-normal text-xs lg:text-[0.7825rem] leading-4 lg:leading-[1.00625rem] tracking-normal lg:tracking-[0%] align-middle text-[#999999]">Transaction Fees</span>
+                        <span className="font-[Font-family] font-normal text-xs lg:text-[0.7825rem] leading-4 lg:leading-[1.00625rem] tracking-normal lg:tracking-[0%] text-right text-white [font-variant-numeric:lining-nums_tabular-nums]">$4.00</span>
                       </div>
-                      <div className="flex w-[270.176px] h-[17px] items-center justify-between gap-[14.31px] text-white/70">
-                        <span className="font-[Font-family] font-normal text-[12.52px] leading-[16.1px] tracking-[0%] align-middle text-[#999999]">Estimated Total</span>
-                        <span className="font-[Font-family] font-normal text-[12.52px] leading-[16.1px] tracking-[0%] text-right text-white [font-variant-numeric:lining-nums_tabular-nums]">{formatCurrency(selectedQuantity * latestCandle.close)}</span>
+                      <div className="flex w-full items-center justify-between gap-4 lg:gap-[0.89438rem] text-white/70">
+                        <span className="font-[Font-family] font-normal text-xs lg:text-[0.7825rem] leading-4 lg:leading-[1.00625rem] tracking-normal lg:tracking-[0%] align-middle text-[#999999]">Estimated Total</span>
+                        <span className="font-[Font-family] font-normal text-xs lg:text-[0.7825rem] leading-4 lg:leading-[1.00625rem] tracking-normal lg:tracking-[0%] text-right text-white [font-variant-numeric:lining-nums_tabular-nums]">{formatCurrency(selectedQuantity * latestCandle.close)}</span>
                       </div>
                     </div>
 
                     <button
                       type="button"
-                      className="flex w-[313.1178px] h-[17px] items-center justify-center  
-                                px-[21.47px] pb-2 font-[Font-family] font-normal 
-                                text-[12px] leading-[16.1px] tracking-[0%] text-white transition">
+                      className="flex w-full items-center justify-center  
+                                px-5 lg:px-[1.34187rem] pb-2 font-[Font-family] font-normal 
+                                text-xs lg:text-[0.75rem] leading-4 lg:leading-[1.00625rem] tracking-normal lg:tracking-[0%] text-white transition">
                       Disclaimer
                       <svg
                         width="25"
@@ -798,7 +767,7 @@ export default function StockDashboard() {
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
                         aria-hidden="true"
-                        className="relative top-[1px] text-white"
+                        className="relative top-px lg:top-[0.0625rem] text-white"
                       >
                         <path
                           d="M4.5 3.5l3 2.5-3 2.5"
@@ -814,9 +783,9 @@ export default function StockDashboard() {
                   </div>
                 </section>
 
-                <section className="w-[313.1178px] h-[243.0219px] overflow-hidden rounded-[3.58px] bg-[#0A0A0A]">
-                  <header className="flex w-[313.1178px] h-[50.6279px] items-center justify-between gap-[7.16px] pl-[21.47px] pr-[14.31px] py-[14.31px] bg-[#1F1F1F]">
-                    <h3 className="font-[Font-family] font-semibold text-[14.31px] leading-[21.47px] text-white">Time &amp; Sales</h3>
+                <section className="flex w-full flex-col overflow-hidden rounded lg:rounded-[0.22375rem] bg-[#0A0A0A]">
+                  <header className="flex w-full items-center justify-between gap-2 lg:gap-[0.4475rem] bg-[#1F1F1F] px-5 lg:px-[1.34187rem] py-4 lg:py-[0.89438rem]">
+                    <h3 className="font-[Font-family] font-semibold text-sm lg:text-[0.89438rem] leading-6 lg:leading-[1.34187rem] text-white">Time &amp; Sales</h3>
                     <button type="button" className="flex h-8 w-8 items-center justify-center rounded-md text-white transition" aria-label="Time & sales menu">
                       <svg
                         width="11.926973342895508"
@@ -833,13 +802,12 @@ export default function StockDashboard() {
                       </svg>
                     </button>
                   </header>
-                  <div className="w-[313.1178px] h-[192.394px] rounded-[3.58px] flex flex-col gap-[12.52px] 
-                                  pt-[18px] pr-[21.47px] pb-[21.47px] pl-[21.47px] overflow-hidden">
+                  <div className="flex h-full w-full flex-col gap-3 lg:gap-[0.7825rem] overflow-hidden px-5 lg:px-[1.34187rem] pb-5 lg:pb-[1.34187rem] pt-5 lg:pt-[1.125rem]">
                     {timeSalesRows.map((row) => (
-                      <div key={`${row.time}-${row.price}`} className="flex w-[270.176px] h-[17.56px] justify-between text-sm font-poppins text-white/80">
-                        <span className="font-[Font-family] font-normal not-italic text-[12.52px] leading-[16.1px] tracking-[0%] text-white [font-variant-numeric:lining-nums_tabular-nums]">{row.time}</span>
-                        <span className="font-[Font-family] font-normal not-italic text-[12.52px] leading-[16.1px] tracking-[0%] text-white [font-variant-numeric:lining-nums_tabular-nums]">{row.price}</span>
-                        <span className="font-[Font-family] font-normal not-italic text-[12.52px] leading-[16.1px] tracking-[0%] text-white [font-variant-numeric:lining-nums_tabular-nums]">{row.size}</span>
+                      <div key={`${row.time}-${row.price}`} className="flex w-full justify-between text-sm font-poppins text-white/80">
+                        <span className="font-[Font-family] font-normal not-italic text-xs lg:text-[0.7825rem] leading-4 lg:leading-[1.00625rem] tracking-normal lg:tracking-[0%] text-white [font-variant-numeric:lining-nums_tabular-nums]">{row.time}</span>
+                        <span className="font-[Font-family] font-normal not-italic text-xs lg:text-[0.7825rem] leading-4 lg:leading-[1.00625rem] tracking-normal lg:tracking-[0%] text-white [font-variant-numeric:lining-nums_tabular-nums]">{row.price}</span>
+                        <span className="font-[Font-family] font-normal not-italic text-xs lg:text-[0.7825rem] leading-4 lg:leading-[1.00625rem] tracking-normal lg:tracking-[0%] text-white [font-variant-numeric:lining-nums_tabular-nums]">{row.size}</span>
                       </div>
                     ))}
                   </div>
@@ -852,7 +820,7 @@ export default function StockDashboard() {
       {isSidebarOpen ? (
         <div className="fixed inset-0 z-40 flex lg:hidden">
           <button type="button" className="absolute inset-0 bg-black/70" aria-label="Close navigation overlay" onClick={closeSidebar} />
-          <div className="relative z-10 h-full w-64 max-w-[80vw] p-4 pt-6 shadow-2xl">
+          <div className="relative z-10 h-full w-64 max-w-full sm:max-w-[80vw] p-4 pt-6 shadow-2xl">
             <Sidebar onLogout={handleLogout} activeItem="dashboard" onNavigate={closeSidebar} onClose={closeSidebar} />
           </div>
         </div>
