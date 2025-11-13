@@ -248,14 +248,17 @@ export default function StockDashboard() {
                     ))}
                   </div>
 
-                  <div className="border-b border-white/5 h-[121.94186401367188px] w-full max-w-[896.4113159179688px] min-w-0 gap-[35.78px] overflow-x-auto pt-[10.74px] pr-[21.47px] pb-[10.74px] pl-[21.47px]">
-                    <div className="flex items-start justify-between gap-6">
-                        <div className="flex h-[100.47093200683594px] w-[313.0494079589844px] flex-col gap-[10.74px]">
-                        <div className="flex h-[100.47093200683594px] w-[313.0494079589844px] flex-wrap items-center gap-[10.74px]">
-                          <span className="font-['Font-family'] text-[17.89px] font-normal leading-[21.47px]  text-white">MSFT</span>
-                          <span className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px]  text-white">Microsoft Corp NASDAQ</span>
-                          <div className="flex h-[21.470930099487305px] w-[50.09884262084961px] items-center gap-[7.16px]">
-                            <button type="button" className="flex h-[21.470930099487305px] w-[21.470930099487305px] items-center justify-center gap-[7.16px] rounded-[89.46px] border-[0.45px] border-[#999999] p-[3.58px] text-white/60 transition hover:text-white">
+                  <div className="border-b border-white/5 w-full max-w-[896.4113159179688px] min-w-0 overflow-x-auto px-4 py-3 sm:px-5 lg:px-[21.47px] lg:py-[10.74px]">
+                    <div className="flex flex-wrap gap-4 lg:flex-nowrap lg:items-start lg:justify-around lg:gap-6">
+                      <div className="flex min-w-[280px] flex-1 flex-col gap-4">
+                        <div className="flex flex-wrap items-center gap-3 text-white">
+                          <span className="font-['Font-family'] text-[17.89px] font-normal leading-[21.47px]">MSFT</span>
+                          <span className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px]">Microsoft Corp NASDAQ</span>
+                          <div className="flex items-center gap-2">
+                            <button
+                              type="button"
+                              className="flex h-6 w-6 items-center justify-center rounded-full border border-[#999999] p-1 text-white/60 transition hover:text-white"
+                            >
                               <svg
                                 width="11.596595764160156"
                                 height="6.861751079559326"
@@ -270,7 +273,10 @@ export default function StockDashboard() {
                                 />
                               </svg>
                             </button>
-                            <button type="button" className="flex h-[21.470930099487305px] w-[21.470930099487305px] items-center justify-center gap-[7.16px] rounded-[89.46px] border-[0.45px] border-[#999999] p-[3.58px] text-white/60 transition hover:text-white">
+                            <button
+                              type="button"
+                              className="flex h-6 w-6 items-center justify-center rounded-full border border-[#999999] p-1 text-white/60 transition hover:text-white"
+                            >
                               <svg
                                 width="10.734420776367188"
                                 height="11.6299467086792"
@@ -287,127 +293,95 @@ export default function StockDashboard() {
                             </button>
                           </div>
                         </div>
-                        <div className="flex h-[40px] w-[174.156982421875px] gap-[7.16px]">
-                            <span className="font-['Font-family'] text-[35.78px] font-semibold leading-[39.36px]  text-[#DAA56A] [font-variant-numeric:lining-nums_tabular-nums]">
-                              {latestCandle.close.toFixed(2)}
+                        <div className="flex flex-wrap items-center gap-3">
+                          <span className="font-['Font-family'] text-[35.78px] font-semibold leading-[39.36px] text-[#DAA56A] [font-variant-numeric:lining-nums_tabular-nums]">
+                            {latestCandle.close.toFixed(2)}
+                          </span>
+                          <div className="flex flex-col text-right">
+                            <span className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px] text-[#0FEDBE]">
+                              {formatSigned(dailyChange)}
                             </span>
-                            <div className="flex items-start h-[37.578487396240234px] w-[44px] flex-col gap-[3.58px] text-right">
-                              <span className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px]  text-[#0FEDBE]">
-                                {formatSigned(dailyChange)}
-                              </span>
-                              <span className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px]  text-[#0FEDBE]">
-                                {formatSigned(dailyChangePct)}%
-                              </span>
-                            </div>
-                          </div>
-                        <div className="flex h-[17px] w-[313.0494079589844px] items-center gap-[7px] font-poppins text-white/60">
-                          <div className="flex h-[17px] w-[199.73545837402344px] justify-between items-center gap-[3.58px] tracking-wider">
-                            <span className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px]  text-[#999999]">
-                              After hours:
-                            </span>
-                            <div className="flex h-[17px] w-[124.15697479248047px] justify-between items-center gap-[3.58px]">
-                              <span className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px]  text-[#D70000]">
-                                406.83
-                              </span>
-                              <span className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px]  text-[#D70000]">
-                                -0.27
-                              </span>
-                              <span className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px]  text-[#D70000]">
-                                -0.07%
-                              </span>
-                            </div>
-                          </div>
-                          <div className="flex h-[8.946221351623535px] w-[0.89px] items-center justify-center text-[#999999]">
-                            |
-                          </div>
-                          <div className="flex h-[17px] items-center">
-                            <span className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px] text-white tracking-wide">
-                              19:59 04/26 EDT
+                            <span className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px] text-[#0FEDBE]">
+                              {formatSigned(dailyChangePct)}%
                             </span>
                           </div>
                         </div>
+                        <div className="flex flex-wrap items-center gap-3 font-poppins text-white/60">
+                          <div className="flex flex-wrap items-center gap-2 tracking-wider">
+                            <span className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px] text-[#999999]">After hours:</span>
+                            <div className="flex flex-wrap items-center gap-3">
+                              <span className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px] text-[#D70000]">406.83</span>
+                              <span className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px] text-[#D70000]">-0.27</span>
+                              <span className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px] text-[#D70000]">-0.07%</span>
+                            </div>
+                          </div>
+                          <span className="hidden h-4 w-px bg-white/30 sm:inline-flex" aria-hidden="true" />
+                          <div className="flex items-center">
+                            <span className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px] text-white tracking-wide">19:59 04/26 EDT</span>
+                          </div>
+                        </div>
                       </div>
-                      <div className="grid h-[99.31395721435547px] w-[504.6351623535156px] grid-cols-2 gap-[28.63px] text-sm font-poppins text-white/70">
-                        <div className="flex h-[99.31395721435547px] w-[238.00363159179688px] flex-col gap-[3.58px]">
-                          <div className="flex h-[17px] w-[238.00363159179688px] items-center justify-between gap-[14.31px]">
+                      <div className="grid flex-1 min-w-[260px] gap-4 text-sm font-poppins text-white/70 sm:grid-cols-2 md:gap-6">
+                        <div className="flex flex-col gap-2">
+                          <div className="flex items-center justify-between gap-4">
                             <span className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px] text-[#999999]">Open</span>
-                            <span
-                              className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px] tracking-[0px] text-[#D70000] [font-variant-numeric:lining-nums_tabular-nums]"
-                            >
+                            <span className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px] text-[#D70000] [font-variant-numeric:lining-nums_tabular-nums]">
                               401.23
                             </span>
                           </div>
-                          <div className="flex h-[17px] w-[238.00363159179688px] items-center justify-between gap-[14.31px]">
+                          <div className="flex items-center justify-between gap-4">
                             <span className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px] text-[#999999]">Low</span>
-                            <span
-                              className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px] tracking-[0px] text-[#D70000] [font-variant-numeric:lining-nums_tabular-nums]"
-                            >
+                            <span className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px] text-[#D70000] [font-variant-numeric:lining-nums_tabular-nums]">
                               400.10
                             </span>
                           </div>
-                          <div className="flex h-[17px] w-[238.00363159179688px] items-center justify-between gap-[14.31px]">
+                          <div className="flex items-center justify-between gap-4">
                             <span className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px] text-[#999999]">High</span>
-                            <span
-                              className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px] tracking-[0px] text-[#0FEDBE] [font-variant-numeric:lining-nums_tabular-nums]"
-                            >
+                            <span className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px] text-[#0FEDBE] [font-variant-numeric:lining-nums_tabular-nums]">
                               408.36
                             </span>
                           </div>
-                          <div className="flex h-[17px] w-[238.00363159179688px] items-center justify-between gap-[14.31px]">
+                          <div className="flex items-center justify-between gap-4">
                             <span className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px] text-[#999999]">52 wk high</span>
-                            <span
-                              className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px] tracking-[0px] text-white [font-variant-numeric:lining-nums_tabular-nums]"
-                            >
+                            <span className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px] text-white [font-variant-numeric:lining-nums_tabular-nums]">
                               430.82
                             </span>
                           </div>
-                          <div className="flex h-[17px] w-[238.00363159179688px] items-center justify-between gap-[14.31px]">
+                          <div className="flex items-center justify-between gap-4">
                             <span className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px] text-[#999999]">52 wk low</span>
-                            <span
-                              className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px] tracking-[0px] text-white [font-variant-numeric:lining-nums_tabular-nums]"
-                            >
+                            <span className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px] text-white [font-variant-numeric:lining-nums_tabular-nums]">
                               273.13
                             </span>
                           </div>
                         </div>
-                        <div className="flex h-[99.31395721435547px] w-[238.00363159179688px] flex-col gap-[3.58px]">
-                          <div className="flex h-[17px] w-[238.00363159179688px] items-center justify-between gap-[14.31px]">
+                        <div className="flex flex-col gap-2">
+                          <div className="flex items-center justify-between gap-4">
                             <span className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px] text-[#999999]">Avg Vol (3M)</span>
-                            <span
-                              className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px] tracking-[0px] text-white [font-variant-numeric:lining-nums_tabular-nums]"
-                            >
+                            <span className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px] text-white [font-variant-numeric:lining-nums_tabular-nums]">
                               21.73M
                             </span>
                           </div>
-                          <div className="flex h-[17px] w-[238.00363159179688px] items-center justify-between gap-[14.31px]">
+                          <div className="flex items-center justify-between gap-4">
                             <span className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px] text-[#999999]">Shares Outstanding</span>
-                            <span
-                              className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px] tracking-[0px] text-white [font-variant-numeric:lining-nums_tabular-nums]"
-                            >
+                            <span className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px] text-white [font-variant-numeric:lining-nums_tabular-nums]">
                               7.43B
                             </span>
                           </div>
-                          <div className="flex h-[17px] w-[238.00363159179688px] items-center justify-between gap-[14.31px]">
+                          <div className="flex items-center justify-between gap-4">
                             <span className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px] text-[#999999]">Mkt Cap</span>
-                            <span
-                              className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px] tracking-[0px] text-white [font-variant-numeric:lining-nums_tabular-nums]"
-                            >
+                            <span className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px] text-white [font-variant-numeric:lining-nums_tabular-nums]">
                               3.02T
                             </span>
                           </div>
-                          <div className="flex h-[17px] w-[238.00363159179688px] items-center justify-between gap-[14.31px]">
+                          <div className="flex items-center justify-between gap-4">
                             <span className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px] text-[#999999]">Div Yield</span>
-                            <span
-                              className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px] tracking-[0px] text-white [font-variant-numeric:lining-nums_tabular-nums]"
-                            >
+                            <span className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px] text-white [font-variant-numeric:lining-nums_tabular-nums]">
                               0.74%
                             </span>
                           </div>
-                          <div className="flex h-[17px] w-[238.00363159179688px] items-center justify-between gap-[14.31px]">
-                            <span className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px] tracking-[0px] text-white">
-                              View all
-                            </span>
-                            <span className="flex h-[15px] w-[30px] items-center justify-end text-white">
+                          <div className="flex items-center justify-between gap-4">
+                            <span className="font-['Font-family'] text-[12.52px] font-normal leading-[16.1px] text-white">View all</span>
+                            <span className="flex h-4 w-6 items-center justify-end text-white">
                               <svg
                                 className="h-full w-full"
                                 viewBox="0 0 12 12"
